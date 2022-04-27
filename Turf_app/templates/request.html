@@ -1,0 +1,100 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{%block content%}
+
+<body  style="background-image: url({% static 'images/add_turf1.jpg' %}); background-repeat:no-repeat;background-size:cover;">
+<div class="container ">
+<div class="row " style="margin-top:200px;padding-bottom: 30px;">
+	<div class="col-lg-12 grid-margin stretch-card" style="background-color:white;">
+		<div class="card">
+		  <div class="card-body">
+			<h4 class="card-title">Requests</h4>
+			<div class="form-group">
+			  <input type="text" class="form-control text-dark" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+			   </div>
+			<div class="table-responsive">
+			  <table class="table table-hover " id="myTable">
+				<thead>
+					<tr>
+						<th>Sl.no</th>
+						<th>Owner Name</th>
+						<th>Turf Name</th>
+						<th>Phone number</th>
+						
+						<th>Sport</th>
+						
+						<th>Action</th>
+					  </tr>
+				</thead>
+				<tbody>
+					{% for i in reqe %}
+					
+					<tr class="alert" role="alert">
+						<td>{{forloop.counter}}</td>
+						<td>
+							{% for j in mem %}
+							{{j.Firstname}}
+							{% endfor %}</td>
+						<td>{{i.Turfname}}</td>
+						<td>
+							{% for j in mem %}
+							{{j.mobile}}
+							{% endfor %}
+						</td>
+						<td>{{i.sport}}</td>
+						
+						
+						<td>
+							{% if i.status == "accept" %}
+							<button type="button" class="btn btn-success">Accepted</button>
+							{% else %}
+							<button type="button" class="btn btn-danger">Rejected</button>
+							{% endif %}
+						</td>
+					  </tr>
+					  
+					 {% endfor %}
+				
+				</tbody>
+			  </table>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div>
+</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+	  function myFunction() {
+		  var input, filter, table, tr, td, i, txtValue;
+		  input = document.getElementById("myInput");
+		  filter = input.value.toUpperCase();
+		  table = document.getElementById("myTable");
+		  tr = table.getElementsByTagName("tr");
+		  for (i = 0; i < tr.length; i++) {
+			  td = tr[i].getElementsByTagName("td")[1];
+			  if (td) {
+				  txtValue = td.textContent || td.innerText;
+				  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+					  tr[i].style.display = "";
+				  } else {
+					  tr[i].style.display = "none";
+				  }
+			  }
+		  }
+	  }
+	$(document).ready(function(){
+	$('table tr').click(function(){
+	  window.location = $(this).data('href');
+	  return false;
+	  });
+	});
+	</script>
+	
+
+
+ {%endblock%}
+</html>
+

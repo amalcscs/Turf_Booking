@@ -1,0 +1,108 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{%block content%}
+
+
+
+<body  style="background-image: url({% static 'images/add_turf1.jpg' %}); background-repeat:no-repeat;background-size:cover;">
+	<section class="ftco-section">
+<div class='container  mb-5' style="padding-top:230px;padding-bottom: 30px;">
+	<div class='row'>
+		<div class='col-md-2'></div>
+		<div class='col-md-8 mt-5' style="background-color:white;">
+			<div class="card p-3">
+				<form method='post' action="{% url 'add' %}" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="row">
+						<div class="col-md-12">
+							<h3>ADD TURF</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Turfname</label>
+							<input type="text" name="Turfname" class='form-control'>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Location</label>
+							<input type="text" name="Location" class='form-control'>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Sport</label>
+							<input type="text" name="Sport" class='form-control'>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Capacity</label>
+							<input type="number" name="Capacity" class='form-control'>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Price</label>
+							<input type="number" name="Price" class='form-control'>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Amenties</label>
+							<input type="text" name="Amenties" class='form-control'>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Upload Image</label>
+							  <input type="file" name='files' class="form-control">
+						</div>
+					</div>
+				<br>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4 " style="padding-bottom:20px;">
+							<input type="submit" value="Send Request" style="background-color:green;font-size:20px;border:radius:50px;color:white;padding:10px;">
+
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class='col-md-2'></div>
+	</div>
+</div>
+
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {% if msg_success %}
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            text: '{{ msg_success }}',
+            showConfirmButton: false,
+            timer: 3000
+        }).then(function () {
+            javascript: history.go(-2);
+        })
+        
+    </script>
+	{% endif %}
+
+{% endblock %}

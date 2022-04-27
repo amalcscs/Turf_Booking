@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+    {% load static %}
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/roboto-font.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-5/css/fontawesome-all.min.css' %}">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="{% static 'css/s.css' %}"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body class="form-v5">
+	<div class="page-content">
+		<div class="form-v5-content">
+			<form class="form-detail" action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<h2>REGISTRATION</h2>
+				<div class="form-row">
+					<div class="col-md-6"><label for="full-name">First Name</label>
+						<input type="text" name="firstname" id="last-name" class="input-text" placeholder="First Name" required>
+						<i class="fas fa-user mr-2"></i>
+					</div>
+					<div class="col-md-6">
+				<label for="full-name">Last Name</label>
+				<input type="text" name="lastname" id="last-name" class="input-text" placeholder="Last Name" required>
+				<i class="fas fa-user mr-2"></i>
+		
+			</div>
+				</div>
+				<div class="form-row">
+					
+						<div class="col-md-6"><label for="full-name">Mobile</label>
+							<input type="number" name="mobile" id="last-name" class="input-text" placeholder="Mobile" required>
+							<i class="fa fa-mobile mr-3" aria-hidden="true"></i>
+						</div>
+						<div class="col-md-6">
+					<label for="full-name">Place</label>
+					<input type="text" name="place" id="last-name" class="input-text" placeholder="Place" required>
+					<i class="fa fa-map-marker mr-3" aria-hidden="true"></i>
+			
+				</div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-6"><label for="full-name">Address</label>
+						<input type="text" name="address" id="last-name" class="input-text" placeholder="Address" required>
+						<i class="fas fa-address-card mr-3"></i>
+					</div>
+					<div class="col-md-6">
+				<label for="full-name">Pincode</label>
+				<input type="number" name="pincode" id="last-name" class="input-text" placeholder="Pincode" required>
+				<i class="fa fa-map-pin mr-3" aria-hidden="true mr-3"></i>
+		
+			</div>
+				</div>
+				<div class="form-row">
+					<div class="col-md-6"><label for="full-name">Email</label>
+						<input type="email" name="email" id="last-name" class="input-text" placeholder="Email" required>
+						<i class="fa fa-envelope mr-3" aria-hidden="true"></i>
+					</div>
+					<div class="col-md-6">
+				<label for="full-name">Password</label>
+				<input type="password" name="password" id="newpass" class="input-text" placeholder="Password" required>
+				<i class="fa fa-key mr-3" aria-hidden="true"></i>
+		
+			</div>
+				</div>
+                <div class="form-row">
+					<div class="col-md-6"><label for="full-name">Confirm Password</label>
+						<input type="password" name="conpassword" id="conpassword" class="input-text" placeholder="Confirm Password" required>
+						<i class="fa fa-unlock-alt mr-3" aria-hidden="true"></i>
+					</div>
+					<div class="col-md-6">
+				<label for="full-name">Profile Picture</label>
+				<input type="file" name="profile_pic" id="last-name" class="input-text" placeholder="Profile Picture" required>
+				
+		
+			</div>
+				</div>
+
+				<span id='message'></span>
+                <br>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+     <script>
+ $('#conpassword').on('change', function () {
+  if ($('#newpass').val() == $('#conpassword').val()) {
+    $('#message').html('Matching').css('color', 'green');
+  } else 
+    $('#message').html('Not Matching').css('color', 'red');
+});
+    </script>
+
+				<div class="form-row-last">
+					<input type="submit" name="register" class="register" value="Register">
+				</div>
+				<div class="row mb-3" style="float:right;">
+					Already have an Account&nbsp;&nbsp;&nbsp;<a href="{% url 'log' %}">Login</a>
+				</div>
+			</form>
+			
+		</div>
+	</div>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {% if msg_success %}
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            text: '{{ msg_success }}',
+            showConfirmButton: false,
+            timer: 3000
+        }).then(function () {
+            javascript: history.go(-2);
+        })
+        
+    </script>
+	{% endif %}
