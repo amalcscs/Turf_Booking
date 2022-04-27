@@ -77,7 +77,7 @@ class Matches(models.Model):
         return self.firstteam
 
 
-class match_result(models.Model):
+class Matchresult(models.Model):
     turf = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
                              related_name='match_resultturf', null=True, blank=True)
     location = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,

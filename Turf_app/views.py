@@ -204,7 +204,7 @@ def match_result(request):
         c = Teams.objects.all()
         if request.method == 'POST':
             
-            an = match_result()
+            an = Matchresult()
             an.turf_id   = request.POST['turfname']
             an.location_id  = request.POST['location']
             an.firstteam_id  = request.POST['firstteam']
@@ -237,3 +237,7 @@ def addteam(request):
             msg_success = "Team Added successfully"
             return render(request, 'Add_match.html', {'msg_success': msg_success})
         return render(request,'addteam.html',{'mem':mem})
+
+
+
+        
