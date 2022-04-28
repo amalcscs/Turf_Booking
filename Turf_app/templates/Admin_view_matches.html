@@ -10,43 +10,41 @@
                 <div class="row">
                    <span><h2>Match Status : </h2></span> 
                    <a class="tg-btn" style="background-color:green;">Win</a>
-                   <a class="tg-btn" style="background-color:gray;">Draw</a>
                    <a class="tg-btn" style="background-color:red;">Loss</a>
                 </div>
+
+                
+                {% for i in view %}
+                    
+               <div class="container">
                 <div class="row" style="padding-top:30px;">
-                    <div class="tg-tickets">
+                    <div class="">
                         <div class="tg-ticket">
-                            <time class="tg-matchdate" datetime="2016-05-03">27<span>june</span></time>
+                            <time class="tg-matchdate">{{i.date|date:'d'}}<span>{{i.date|date:'m'}}</span></time>
                             <div class="tg-matchdetail">
-                                <span class="tg-theme-tag">English Premier League</span>
-                                <h4>Lumberjacks <span>vs</span> Killer Whales</h4>
+                                <span class="tg-theme-tag">{{i.matchname}}</span>
+                                <h4>{{i.win_team }} <span>vs</span>{{i.loss_team}}</h4>
                                 <ul class="tg-matchmetadata">
-                                    <li><time datetime="2016-05-03">15:30 PM</time></li>
-                                    <li><address>Soccer Stadium, Dubai</address></li>
+                                    <li><time datetime="2016-05-03">{{i.fromtime}}</time></li>
+                                    <li><address>
+                                        {% for j in turf1 %}
+                                        {% if i.turf_id == j.id  %}
+                                        {{j.Turfname}}</address>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </li>
                                 </ul>
                             </div>
                             <div class="tg-btnsbox">
-                                <a class="tg-btn " style="background-color:green;">Team1</a>
-                                <a class="tg-btn" style="background-color:red;">Team2</a>
+                                <a class="tg-btn " style="background-color:green;">{{i.win_team }} </a>
+                                <a class="tg-btn" style="background-color:red;">{{i.loss_team}}</a>
                             </div>
                         </div>
-                        <div class="tg-ticket">
-                            <time class="tg-matchdate" datetime="2016-05-03">27<span>june</span></time>
-                            <div class="tg-matchdetail">
-                                <span class="tg-theme-tag">English Premier League</span>
-                                <h4>Lumberjacks <span>vs</span> Killer Whales</h4>
-                                <ul class="tg-matchmetadata">
-                                    <li><time datetime="2016-05-03">15:30 PM</time></li>
-                                    <li><address>Soccer Stadium, Dubai</address></li>
-                                </ul>
-                            </div>
-                            <div class="tg-btnsbox">
-                                <a class="tg-btn" style="background-color:red;">Team1</a>
-                                <a class="tg-btn" style="background-color:green;">Team2</a>
-                            </div>
-                        </div>
+                    </div>
                         
-                       
+                        {% endfor %}
+                    
+
                        
                         
                     </div>

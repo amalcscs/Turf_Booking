@@ -12,6 +12,7 @@ from Turf_app import views
 urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path(r'^ind$',views.ind, name='ind'),
+    re_path(r'^User_logout$',views.User_logout, name='User_logout'),
     
     re_path(r'^about/$',views.about, name='about'),
     re_path(r'^matches/$',views.matches, name='matches'),
@@ -25,6 +26,7 @@ urlpatterns = [
     re_path(r'^User_contact/$',views.User_contact, name='User_contact'),  
     re_path(r'^Owner_notification/$',views.Owner_notification, name='Owner_notification'),  
     re_path(r'^User_notification/$',views.User_notification, name='User_notification'),  
+    re_path(r'^User_viewmatchresult/$',views.User_viewmatchresult, name='User_viewmatchresult'),  
 
     re_path(r'^$',views.indexo, name='indexo'),
     re_path(r'^log/$',views.log, name='log'),
@@ -38,12 +40,18 @@ urlpatterns = [
     re_path(r'^Add_match/$',views.Add_match, name='Add_match'),
     re_path(r'^match_result/$',views.match_result, name='match_result'),
     re_path(r'^Owner_contact/$',views.Owner_contact, name='Owner_contact'),
+    re_path(r'^Owner_logout/$',views.Owner_logout, name='Owner_logout'),
+    re_path(r'^Owner_messagereply/(?P<id>\d+)/$',views.Owner_messagereply, name='Owner_messagereply'),
 
     re_path(r'^Admin_index/$',views.Admin_index, name='Admin_index'),
+    re_path(r'^Admin_logout/$',views.Admin_logout, name='Admin_logout'),
     re_path(r'^Admin_Turf_requests/$',views.Admin_Turf_requests, name='Admin_Turf_requests'),
     re_path(r'^Admin_notification/$',views.Admin_notification, name='Admin_notification'),
+    re_path(r'^Admin_messagereply/(?P<id>\d+)/$',views.Admin_messagereply, name='Admin_messagereply'),
     re_path(r'^Admin_view_matches/$',views.Admin_view_matches, name='Admin_view_matches'),
     re_path(r'^Admin_contact/$',views.Admin_contact, name='Admin_contact'),
+    re_path(r'^AdminTurfapprove/(?P<id>\d+)/$',views.AdminTurfapprove, name='AdminTurfapprove'),
+    re_path(r'^AdminTurfrejected/(?P<id>\d+)/$',views.AdminTurfrejected, name='AdminTurfrejected'),
 
 ]
 

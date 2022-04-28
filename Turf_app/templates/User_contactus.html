@@ -292,6 +292,9 @@
 		<!--************************************
 				Banner Start
 		*************************************-->
+	
+
+
 		<div class="tg-banner tg-haslayout">
 			<div class="tg-imglayer">
 				<img src="{% static 'images/bg-pattran.png' %}" alt="image desctription">
@@ -328,54 +331,47 @@
 								<div class="row">
 									<div class="col-md-5 col-sm-12 col-xs-12">
 										<div class="tg-contactinfobox">
-											<div class="tg-section-heading"><h2>feel free to send us your queries, Suggestion &amp; Remarks</h2></div>
+											<div class="tg-section-heading"></div>
 											<div class="tg-description">
-												<p>Consectetur adipisicing elit sed do eiusmod temport incididunt utia labore et dolore magna aliqua enima ad minim veniam quistrud on ullamco laboris nisiut aliquip ex ea commodo consequat.</p>
+												<p>Their contact page includes all the standard information — name, location, email, and so forth. The page feels plain, but it fits with the rest of their site and their overall branding, which lets the user know who the brand is and what they can expect.</p>
 											</div>
+											
+											{% for i in mem1 %}
+												
+											
+												
 											<ul class="tg-contactinfo">
 												<li>
 													<i class="fa fa-map-marker"></i>
-													<address>123 Eccles Old Road, New Salford Road London, Uk, M6 7AF</address>
+													<address>{{i.address}}</address>
 												</li>
 												<li>
 													<i class="fa fa-phone"></i>
-													<span>+44 123 456 788 - 9</span>
+													<span>{{i.mobile}}</span>
 												</li>
 												<li>
 													<i class="fa fa-envelope-o"></i>
-													<a href="info%40domain.html">info@domain.com</a>
+													{{i.email}}
 												</li>
-												<li>
-													<i class="fa fa-skype"></i>
-													<a href="info%40domain.html">Prosoccer772</a>
-												</li>
-												<li>
-													<i class="fa fa-facebook-f"></i>
-													<a href="info%40domain.html">facebook.com/prosoccer772</a>
-												</li>
-												<li>
-													<i class="fa fa-twitter"></i>
-													<a href="info%40domain.html">twitter.com/prosoccer772</a>
-												</li>
-												<li>
-													<i class="fa fa-laptop"></i>
-													<a href="info%40domain.html">www.domain.com</a>
-												</li>
+												
 											</ul>
+											{% endfor %}
 										</div>
 									</div>
 									<div class="col-md-7 col-sm-12 col-xs-12">
-										<form action="#" method="post" class="tg-commentform help-form" id="tg-commentform">
+										<form action="" method="post" class="tg-commentform help-form" id="tg-commentform" enctype="multipart/form-data">
+											
+										{% csrf_token %}
 											<fieldset>
 												<div class="form-group">
-													<input type="text" required="" placeholder="Name*" class="form-control" name="contact[name]">
+													<input type="text" required="" placeholder="Name*" class="form-control" name="name">
 												</div>
 												<div class="form-group">
-													<input type="email" required="" placeholder="Email*" class="form-control" name="contact[email]">
+													<input type="email" required="" placeholder="Email*" class="form-control" name="email">
 												</div>
 												<div class="form-group">
 													<div class="tg-select">
-														<select name="contact[type]">
+														<select name="messagetype">
 															<option value="">Message Type*</option>
 															<option value="Help">Discussion</option>
 															<option value="Help">Help</option>
@@ -384,10 +380,10 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<textarea required placeholder="Message*" name="contact[message]"></textarea>
+													<textarea required placeholder="Message*" name="message"></textarea>
 												</div>
 												<div class="form-group">
-													<button type="submit" class="tg-btn submit-now">send</button>
+													<input type="submit" class="tg-btn " value="send">
 												</div>
 											</fieldset>
 										</form>
@@ -447,24 +443,7 @@
 												</li>
 											</ul>
 										</div> -->
-										<div class="item">
-											<span class="tg-theme-tag">SWEEPER</span>
-											<div class="tg-section-heading"><h2>Manchester, UK</h2></div>
-											<ul class="tg-contactinfo">
-												<li>
-													<i class="fa fa-map-marker"></i>
-													<address>123 Eccles Old Road, New Salford Road London, Uk, M6 7AF</address>
-												</li>
-												<li>
-													<i class="fa fa-phone"></i>
-													<span>+44 123 456 788 - 9</span>
-												</li>
-												<li>
-													<i class="fa fa-envelope-o"></i>
-													<span>info@domain.com</span>
-												</li>
-											</ul>
-										</div>
+										
 									</div>
 								</div>
 							</div>
@@ -473,7 +452,7 @@
 				</div>
 				<div id="tg-mapcontent" class="tg-mapcontent owl-carousel">
 					<div class="item">
-						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125531.57792988152!2d76.15320935828915!3d10.511548709427712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7ee15ed42d1bb%3A0x82e45aa016ca7db!2sThrissur%2C%20Kerala!5e0!3m2!1sen!2sin!4v1646806227396!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+					{{turf.locationurl}}
 					</div>
 					<div class="item">
 						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2490.0010946428147!2d-2.3645922841588!3d51.384657927491055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487181149eed3bff%3A0x3aaf87fd82220875!2s3+Edgar+Buildings+George+St%2C+Bath%2C+Bath+and+North+East+Somerset+BA1+2FJ%2C+UK!5e0!3m2!1sen!2s!4v1468332753250"></iframe>
@@ -487,6 +466,9 @@
 				</div>
 			</section>
 		</main>
+
+
+
 		<!--************************************
 				Main End
 		*************************************-->
@@ -503,86 +485,31 @@
 							<div class="col-sm-4">
 								<div class="tg-footercol">
 									<div class="tg-posttitle">
-										<h3>signup newsletter</h3>
+										<h3>signup</h3>
 									</div>
 									<div class="tg-description">
-										<p>Adipisicing elit, sed do eiusmod tempor incidunta utiai labore et dolore magna si aliqua quis.</p>
+										<p>A signup page (also known as a registration page) enables users and organizations to independently register and gain access to your system. It is common to have multiple signup pages depending on the types of people and organizations you want to register.</p>
 									</div>
 									<form class="tg-form-newsletter">
 										<fieldset>
-											<div class="form-group">
+											<!-- <div class="form-group">
 												<input type="email" class="form-control" name="email" placeholder="Email">
-											</div>
-											<button class="tg-btn" type="submit">signup</button>
+											</div> -->
+											<a href="{% url 'regis' %}"><input type="button" value="signup" class="tg-btn" type="submit"></a>
 										</fieldset>
 									</form>
 									<div class="tg-posttitle">
 										<h3>popular tags</h3>
 									</div>
 									<div class="tg-tags">
-										<a class="tg-tag" href="#">Turfs</a>
-										<a class="tg-tag" href="#">Matches</a>
-										<a class="tg-tag" href="#">Results</a>
-										<a class="tg-tag" href="#">Sports</a>
-										<a class="tg-tag" href="#">Magazine</a>
+										<a class="tg-tag" >Turfs</a>
+										<a class="tg-tag" >Matches</a>
+										<a class="tg-tag" >Results</a>
+									
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-4">
-								<div class="tg-footercol">
-									<div class="tg-posttitle">
-										<h3>Top products</h3>
-									</div>
-									<div class="tg-toprated">
-										<ul>
-											<li>
-												<figure>
-													<a href="#">
-														<img src="{% static 'images/thumbnails/img-04.jpg' %}" alt="image description">
-													</a>
-												</figure>
-												<div class="tg-productcontent">
-													<h4><a href="#">Smooth 3-Stripes Scarf</a></h4><span class="tg-stars"><span></span></span>
-													<span class="tg-price">Price: $67</span>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<a href="#">
-														<img src="{% static 'images/thumbnails/img-05.jpg' %}" alt="image description">
-													</a>
-												</figure>
-												<div class="tg-productcontent">
-													<h4><a href="#">Smooth 3-Stripes Scarf</a></h4><span class="tg-stars"><span></span></span>
-													<span class="tg-price">Price: $67</span>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<a href="#">
-														<img src="{% static 'images/thumbnails/img-06.jpg' %}" alt="image description">
-													</a>
-												</figure>
-												<div class="tg-productcontent">
-													<h4><a href="#">Smooth 3-Stripes Scarf</a></h4><span class="tg-stars"><span></span></span>
-													<span class="tg-price">Price: $67</span>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<a href="#">
-														<img src="{% static 'images/thumbnails/img-07.jpg' %}" alt="image description">
-													</a>
-												</figure>
-												<div class="tg-productcontent">
-													<h4><a href="#">Smooth 3-Stripes Scarf</a></h4><span class="tg-stars"><span></span></span>
-													<span class="tg-price">Price: $67</span>
-												</div>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
+							<div class="col-sm-4"></div>
 							<div class="col-sm-4">
 								<div class="tg-footercol">
 									<!-- <div class="tg-haslayout">
@@ -593,25 +520,25 @@
 										</strong>
 									</div> -->
 									<div class="tg-description">
-										<p>dipisicing elit sedtado eiusmod dunt ut labore et dolore magna aliqua enim minim veniami quis nostrud.</p>
+										<p>To edit the info that you use on Google services, like your name and photo, sign in to your account.</p>
 									</div>
+									{% for i in mem1 %}
+												
 									<ul class="tg-contactinfo">
 										<li>
 											<i class="fa fa-home"></i>
-											<address>123 Eccles Old Road, New Salford Road London, Uk, M6 7AF</address>
+											<address>{{i.address}}</address>
 										</li>
 										<li>
 											<i class="fa fa-envelope-o"></i>
-											<a href="info%40domain.html">info@domain.com</a>
+											{{i.email}}
 										</li>
 										<li>
 											<i class="fa fa-phone"></i>
-											<span>+44 123 456 788 - 9</span>
+											<span>{{i.mobile}}</span>
 										</li>
 									</ul>
-									<div class="tg-haslayout">
-										<a class="tg-btn" href="#">read more</a>
-									</div>
+									{% endfor %}
 								</div>
 							</div>
 						</div>
@@ -622,14 +549,14 @@
 				<div class="container">
 					<span class="tg-copyright"><a target="_blank" href="https://www.templateshub.net"></a></span>
 					<nav class="tg-footernav">
-						<ul>
+						<!-- <ul>
 							<li><a href="#">Home</a></li>
 							<li><a href="#">All Turfs</a></li>
 							<li><a href="#">Matches</a></li>
 							<li><a href="#">Shop</a></li>
 							<li><a href="#">About us</a></li>
 							<li><a href="#">Contact us</a></li>
-						</ul>
+						</ul> -->
 					</nav>
 				</div>
 			</div>

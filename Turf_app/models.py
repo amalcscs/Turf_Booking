@@ -37,13 +37,14 @@ class Turf(models.Model):
                                     related_name='turfdesignation', null=True, blank=True)
     Turfname = models.CharField(max_length=240, null=True)
     location = models.CharField(max_length=240, null=True)
+    locationurl = models.CharField(max_length=240, null=True)
     sport = models.CharField(max_length=240, null=True)
     
     capacity = models.CharField(max_length=240, null=True)
     Price = models.CharField(max_length=240, null=True)
     amenties = models.CharField(max_length=240, null=True)
     photo = models.FileField(upload_to='images/', null=True, blank=True)
-    status = models.CharField(max_length=240, null=True, default='')
+    status = models.CharField(max_length=240, null=True, default='0')
 
     def __str__(self):
         return self.Turfname
@@ -64,13 +65,13 @@ class Matches(models.Model):
                              related_name='Matchesuser', null=True, blank=True)
     turf = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
                              related_name='matchturf', null=True, blank=True)
-    location = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
-                             related_name='matchlocation', null=True, blank=True)
+    matchname = models.CharField(max_length=240, null=True)
     firstteam = models.CharField(max_length=240, null=True)
     secondteam = models.CharField(max_length=240, null=True)
     result = models.CharField(max_length=240, null=True)
     photo = models.FileField(upload_to='images/', null=True, blank=True)
     date = models.DateField(null=True, blank=True)
+    fromtime = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
     status = models.CharField(max_length=240, null=True, default='')
 
     def __str__(self):
@@ -78,10 +79,10 @@ class Matches(models.Model):
 
 
 class Matchresult(models.Model):
+    user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,
+                             related_name='match_resultuser', null=True, blank=True)
     turf = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
                              related_name='match_resultturf', null=True, blank=True)
-    location = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
-                             related_name='match_resultlocation', null=True, blank=True)
     firstteam = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
                              related_name='match_resultfirstteam', null=True, blank=True)
     secondteam = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
@@ -90,7 +91,9 @@ class Matchresult(models.Model):
                              related_name='match_resultwin_team', null=True, blank=True)
     loss_team = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
                              related_name='match_resultloss_team', null=True, blank=True)
+    matchname = models.CharField(max_length=240, null=True)
     date = models.DateField(null=True, blank=True)
+    fromtime = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
     photo = models.FileField(upload_to='images/', null=True, blank=True)
     match_status = models.CharField(max_length=240, null=True, default='')
 
@@ -107,6 +110,9 @@ class Contact_messages(models.Model):
     email = models.EmailField(max_length=240, null=True)
     message_type = models.CharField(max_length=240, null=True)
     message = models.CharField(max_length=240, null=True)
+    reply = models.CharField(max_length=240, null=True)
+    repliedby = models.CharField(max_length=240, null=True)
+    replyto = models.CharField(max_length=240, null=True)
     
 
     def __str__(self):

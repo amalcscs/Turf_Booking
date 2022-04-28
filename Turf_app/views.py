@@ -25,7 +25,6 @@ def log(request):
                 
                 member=user_registration.objects.get(email=request.POST['email'], password=request.POST['password'])
                 request.session['O_id'] = member.designation_id
-                request.session['usernamets1'] = member.fullname
                 request.session['O_id'] = member.id 
                 mem=user_registration.objects.filter(id= member.id)
                 
@@ -35,7 +34,6 @@ def log(request):
                 
                 member=user_registration.objects.get(email=request.POST['email'], password=request.POST['password'])
                 request.session['U_id'] = member.designation_id
-                request.session['usernamets1'] = member.fullname
                 request.session['U_id'] = member.id 
                 mem1=user_registration.objects.filter(id= member.id)
                 
@@ -50,7 +48,7 @@ def log(request):
 def regis(request):
     
     if request.method == 'POST':
-        des=designation.objects.get(designation="user")
+        des=designation.objects.get(designation="users")
         acc = user_registration()
         acc.fullname = request.POST['firstname']
         acc.Lastname = request.POST['lastname']
@@ -67,29 +65,60 @@ def regis(request):
         return render(request, 'reg.html', {'msg_success': msg_success})
     return render(request, 'reg.html') 
 
+#*******Admin module*******
+
+#Admin Logout
+
+def Admin_logout(request):
+    if 'SAdm_id' in request.session:  
+        request.session.flush()
+        return redirect("/")
+    else:
+        return redirect('/') 
+
+#Admin Index
+
 def Admin_index(request):
-      return render(request, 'Admin_index.html')
+        owner = designation.objects.get(designation='owner')
+        ownercount=Contact_messages.objects.filter(designation_id=owner).count()
+        return render(request, 'Admin_index.html',{'ownercount':ownercount})
 
 def Admin_Turf_requests(request):
-      return render(request, 'Admin_Turf_requests.html')
+    desig = designation.objects.get(designation="owner")
+    req1 = Turf.objects.filter(designation_id=desig)
+    return render(request, 'Admin_Turf_requests.html',{'req1':req1})
 
 def Admin_notification(request):
-      return render(request, 'Admin_notification.html')
+    
+        desig = designation.objects.get(designation="owner")
+        mess1 = Contact_messages.objects.filter(designation_id=desig)
+        return render(request, 'Admin_notification.html',{'mess1':mess1})
+
+def AdminTurfapprove(request,id):
+    
+    n = Turf.objects.filter(id=id).update(status ="approved")
+    return redirect('Admin_Turf_requests')
+
+def AdminTurfrejected(request,id):
+    
+    n = Turf.objects.filter(id=id).update(status ="rejected")
+    return redirect('Admin_Turf_requests')
+
+def Admin_messagereply(request,id):
+    if request.method == 'POST':
+        v = Contact_messages.objects.get(id=id)
+        v.reply=request.POST.get('reply')
+        v.save()
+    return redirect('Admin_notification')
 
 def Admin_view_matches(request):
-      return render(request, 'Admin_view_matches.html')
+    turf1 = Turf.objects.all()
+    view = Matchresult.objects.all().order_by("-id")
+    return render(request, 'Admin_view_matches.html',{'view':view,'turf1':turf1})
 
 def Admin_contact(request):
       return render(request, 'Admin_contact.html')
 
-def ind(request):
-      return render(request, 'User_index.html')
-
-def User_contact(request):
-  return render(request, 'User_contactus.html')
-
-def Owner_contact(request):
-    return render(request, 'owner_contactus.html')
 
 def about(request):
   return render(request, 'aboutus.html')
@@ -109,8 +138,7 @@ def cart(request):
 def books(request):
   return render(request, 'bookings.html') 
 
-def User_notification(request):
-      return render(request, 'User_notification.html') 
+
   
 def book_ticket(request):
   return render(request, 'book_ticket.html')
@@ -121,13 +149,34 @@ def buy_tickets_readmore(request):
 def payment(request):
   return render(request, 'payment.html') 
 
-def indexo(request):
-      return render(request, 'index.html')
+
 
 def sign(request):
   return render(request, 'signup.html') 
 
 #****Owner module******
+
+#index
+
+def indexo(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        users = designation.objects.get(designation='users')
+        Act_count=Contact_messages.objects.filter(designation_id=users).count()
+        return render(request, 'index.html',{'mem':mem,'Act_count':Act_count})
+
+#Owner logout
+
+def Owner_logout(request):
+    if 'O_id' in request.session:
+        request.session.flush()
+        return redirect('/')
+    else:
+        return redirect('/')
 
 #Turf Adding
 
@@ -142,6 +191,7 @@ def add(request):
             abc = Turf()
             abc.Turfname = request.POST['Turfname']
             abc.location = request.POST['Location']
+            abc.locationurl = request.POST['loc_url']
             abc.sport = request.POST['Sport']
             abc.capacity = request.POST['Capacity']
             abc.Price = request.POST['Price']
@@ -164,8 +214,30 @@ def req(request):
         return render(request, 'request.html',{'mem':mem,'reqe':reqe}) 
 
 def Owner_notification(request):
-      return render(request, 'Owner_notification.html') 
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        desig = designation.objects.get(designation="users")
+        mess = Contact_messages.objects.filter(designation_id=desig)
+        return render(request, 'Owner_notification.html',{'mem':mem,'mess':mess}) 
 
+def Owner_messagereply(request,id):
+     if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        if request.method == 'POST':
+            v = Contact_messages.objects.get(id=id)
+            v.reply=request.POST.get('reply')
+            v.repliedby=O_id
+            v.save()
+        return redirect('Owner_notification')
+        
 def Owner_book_details(request):
     return render(request,'Owner_book_details.html') 
 
@@ -239,5 +311,94 @@ def addteam(request):
         return render(request,'addteam.html',{'mem':mem})
 
 
+def Owner_contact(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        turf=Turf.objects.filter(user_id=O_id)
+        des2=designation.objects.get(designation="owner")
+        if request.method == 'POST':
+            
+            a = Contact_messages()
+            a.name  = request.POST['name']
+            a.email  = request.POST['email']
+            a.message_type  = request.POST['messagetype']
+            a.message  = request.POST['message']
+            a.user_id  = O_id
+            a.designation_id = des2.id
+            a.save()
+            msg_success = "Message send successfully"
+            return render(request, 'owner_contactus.html', {'msg_success': msg_success})
+        return render(request, 'owner_contactus.html',{'mem':mem,'turf':turf})
 
-        
+
+#***********User module***********
+
+def User_logout(request):
+    if 'U_id' in request.session:
+        request.session.flush()
+        return redirect('/')
+    else:
+        return redirect('/')
+
+#user index
+
+def ind(request):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        user_count=Contact_messages.objects.filter(user_id=U_id).count()
+        return render(request, 'User_index.html',{'mem1':mem1,'user_count':user_count})
+
+
+def User_notification(request):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        user_reg = user_registration.objects.all()
+        mess3 = Contact_messages.objects.filter(user_id=U_id)
+        return render(request, 'User_notification.html',{'user_reg':user_reg,'mem1':mem1,'mess3':mess3}) 
+
+
+def User_viewmatchresult(request):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        turf1 = Turf.objects.all()
+        view = Matchresult.objects.all().order_by("-id")
+        return render(request, 'User_viewmatchresult.html',{'turf1':turf1,'mem1':mem1,'view':view}) 
+
+
+def User_contact(request):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        des2=designation.objects.get(designation="users")
+        if request.method == 'POST':
+            
+            a = Contact_messages()
+            a.name  = request.POST['name']
+            a.email  = request.POST['email']
+            a.message_type  = request.POST['messagetype']
+            a.message  = request.POST['message']
+            a.user_id  = U_id
+            a.designation_id = des2.id
+            a.save()
+            msg_success = "Message send successfully"
+            return render(request, 'owner_contactus.html', {'msg_success': msg_success})
+        return render(request, 'User_contactus.html',{'mem1':mem1})
