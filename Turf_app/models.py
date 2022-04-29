@@ -42,6 +42,7 @@ class Turf(models.Model):
     
     capacity = models.CharField(max_length=240, null=True)
     Price = models.CharField(max_length=240, null=True)
+    Playrate = models.CharField(max_length=240, null=True)
     amenties = models.CharField(max_length=240, null=True)
     photo = models.FileField(upload_to='images/', null=True, blank=True)
     status = models.CharField(max_length=240, null=True, default='0')
@@ -117,3 +118,39 @@ class Contact_messages(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class TurfBooking(models.Model):
+    user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,
+                             related_name='TurfBookinguser', null=True, blank=True)
+    Turf = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
+                                    related_name='TurfBookingTurf', null=True, blank=True)
+    designation = models.ForeignKey(designation, on_delete=models.DO_NOTHING,
+                                    related_name='TurfBookingdesignation', null=True, blank=True)
+    date = models.DateField(null=True, blank=True)
+    fromtime = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
+    sport = models.CharField(max_length=240, null=True)
+    gamestructure = models.CharField(max_length=240, null=True)
+    status = models.CharField(max_length=240, null=True, default='0')
+    
+    def __str__(self):
+        return self.sport
+
+
+class Payment(models.Model):
+    user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,
+                             related_name='Paymentuser', null=True, blank=True)
+    Turf = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
+                                    related_name='PaymentTurf', null=True, blank=True)
+    designation = models.ForeignKey(designation, on_delete=models.DO_NOTHING,
+                                    related_name='Paymentdesignation', null=True, blank=True)
+    date = models.DateField(null=True, blank=True)
+    bankname = models.CharField(max_length=240, null=True)
+    accountnumber = models.CharField(max_length=240, null=True)
+    ifsccode = models.CharField(max_length=240, null=True)
+    branchname = models.CharField(max_length=240, null=True)
+    amount = models.CharField(max_length=240, null=True)
+    status = models.CharField(max_length=240, null=True, default='0')
+    
+    def __str__(self):
+        return self.bankname

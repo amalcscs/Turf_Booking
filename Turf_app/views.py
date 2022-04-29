@@ -119,9 +119,42 @@ def Admin_view_matches(request):
 def Admin_contact(request):
       return render(request, 'Admin_contact.html')
 
+def Admin_signupdetails(request):
+    userreg = user_registration.objects.all()
+    return render(request, 'Admin_signupdetails.html',{'userreg':userreg})
 
-def about(request):
-  return render(request, 'aboutus.html')
+def Admin_addowner(request,id):
+    j = designation.objects.get(designation="owner")
+    n = user_registration.objects.filter(id=id).update(designation_id = j.id)
+    return redirect('Admin_signupdetails')
+
+def Admin_update(request,id):
+    c = user_registration.objects.filter(id=id)
+    return render(request, 'Admin_update.html',{'c':c})
+
+def Admin_updatesave(request,id):
+    
+    if request.method == 'POST':
+        c = user_registration.objects.filter(id=id)
+        c.Firstname   = request.POST['firstname']
+        c.Lastname  = request.POST['lastname']
+        c.place  = request.POST['place']
+        c.address   = request.POST['address']
+        c.pincode   = request.POST['pincode']
+        c.mobile   = request.POST['mobile']
+        c.email   = request.POST['email']
+        c.photo = request.FILES['files']
+        c.save()
+        return redirect('Admin_signupdetails')
+
+
+def Admin_delete(request,id):
+    
+        m = user_registration.objects.get(id=id)
+        m.delete()
+        return redirect('Admin_signupdetails')
+
+
 
 def matches(request):
   return render(request, 'matches.html')
@@ -129,14 +162,11 @@ def matches(request):
 def shop(request):
   return render(request, 'shoplist.html')
 
-def turf(request):
-  return render(request, 'turfs.html')
 
 def cart(request):
   return render(request, 'cart.html')
 
-def books(request):
-  return render(request, 'bookings.html') 
+
 
 
   
@@ -187,6 +217,7 @@ def add(request):
         else:
             return redirect('/')
         mem = user_registration.objects.filter(id=O_id)
+        dess = designation.objects.get(designation="owner")
         if request.method == 'POST':
             abc = Turf()
             abc.Turfname = request.POST['Turfname']
@@ -197,6 +228,7 @@ def add(request):
             abc.Price = request.POST['Price']
             abc.amenties = request.POST['Amenties']
             abc.photo = request.FILES['files']
+            abc.designation_id = dess.id
             abc.user_id  = O_id
             abc.save()
             msg_success = "Turf Added successfull"
@@ -402,3 +434,80 @@ def User_contact(request):
             msg_success = "Message send successfully"
             return render(request, 'owner_contactus.html', {'msg_success': msg_success})
         return render(request, 'User_contactus.html',{'mem1':mem1})
+
+
+def about(request):
+    return render(request, 'aboutus.html')
+
+#booking turf
+
+def turf(request):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        allturf = Turf.objects.filter(status="approved") 
+        return render(request, 'turfs.html',{'allturf':allturf,'mem1':mem1})
+
+
+def books(request,id):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        design = designation.objects.get(designation="users")
+        if request.method == 'POST':
+            
+            a = TurfBooking()
+            a.date  = request.POST['date']
+            a.fromtime  = request.POST['time']
+            a.sport  = request.POST['Sport']
+            a.gamestructure  = request.POST['game_structure']
+            a.user_id  = U_id
+            a.designation_id = design.id
+            a.Turf_id = id
+            a.save()
+            msg_success = "Booking Request send successfully"
+            return render(request, 'bookings.html', {'msg_success': msg_success})
+        return render(request, 'bookings.html',{'mem1':mem1}) 
+
+
+def Turf_booking(request):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        turfbook = TurfBooking.objects.filter(user_id = U_id)
+        turfname = Turf.objects.filter(user_id = U_id)
+        return render(request, 'Turf_booking.html',{'turfbook':turfbook,'mem1':mem1,'turfname':turfname})
+
+def payment(request,id):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        design = designation.objects.get(designation="users")
+        if request.method == 'POST':
+            
+            a = Payment.objects.get(id=id)
+            a.date  = datetime.now()
+            a.accountnumber  = request.POST['accnumber']
+            a.bankname  = request.POST['bankname']
+            a.ifsccode  = request.POST['ifsccode']
+            a.branchname  = request.POST['branchname']
+            a.amount  = request.POST['amount']
+            a.user_id  = U_id
+            a.designation_id = design.id
+            a.Turf_id = id
+            a.save()
+            msg_success = "Paid"
+            return render(request, 'Turf_booking.html', {'msg_success': msg_success})
+        return render(request, 'Turf_booking.html',{'mem1':mem1}) 

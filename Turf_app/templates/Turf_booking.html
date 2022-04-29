@@ -32,8 +32,11 @@
 	<link rel="stylesheet" href="{% static 'css/color.css' %}">
 	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+ 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-    
 <body>
 	<!--[if lt IE 8]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -134,11 +137,11 @@
 											<ul>
 												<li class="active">  
 													<a href="{% url 'User_notification' %}"><button type="button" class="btn btn-primary "  style="margin-bottom:20px;">
-														Notifications <span class="badge badge-light">4</span>
+														Notifications <span class="badge badge-light">{{user_count}}</span>
 													  </button></a>
 												</li>
 												<li class="active">  
-													<a href="{% url 'User_notification' %}"><button type="button" class="btn btn-danger "  style="margin-bottom:20px;">
+													<a href="{% url 'User_logout' %}"><button type="button" class="btn btn-danger "  style="margin-bottom:20px;">
 														Logout 
 													  </button></a>
 												</li>
@@ -163,9 +166,7 @@
 															
 																		</li>
 																		<li class="active">
-																			<a href="{% url 'User_notification' %}"><button type="button" class="btn btn-primary "  style="margin-bottom:20px;">
-                                                                                Your bookings <span class="badge badge-light">4</span>
-                                                                              </button></a>
+																			<a href="{% url 'regis' %}">Register</a>
 																	
 																				</li>
                                         </ul>
@@ -222,8 +223,9 @@
 			</div>
 		</header>
 
+    
     <!-- Page Content -->
-    <div class="tg-banner tg-haslayout" style="margin-top: -0px;">
+    <div class="tg-banner tg-haslayout" >
 			<div class="tg-imglayer">
 				<img src="{% static 'images/bg-pattran.png' %}" alt="image desctription">
 			</div>
@@ -231,82 +233,175 @@
 				<div class="row">
 					<div class="tg-banner-content tg-haslayout">
 						<div class="tg-pagetitle">
-							<h1>Book your Turfs</h1>
+							<h1>My Bookings</h1>
 						</div>
 						<ol class="tg-breadcrumb">
 							<li><a href="{% url 'ind' %}"></a></li>
-							
+							<li class="active">Home-mybooking</li>
 						</ol>
 					</div>
 				</div>
 			</div>
 		</div>
-   </div>
+    <div class="products">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="filters">
+              <!-- <ul>
+                  <li cl
+                  ass="active" data-filter="*">All Products</li>
+                  <li data-filter=".des">Featured</li>
+                  <li data-filter=".dev">Flash Deals</li>
+                  <li data-filter=".gra">Last Minute</li>
+              </ul> -->
+            </div>
+          </div>
 
-			
-				<div class="row ">
-					<div class="container mb-5" style="margin-bottom:50px;"> 
-					<div class="col-md-3"></div>
-					<div class="col-md-6" style="background-color: antiquewhite;padding:-top:30px;padding-bottom:30px;">
-					<div class="booking-form" >
-						<!-- <div class="booking-bg"></div> -->
-						
-							<div class="form-header">
-								<h2>Book Your Turf</h2>
-							</div>
-							<form method="post" action="" enctype="multipart/form-data">
-                                {% csrf_token %}
-                            <div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-                                        <span class="form-label">Enter your Date</span>
-										<input class="form-control" type="date" required name="date">
-										
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-                                        <span class="form-label">Enter your Time</span>
-										<input class="form-control" type="time" name="time" required>
-										
-									</div>
-								</div>
-							</div>
-                            <div class="form-group">
-                                <span class="form-label">Enter your Sport</span>
-								<select class="form-control" required name="Sport">
-									<option value="" selected hidden></option>
-									<option>Football</option>
-									<option>Cricket</option>
-								</select>
-								<span class="select-arrow"></span>
-								
-							</div>
-							<div class="form-group">
-                                <span class="form-label">Game structure</span>
-                                <select class="form-control" required name="game_structure">
-									<option value=""  selected hidden></option>
-									<option>Elevens</option>
-									<option>Sevens</option>
-								</select>
-								
-							</div>
-							<div class="form-btn" style="float:right">
-								
-								<button type="submit" class="btn btn-success">Send Request</button>
-							</a>
-							</div>
-						</form>
-					</div>
-				</div>
-				<div class="col-md-3"></div>
-			</div>
-			</div>
-	
 
-</center>
+          
+       
+<div class="container " style="padding-top:230px;">
+    <div class="row " >
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">My Bookings</h4>
+                <div class="form-group">
+                  <input type="text" class="form-control text-dark" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                   </div>
+                <div class="table-responsive">
+                  <table class="table table-hover " id="myTable">
+                    <thead>
+                        <tr>
+                            <th>Sl.no</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                           
+                            <th>Sport</th>
+                            <th>Game Structure</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Turf name</th>
+                           <th>Status</th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for i in turfbook %}
+                            
+                       
+                        <tr class="alert" role="alert">
+                            <td>{{forloop.counter}}</td>
+                            <td>
+                                
+                                {% for j in mem1 %}
+                                {{j.Firstname}}
+                                {% endfor %}
+                            </td>
+                                
+                            <td>
+                                {% for j in mem1 %}
+                                {{j.email}}
+                                {% endfor %}</td>
+                            <td>{{i.sport}}</td>
+                            <td>{{i.gamestructure}}</td>
+                            <td>{{i.date}}</td>
+                            <td>{{i.fromtime}}</td>
+                            <td> {{i.Turf.Turfname }}</td>
+                            <td>  
+                                {% if i.status == "0" %}
+                                 <div class="btn btn-warning" >
+                                  <i class="mdi mdi-check"></i>&nbsp; Pending
+                              </div>
+                                 {% elif i.status == "booked" %}
+                                 <div class="btn btn-success" data-toggle="modal"
+                                 data-target="#myModal{{i.id}}">
+                                  <i class="mdi mdi-check"></i>&nbsp; Payment
+                              </div>
+                              {% elif i.status == "rejected" %} 
+                              <div class="btn btn-danger" >
+                                <i class="mdi mdi-check"></i>&nbsp; Rejected
+                            </div>
+                            {% elif i.status == "paid" %} 
+                              <div class="btn btn-info" >
+                                <i class="mdi mdi-check"></i>&nbsp; Paid
+                            </div>
+                            {% endif %} </td>
+                          </tr>
+                          {% endfor %}
+                            
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    {% for i in turfbook %}
+    <div class="modal fade" id="myModal{{i.id}}" 
+    aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-warning" role="document">
+      <!--Content-->
+      <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header text-center">
+          <h4 class="modal-title white-text w-100 font-weight-bold py-2">Payment</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="white-text">&times;</span>
+          </button>
+        </div>
+  
+        <!--Body-->
+        <form action="{% url 'payment' i.id %}" method="post" enctype="multipart/form-data">
+               <div class="modal-body">
+          <div class="row">
+              <div class="col-md-6">
+           <label>Account Number</label>
+            <input type="text" name="accnumber" id="form3" class="form-control validate" required>
+        </div>
+        <div class="col-md-6">
+            <label>Bank Name</label>
+             <input type="text" name="bankname" id="form3" class="form-control validate" required>
+         </div>
+          </div>
+  
+          <div class="row " style="padding-top:20px;">
+            <div class="col-md-6">
+         <label>IFSC Code</label>
+          <input type="text" id="ifsccode" class="form-control validate" required>
+      </div>
+      <div class="col-md-6">
+        <label>Branch Name</label>
+         <input type="text" name="branchname" id="form3" class="form-control validate" required>
+     </div>
+        </div>
+        <div class="row" style="padding-top:20px;">
+            <div class="col-md-6">
+                <label>Date</label>
+                 <div>{{datetime.now}}</div>
+             </div>
+            <div class="col-md-6">
+         <label>Amount</label>
+          <input type="number" name="amount" id="form3" class="form-control validate" required>
+      </div>
+    
+        </div>
+        <div class="text-center mt-3" style="padding-top:20px;">
+        
+         <button type="submit" class="btn btn-success">Pay</button>
+      </div>
+      
+        </div>
+    </form>
+  
+   {% endfor %}
 
-<!-- Optional JavaScript -->
+
+    </body>
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -332,32 +427,6 @@
         
     </script>
 	{% endif %}
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-
-    <!-- Additional Scripts -->
-    <script src="{% static 'js/custom.js' %}"></script>
-    <script src="{% static 'js/owl.js' %}"></script>
-    <script src="{% static 'js/slick.js' %}"></script>
-    <script src="{% static 'js/isotope.js' %}"></script>
-    <script src="{% static 'js/accordions.js' %}"></script>
-
-
-    <script language = "text/Javascript"> 
-      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
-      function clearField(t){                   //declaring the array outside of the
-      if(! cleared[t.id]){                      // function makes it static and global
-          cleared[t.id] = 1;  // you could use true and false, but that's more typing
-          t.value='';         // with more chance of typos
-          t.style.color='#fff';
-          }
-      }
-    </script>
-
-
-  </body>
-
-</html>
+     
+    </html>
+    

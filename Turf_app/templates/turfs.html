@@ -33,6 +33,15 @@
 	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
+<style>
+  .we{
+    height:250px!important;
+    width:500px!important;
+  }
+  .des{
+    padding-top:30px!important;
+  }
+</style>
 <body>
 	<!--[if lt IE 8]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -137,7 +146,7 @@
 													  </button></a>
 												</li>
 												<li class="active">  
-													<a href="{% url 'User_logout' %}"><button type="button" class="btn btn-danger "  style="margin-bottom:20px;">
+													<a href="{% url 'User_notification' %}"><button type="button" class="btn btn-danger "  style="margin-bottom:20px;">
 														Logout 
 													  </button></a>
 												</li>
@@ -162,8 +171,15 @@
 															
 																		</li>
 																		<li class="active">
-																			<a href="{% url 'regis' %}">Register</a>
-																	
+                                      <div class="dropdown show">
+                                        <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          Your Bookings
+                                        </a>
+                                      
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                          <a class="dropdown-item" href="{% url 'Turf_booking' %}">Turf Booking</a>
+                                        </div>
+                                      </div>
 																				</li>
                                         </ul>
                                     </nav>
@@ -259,85 +275,28 @@
           <div class="col-md-12" style="padding-top:50px;">
             <div class="filters-content">
                 <div class="row grid">
-                    <div class="col-lg-4 col-md-4 all des">
+                  {% for i in allturf %}
+                    <div class="col-lg-4 col-md-4 all des mt-5">
                       <div class="product-item">
-                        <a href="#"><img src="{% static 'images/image3.jpg' %}" alt=""></a>
+                        <a href="#"><img src="{{i.photo.url}}" class="we" alt=""></a>
                         <div class="down-content">
-                          <a href="#"><h4>Tittle goes here</h4></a>
-                          <h6>$18.25</h6>
-                          <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                          <a href="{% url 'books' %}"
+                          <a href="#"><h4>{{i.Turfname}}</h4></a>
+                          <h6>${{i.Playrate}}</h6>
+                          <p>{{i.location}}</p>
+                          <a href="{% url 'books' i.id %}"
                           <button type="button" class="btn btn-warning">Book Now</button></a>
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 all dev">
-                      <div class="product-item">
-                        <a href="#"><img src="{% static 'images/image3.jpg' %}" alt=""></a>
-                        <div class="down-content">
-                          <a href="#"><h4>Tittle goes here</h4></a>
-                          <h6>$16.75</h6>
-                          <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                          
-                          <button type="button" class="btn btn-warning">Book Now</button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 all gra">
-                      <div class="product-item">
-                        <a href="#"><img src="{% static 'images/image3.jpg' %}" alt=""></a>
-                        <div class="down-content">
-                          <a href="#"><h4>Tittle goes here</h4></a>
-                          <h6>$32.50</h6>
-                          <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                          <button type="button" class="btn btn-warning">Book Now</button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 all gra">
-                      <div class="product-item">
-                        <a href="#"><img src="{% static 'images/image3.jpg' %}" alt=""></a>
-                        <div class="down-content">
-                          <a href="#"><h4>Tittle goes here</h4></a>
-                          <h6>$24.60</h6>
-                          <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                          <button type="button" class="btn btn-warning">Book Now</button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 all dev">
-                      <div class="product-item">
-                        <a href="#"><img src="{% static 'images/image3.jpg' %}" alt=""></a>
-                        <div class="down-content">
-                          <a href="#"><h4>Tittle goes here</h4></a>
-                          <h6>$18.75</h6>
-                          <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                          <button type="button" class="btn btn-warning">Book Now</button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 all des">
-                      <div class="product-item">
-                        <a href="#"><img src="{% static 'images/image3.jpg' %}" alt=""></a>
-                        <div class="down-content">
-                          <a href="#"><h4>Tittle goes here</h4></a>
-                          <h6>$12.50</h6>
-                          <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                          <button type="button" class="btn btn-warning">Book Now</button>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-          </div>
-         
+                      {% endfor %}
+
         </div>
       </div>
     </div>
 
     
 
-    
+<!--     
     <footer>
       <div class="container">
         <div class="row">
@@ -350,7 +309,7 @@
           </div>
         </div>
       </div>
-    </footer>
+    </footer> -->
 
 
     <!-- Bootstrap core JavaScript -->

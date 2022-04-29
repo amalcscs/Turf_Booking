@@ -11,7 +11,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Notifications</h4>
+                <h4 class="card-title">Registration details</h4>
                 <div class="form-group">
                   <input type="text" class="form-control text-dark" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
                    </div>
@@ -22,26 +22,45 @@
                                 <th>Sl.no</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Message Type</th>
-                                <th>Message</th>
-                                <th>Action</th>
+                                <th>Mobile</th>
+                                <th>Place</th>
+                                <th>Add Owner</th>
+                                <th>Update</th>
+                                <th>Delete</th>
                               </tr>
                         </thead>
                         <tbody>
-                            {% for i in mess1 %}
+                            {% for i in userreg %}
                             <tr class="alert" role="alert">
                                 <td>{{forloop.counter}}</td>
-                                <td>{{i.name}}</td>
+                                <td>{{i.Firstname}}</td>
                                 <td>{{i.email}}</td>
-                                <td>{{i.message_type}}</td>
-                                <td>{{i.message}}</td>
+                                <td>{{i.mobile}}</td>
+                                <td>{{i.place}}</td>
                                 
-                                <td><a href="#">
-                                    <div class="btn btn btn-warning" data-toggle="modal"
-                                        data-target="#myModal{{i.id}}">
-                                        <i class=" text-warning mdi mdi-send btn-icon-prepend"></i>Reply
+                                <td> 
+                                    {% if i.designation_id == 2 %}
+                                    <a href="{% url 'Admin_addowner' i.id %}">
+                                    <div class="btn btn-success" >
+                                        <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Owner
                                     </div>
-        
+                                </a>
+                                {% else %}
+                                <div class="btn btn-primary" >
+                                 &nbsp; User
+                                </div>
+                                {% endif %}
+                                </td>
+                                <td> <a href="{% url 'Admin_update' i.id %}">
+                                    <div class="btn btn-warning" >
+                                       &nbsp; Update
+                                    </div>
+                                </a>
+                                </td>
+                                <td> <a href="{% url 'Admin_delete' i.id %}">
+                                    <div class="btn btn-danger" >
+                                        &nbsp; Delete
+                                    </div>
                                 </a>
                                 </td>
                               </tr>
@@ -56,51 +75,6 @@
         </div>
     </div>
 
-<!-- Modal -->
-{% for i in mess1 %}
-<div class="modal" id="myModal{{i.id}}" >
-    <div class="modal-dialog">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content" style="background-color:grey;">
-
-            <!-- Modal Header -->
-            <div class="modal-header" >
-                <h4 class="modal-title">Reply</h4>
-                <button type="button " class="close " style="color:white;"
-                    data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body" >
-                <form action="{% url 'Admin_messagereply' i.id %}" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="card">
-                        <div class="card-body" style="background-color:white;">
-                            <div class="row p-3">
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
-                                    <textarea class="col-12 col-sm-12 col-md-12 col-lg-12 form-control  text-light"
-                                        style="height: 100px; background-color:white; " name="reply"
-                                        rows="4"> </textarea>
-                                </div>
-                            </div>
-                            <br>
-                            <div  style="float:right;padding-bottom:20px;">
-                                <button type="submit" 
-                                    class="btn btn-outline-primary btn-icon-text ">
-                                    <i class="text-primary mdi mdi-send btn-icon-prepend"></i>
-                                    Send
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-{% endfor %}
 
     <script>
 
