@@ -248,6 +248,13 @@
 		<!--************************************
 				Main Start
 		*************************************-->
+
+
+
+
+
+
+
 		<main id="tg-main" class="tg-main tg-haslayout">
 			<section class="tg-main-section tg-haslayout">
 				<div class="container">
@@ -256,127 +263,32 @@
 					</div>
 					<div class="col-sm-11 col-xs-11 pull-right">
 						<div class="row">
+							{% for i in view %}
+
 							<div class="tg-tickets">
 								<div class="tg-ticket">
-									<time class="tg-matchdate" datetime="2016-05-03">27<span>june</span></time>
-									<div class="tg-matchdetail">
-										<span class="tg-theme-tag">English Premier League</span>
-										<h4>Lumberjacks <span>vs</span> Killer Whales</h4>
-										<ul class="tg-matchmetadata">
-											<li><time datetime="2016-05-03">15:30 PM</time></li>
-											<li><address>Soccer Stadium, Dubai</address></li>
-										</ul>
+									<time class="tg-matchdate">{{i.date|date:'d'}}<span>{{i.date|date:'m'}}</span></time>
+                                    <div class="tg-matchdetail">
+                                        <span class="tg-theme-tag">{{i.matchname}}</span>
+                                        <h4>{{i.secondteam }} <span>vs</span>{{i.firstteam}}</h4>
+                                        <ul class="tg-matchmetadata">
+                                            <li><time datetime="2016-05-03">{{i.fromtime}}</time></li>
+                                            <li><address>
+                                                {% for j in turf1 %}
+                                                {% if i.turf_id == j.id  %}
+                                                {{j.Turfname}}</address>
+                                                {% endif %}
+                                            {% endfor %}
+                                            </li>
+                                        </ul>
 									</div>
 									<div class="tg-btnsbox">
-										<a class="tg-btn" href="{% url 'buy_tickets_readmore' %}">read more</a>
-										<a class="tg-btn" href="{% url 'book_ticket' %}">book my ticket</a>
+									
+										<a class="tg-btn" href="{% url 'book_ticket' i.id %}">book my ticket</a>
 									</div>
 								</div>
-								<div class="tg-ticket">
-									<time class="tg-matchdate" datetime="2016-05-03">27<span>june</span></time>
-									<div class="tg-matchdetail">
-										<span class="tg-theme-tag">English Premier League</span>
-										<h4>Lumberjacks <span>vs</span> Killer Whales</h4>
-										<ul class="tg-matchmetadata">
-											<li><time datetime="2016-05-03">15:30 PM</time></li>
-											<li><address>Soccer Stadium, Dubai</address></li>
-										</ul>
-									</div>
-									<div class="tg-btnsbox">
-										<a class="tg-btn" href="#">read more</a>
-										<a class="tg-btn" href="#">book my ticket</a>
-									</div>
-								</div>
-								<div class="tg-ticket">
-									<time class="tg-matchdate" datetime="2016-05-03">27<span>june</span></time>
-									<div class="tg-matchdetail">
-										<span class="tg-theme-tag">English Premier League</span>
-										<h4>Lumberjacks <span>vs</span> Killer Whales</h4>
-										<ul class="tg-matchmetadata">
-											<li><time datetime="2016-05-03">15:30 PM</time></li>
-											<li><address>Soccer Stadium, Dubai</address></li>
-										</ul>
-									</div>
-									<div class="tg-btnsbox">
-										<a class="tg-btn" href="#">read more</a>
-										<a class="tg-btn" href="#">book my ticket</a>
-									</div>
-								</div>
-								<div class="tg-ticket">
-									<time class="tg-matchdate" datetime="2016-05-03">27<span>june</span></time>
-									<div class="tg-matchdetail">
-										<span class="tg-theme-tag">English Premier League</span>
-										<h4>Lumberjacks <span>vs</span> Killer Whales</h4>
-										<ul class="tg-matchmetadata">
-											<li><time datetime="2016-05-03">15:30 PM</time></li>
-											<li><address>Soccer Stadium, Dubai</address></li>
-										</ul>
-									</div>
-									<div class="tg-btnsbox">
-										<a class="tg-btn" href="#">read more</a>
-										<a class="tg-btn" href="#">book my ticket</a>
-									</div>
-								</div>
-								<div class="tg-ticket">
-									<time class="tg-matchdate" datetime="2016-05-03">27<span>june</span></time>
-									<div class="tg-matchdetail">
-										<span class="tg-theme-tag">English Premier League</span>
-										<h4>Lumberjacks <span>vs</span> Killer Whales</h4>
-										<ul class="tg-matchmetadata">
-											<li><time datetime="2016-05-03">15:30 PM</time></li>
-											<li><address>Soccer Stadium, Dubai</address></li>
-										</ul>
-									</div>
-									<div class="tg-btnsbox">
-										<a class="tg-btn" href="#">read more</a>
-										<a class="tg-btn" href="#">book my ticket</a>
-									</div>
-								</div>
-								<div class="tg-ticket">
-									<time class="tg-matchdate" datetime="2016-05-03">27<span>june</span></time>
-									<div class="tg-matchdetail">
-										<span class="tg-theme-tag">English Premier League</span>
-										<h4>Lumberjacks <span>vs</span> Killer Whales</h4>
-										<ul class="tg-matchmetadata">
-											<li><time datetime="2016-05-03">15:30 PM</time></li>
-											<li><address>Soccer Stadium, Dubai</address></li>
-										</ul>
-									</div>
-									<div class="tg-btnsbox">
-										<a class="tg-btn" href="#">read more</a>
-										<a class="tg-btn" href="#">book my ticket</a>
-									</div>
-								</div>
-								<div class="tg-ticket">
-									<time class="tg-matchdate" datetime="2016-05-03">27<span>june</span></time>
-									<div class="tg-matchdetail">
-										<span class="tg-theme-tag">English Premier League</span>
-										<h4>Lumberjacks <span>vs</span> Killer Whales</h4>
-										<ul class="tg-matchmetadata">
-											<li><time datetime="2016-05-03">15:30 PM</time></li>
-											<li><address>Soccer Stadium, Dubai</address></li>
-										</ul>
-									</div>
-									<div class="tg-btnsbox">
-										<a class="tg-btn" href="#">read more</a>
-										<a class="tg-btn" href="#">book my ticket</a>
-									</div>
-								</div>
-								<div class="tg-ticket">
-									<time class="tg-matchdate" datetime="2016-05-03">27<span>june</span></time>
-									<div class="tg-matchdetail">
-										<span class="tg-theme-tag">English Premier League</span>
-										<h4>Lumberjacks <span>vs</span> Killer Whales</h4>
-										<ul class="tg-matchmetadata">
-											<li><time datetime="2016-05-03">15:30 PM</time></li>
-											<li><address>Soccer Stadium, Dubai</address></li>
-										</ul>
-									</div>
-									<div class="tg-btnsbox">
-										<a class="tg-btn" href="#">read more</a>
-										<a class="tg-btn" href="#">book my ticket</a>
-									</div>
-								</div>
+								
+								{% endfor %}
 							</div>
 						</div>
 					</div>

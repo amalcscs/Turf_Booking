@@ -1,0 +1,94 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{%block content%}
+
+<body  style="background-image: url({% static 'images/add_turf1.jpg' %}); background-repeat:no-repeat;background-size:cover;">
+	<section class="ftco-section">
+
+
+       
+        <div class="container " style="padding-top:230px;">
+            <div class="row " >
+                <div class="col-lg-12 grid-margin stretch-card" style="background-color:white;">
+                    <div class="card" >
+                      <div class="card-body" >
+                        <h4 class="card-title">Turf Bookings</h4>
+                        <div class="form-group">
+                          <input type="text" class="form-control text-dark" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                           </div>
+                        <div class="table-responsive">
+                          <table class="table table-hover " id="myTable">
+                            <thead>
+                                <tr>
+                                    <th>Sl.no</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                   
+                                    <th>Sport</th>
+                                    <th>Game Structure</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Turf name</th>
+                                   <th>Status</th>
+                                  </tr>
+                            </thead>
+                            <tbody>
+                                
+                                {% for i in turfbook %}
+                                    
+                               
+                                <tr class="alert" role="alert">
+                                    <td>{{forloop.counter}}</td>
+                                    <td>
+                                        {{i.user.Firstname}}
+                                    </td>
+                                        
+                                    <td>
+                                  
+                                        {{i.user.email}}</td>
+                                    <td>{{i.sport}}</td>
+                                    <td>{{i.gamestructure}}</td>
+                                    <td>{{i.date}}</td>
+                                    <td>{{i.fromtime}}</td>
+                                    <td> {{i.Turf.Turfname }}</td>
+                                    <td>  
+                                        {% if i.status == "0" %}
+                                        <a href="{% url 'Owner_accept_booking' i.id %}">
+                                         <div class="btn btn-success" >
+                                          <i class="mdi mdi-check"></i>&nbsp; Accept
+                                      </div>
+                                    </a>
+                                    <a href="{% url 'Owner_reject_booking' i.id %}">
+                                      <div class="btn btn-danger" >
+                                        <i class="mdi mdi-check"></i>&nbsp; Reject
+                                    </div>
+                                    </a>
+                                         {% elif i.status == "booked" %}
+                                         <div class="btn btn-primary" data-toggle="modal"
+                                         data-target="#myModal{{i.id}}">
+                                          <i class="mdi mdi-check"></i>&nbsp; Booked
+                                      </div>
+                                      {% elif i.status == "rejected" %} 
+                                      <div class="btn btn-danger" >
+                                        <i class="mdi mdi-check"></i>&nbsp; Rejected
+                                    </div>
+                                    {% elif i.status == "paid" %} 
+                                      <div class="btn btn-warning" >
+                                        <i class="mdi mdi-check"></i>&nbsp; Paid
+                                    </div>
+                                    {% endif %} </td>
+                                  </tr>
+                                  {% endfor %}
+                                    
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+        
+{% endblock %}

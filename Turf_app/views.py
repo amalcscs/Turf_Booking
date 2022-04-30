@@ -156,8 +156,7 @@ def Admin_delete(request,id):
 
 
 
-def matches(request):
-  return render(request, 'matches.html')
+
 
 def shop(request):
   return render(request, 'shoplist.html')
@@ -170,8 +169,7 @@ def cart(request):
 
 
   
-def book_ticket(request):
-  return render(request, 'book_ticket.html')
+
 
 def buy_tickets_readmore(request):
   return render(request, 'buy_tickets_readmore.html') 
@@ -367,6 +365,26 @@ def Owner_contact(request):
         return render(request, 'owner_contactus.html',{'mem':mem,'turf':turf})
 
 
+def Owner_Turf_bookingviewUser(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        desss = designation.objects.get(designation="users")
+        turfbook = TurfBooking.objects.filter(designation_id = desss.id)
+        return render(request, 'Owner_Turf_bookingviewUser.html',{'turfbook':turfbook,'mem':mem})
+
+def Owner_accept_booking(request,id):
+    n = TurfBooking.objects.filter(id=id).update(status = "booked")
+    return redirect('Owner_Turf_bookingviewUser')
+
+def Owner_reject_booking(request,id):
+    n = TurfBooking.objects.filter(id=id).update(status = "rejected")
+    return redirect('Owner_Turf_bookingviewUser')
+
+
 #***********User module***********
 
 def User_logout(request):
@@ -511,3 +529,74 @@ def payment(request,id):
             msg_success = "Paid"
             return render(request, 'Turf_booking.html', {'msg_success': msg_success})
         return render(request, 'Turf_booking.html',{'mem1':mem1}) 
+
+
+def matches(request):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        turf1 = Turf.objects.all()
+        view = Matches.objects.all().order_by("-id")
+        return render(request, 'matches.html',{'mem1':mem1,'turf1':turf1,'view':view})
+
+def book_ticket(request,id):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        turf = Turf.objects.all()
+        order = Matches.objects.filter(id=id).order_by("-id")
+        return render(request, 'book_ticket.html',{'mem1':mem1,'order':order,'turf':turf})
+
+def ticket_booksave(request,id):
+        if request.method == 'POST':
+            
+            a = Matches.objects.get(id=id)
+            a.quantity  = request.POST['qty']
+            a.total  = request.POST['item_total']
+            a.date  = datetime.now()
+            a.accountnumber  = request.POST['accnumber']
+            a.bankname  = request.POST['bankname']
+            a.ifsccode  = request.POST['ifsccode']
+            a.branchname  = request.POST['branchname']
+            a.amount  = request.POST['item_total']
+            a.paymentdate  = datetime.now()
+            a.paymentstatus  = "paid"
+            a.save()
+            return redirect('matches')
+
+def ticket_bookpayment(request,id):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        return render(request,'ticket_bookpayment.html',{'mem1':mem1})
+        # if request.method == 'POST':
+            
+        #     a = Payment.objects.get(id=id)
+        #     a.accountnumber  = request.POST['qty']
+        #     a.bankname  = request.POST['item_total']
+        #     a.ifsccode  = request.POST['qty']
+        #     a.branchname  = request.POST['item_total']
+        #     a.date  = datetime.now()
+        #     a.amount  = request.POST['item_total']
+        #     a.user_id = U_id
+        #     a.designation_id = des.id
+        #     a.matches_id  = id
+        #     a.save()
+        #     return render(request,'ticket_bookpayment.html',{'mem1':mem1})
+        
+  
+
+def bookingdelete(request,id):
+    
+        m = Matches.objects.get(id=id)
+        m.delete()
+        return redirect('matches')

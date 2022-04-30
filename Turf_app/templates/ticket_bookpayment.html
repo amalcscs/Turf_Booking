@@ -41,11 +41,6 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
 </head>
-<script>
-    document.getElementById("current_date").innerHTML = Date();
-
-
-</script>
 <script type="text/javascript">
     <!--
     $(function() {
@@ -279,7 +274,7 @@
 				<div class="row">
 					<div class="tg-banner-content tg-haslayout">
 						<div class="tg-pagetitle">
-							<h1>Book your Turfs</h1>
+							<h1>Payment</h1>
 						</div>
 						<ol class="tg-breadcrumb">
 							<li><a href="{% url 'ind' %}"></a></li>
@@ -295,117 +290,55 @@
         <div class="row">
             <div class="col-md-3"></div>
             
-                <div class="col-md-6"></div>
-                {% for i in order %}
-                <form id="cart" action="{% url 'ticket_booksave' i.id %}" method="post">
-                    {% csrf_token %}
-                    {% endfor %}
-                    <table class="table table-bordered text-center mb-0" name="cart">
-                        <thead class="bg-secondary text-dark">
-                            <tr>
-                                <th>Match Name</th>
-                                <th>Turf Name</th>
-                                <th>Date</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th>Buy</th>
-                                <th>Remove</th>
-                            </tr>
-                        </thead>
-                        <tbody class="align-middle" >
-                            {% for i in order %}
-                            <tr>
-                                <td class="align-middle">{{i.matchname}}</td>
-                                <td class="align-middle">
-                                    {{i.turf.Turfname}}
-                                    
-                                </td>
-                                <td class="align-middle">{{i.date|date:'d-m-Y'}}</td>
-                                <td class="align-middle"><input type="text" disabled name="price" value="{{i.Ticketprice}}"></td>
-                               
-                                   <td> <input type="text" name="qty" value="1">
-                                      
-                                </td>
-                                <td class="align-middle"><input type="text" name="item_total" value="" jAutoCalc="{qty} * {price}"></td>
-                            <td class="align-middle">
-                                
-                                {% if i.paymentstatus == "0" %}
-                                <button type="submit" class="btn btn-sm btn-success" data-toggle="modal"
-                                data-target="#myModal{{i.id}}">Buy</button>
-                                {% elif i.paymentstatus == "paid" %}
-                                <button type="submit" class="btn btn-sm btn-primary">Paid</button>
-                            {% endif %}
-                            </td>
-                                <td class="align-middle">
-                                    <a href="{% url 'bookingdelete' i.id %}">
-                                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button>
-                                </a>
-                            </td>
-                            </tr>
-                            {% endfor %}
-                           </tbody></table>
-        
-                        </div>
                         <div class="col-md-6"></div>
+
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6">
+                         <label>Account Number</label>
+                          <input type="text" name="accnumber" id="form3" class="form-control validate" required>
+                      </div>
+                      <div class="col-md-6">
+                          <label>Bank Name</label>
+                           <input type="text" name="bankname" id="form3" class="form-control validate" required>
+                       </div>
+                        </div>
+                
+                        <div class="row " style="padding-top:20px;">
+                          <div class="col-md-6">
+                       <label>IFSC Code</label>
+                        <input type="text" id="ifsccode" class="form-control validate" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label>Branch Name</label>
+                       <input type="text" name="branchname" id="form3" class="form-control validate" required>
+                   </div>
+                      </div>
+                      <div class="row" style="padding-top:20px;">
+                          <div class="col-md-6">
+                              <label>Date</label>
+                               <div>{{datetime.now}}</div>
+                           </div>
+                          <div class="col-md-6">
+                       <label>Amount</label>
+                        <input type="number" name="amount" id="form3" class="form-control validate" required>
+                    </div>
+                  
+                      </div>
+                      <div class="text-center mt-3" style="padding-top:20px;">
+                      
+                       <button type="submit" class="btn btn-success">Pay</button>
+                    </div>
+                    
+                      </div>
+                  </form>
+
+
+                        <div class="col-md-3"></div>
                         </div>
                     </div>
 
-                    {% for i in order %}
-                    <div class="modal fade" id="myModal{{i.id}}" 
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-notify modal-warning" role="document">
-                      <!--Content-->
-                      <div class="modal-content">
-                        <!--Header-->
-                        <div class="modal-header text-center">
-                          <h4 class="modal-title white-text w-100 font-weight-bold py-2">Payment</h4>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" class="white-text">&times;</span>
-                          </button>
-                        </div>
-                  
-                        <!--Body-->
-                       
-                               <div class="modal-body">
-                          <div class="row">
-                              <div class="col-md-6">
-                           <label>Account Number</label>
-                            <input type="text" name="accnumber" id="form3" class="form-control validate" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label>Bank Name</label>
-                             <input type="text" name="bankname" id="form3" class="form-control validate" required>
-                         </div>
-                          </div>
-                  
-                          <div class="row " style="padding-top:20px;">
-                            <div class="col-md-6">
-                         <label>IFSC Code</label>
-                          <input type="text" id="ifsccode" name="ifsccode" class="form-control validate" required>
-                      </div>
-                      <div class="col-md-6">
-                        <label>Branch Name</label>
-                         <input type="text" name="branchname" id="form3" class="form-control validate" required>
-                     </div>
-                        </div>
-                      
-                        <!-- <div class="row" style="padding-top:20px;">
-                            <div class="col-md-6">
-                                <label>Date</label>
-                                <input type="text" style= {{i.date}}</div>
-                             </div>
-                            
-                        </div> -->
-                        <div class="text-center mt-3" style="padding-top:20px;">
-                        
-                         <button type="submit" class="btn btn-success">Pay</button>
-                      </div>
-                      
-                        </div>
-                    </form>
-                  
-                   {% endfor %}
+
 
 
                     

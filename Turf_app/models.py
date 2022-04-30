@@ -74,6 +74,17 @@ class Matches(models.Model):
     date = models.DateField(null=True, blank=True)
     fromtime = models.TimeField(auto_now=False, auto_now_add=False, null=True, blank=True)
     status = models.CharField(max_length=240, null=True, default='')
+    Ticketprice = models.CharField(max_length=240, null=True)
+    quantity = models.CharField(max_length=240, null=True)
+    total = models.CharField(max_length=240, null=True)
+    paymentstatus = models.CharField(max_length=240, null=True, default='0')
+    paymentdate = models.DateField(null=True, blank=True)
+    bankname = models.CharField(max_length=240, null=True)
+    accountnumber = models.CharField(max_length=240, null=True)
+    ifsccode = models.CharField(max_length=240, null=True)
+    branchname = models.CharField(max_length=240, null=True)
+    amount = models.CharField(max_length=240, null=True)
+    
 
     def __str__(self):
         return self.firstteam
@@ -140,6 +151,8 @@ class TurfBooking(models.Model):
 class Payment(models.Model):
     user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,
                              related_name='Paymentuser', null=True, blank=True)
+    matches = models.ForeignKey(Matches, on_delete=models.DO_NOTHING,
+                             related_name='Paymentmatches', null=True, blank=True)
     Turf = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
                                     related_name='PaymentTurf', null=True, blank=True)
     designation = models.ForeignKey(designation, on_delete=models.DO_NOTHING,

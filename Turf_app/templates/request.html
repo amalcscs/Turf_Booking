@@ -46,12 +46,24 @@
 						
 						
 						<td>
-							{% if i.status == "accept" %}
-							<button type="button" class="btn btn-success">Accepted</button>
-							{% else %}
-							<button type="button" class="btn btn-danger">Rejected</button>
-							{% endif %}
+							{% if i.status == "0" %}
+						
+							 <div class="btn btn-warning" >
+							  <i class="mdi mdi-check"></i>&nbsp; Pending
+						  </div>
+						
+							 {% elif i.status == "approved" %}
+							 <div class="btn btn-success" data-toggle="modal"
+							 data-target="#myModal{{i.id}}">
+							  <i class="mdi mdi-check"></i>&nbsp; Approved
+						  </div>
+						  {% elif i.status == "rejected" %} 
+						  <div class="btn btn-danger" >
+							<i class="mdi mdi-check"></i>&nbsp; Rejected
+						</div>
+						
 						</td>
+						{%endif%}
 					  </tr>
 					  
 					 {% endfor %}
