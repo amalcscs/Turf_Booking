@@ -95,13 +95,13 @@ class Matchresult(models.Model):
                              related_name='match_resultuser', null=True, blank=True)
     turf = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
                              related_name='match_resultturf', null=True, blank=True)
-    firstteam = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
+    firstteam = models.ForeignKey(Teams, on_delete=models.DO_NOTHING,
                              related_name='match_resultfirstteam', null=True, blank=True)
-    secondteam = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
+    secondteam = models.ForeignKey(Teams, on_delete=models.DO_NOTHING,
                              related_name='match_resultsecondteam', null=True, blank=True)
-    win_team = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
+    win_team = models.ForeignKey(Teams, on_delete=models.DO_NOTHING,
                              related_name='match_resultwin_team', null=True, blank=True)
-    loss_team = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
+    loss_team = models.ForeignKey(Teams, on_delete=models.DO_NOTHING,
                              related_name='match_resultloss_team', null=True, blank=True)
     matchname = models.CharField(max_length=240, null=True)
     date = models.DateField(null=True, blank=True)
@@ -167,3 +167,33 @@ class Payment(models.Model):
     
     def __str__(self):
         return self.bankname
+
+
+class Shopcategory(models.Model):
+    user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,
+                             related_name='Shopcategoryuser', null=True, blank=True)
+    category = models.CharField(max_length=240, null=True)
+    status = models.CharField(max_length=240, null=True, default='0')
+    
+    def __str__(self):
+        return self.category
+
+
+class Shopitems(models.Model):
+    user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,
+                             related_name='Shopitemsuser', null=True, blank=True)
+    category = models.ForeignKey(Shopcategory, on_delete=models.DO_NOTHING,
+                             related_name='Shopitemsuser', null=True, blank=True)
+    companyname = models.CharField(max_length=240, null=True)
+    itemname = models.CharField(max_length=240, null=True)
+    price = models.CharField(max_length=240, null=True)
+    size = models.CharField(max_length=240, null=True)
+    color = models.CharField(max_length=240, null=True)
+    quantity = models.CharField(max_length=240, null=True)
+    finalprice = models.CharField(max_length=240, null=True)
+    photo = models.FileField(upload_to='images/', null=True, blank=True)
+    description = models.CharField(max_length=240, null=True)
+    status = models.CharField(max_length=240, null=True, default='0')
+    
+    def __str__(self):
+        return self.category

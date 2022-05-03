@@ -1,0 +1,68 @@
+{% extends 'Admin_index.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+  <div class="col-md-1"> </div>
+      <div class="col-md-10">
+<main id="tg-main" class="tg-main tg-haslayout" style="padding-top:200px;">
+  <section class="tg-main-section tg-haslayout">
+      <div class="container ">
+         <div class="row">
+            
+          <div class="col-md-12 pull-right">
+              <div class="row">
+                 <span><h2>Match Status : </h2></span> 
+                 <a class="tg-btn" style="background-color:green;">Win</a>
+                 <a class="tg-btn" style="background-color:red;">Loss</a>
+              </div>
+
+              
+              {% for i in view %}
+                  
+             <div class="container">
+              <div class="row" style="padding-top:30px;">
+                  <div class="">
+                      <div class="tg-ticket">
+                          <time class="tg-matchdate">{{i.date|date:'d'}}<span>{{i.date|date:'m'}}</span></time>
+                          <div class="tg-matchdetail">
+                              <span class="tg-theme-tag">{{i.matchname}}</span>
+                              <h4>{{i.win_team }} <span>vs</span>{{i.loss_team}}</h4>
+                              <ul class="tg-matchmetadata">
+                                  <li><time datetime="2016-05-03">{{i.fromtime}}</time></li>
+                                  <li><address>
+                                      {% for j in turf1 %}
+                                      {% if i.turf_id == j.id  %}
+                                      {{j.Turfname}}</address>
+                                      {% endif %}
+                                  {% endfor %}
+                                  </li>
+                              </ul>
+                          </div>
+                         
+                              <a class="tg-btn " style="background-color:green;">{{i.win_team }} </a>
+                              <a class="tg-btn" style="background-color:red;">{{i.loss_team}}</a>
+                         
+                      </div>
+                  </div>
+                      
+                      {% endfor %}
+                  
+
+                     
+                      
+                  </div>
+              </div>
+         
+         </div>
+          </div>
+      </div>
+  </div>
+  </section>
+</main>
+</div>
+<div class="col-md-1"></div>
+
+</div>
+
+{% endblock %}

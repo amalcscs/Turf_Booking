@@ -32,6 +32,7 @@ urlpatterns = [
     re_path(r'^User_viewmatchresult/$',views.User_viewmatchresult, name='User_viewmatchresult'),  
     re_path(r'^Turf_booking/$',views.Turf_booking, name='Turf_booking'),  
     re_path(r'^payment/(?P<id>\d+)/$',views.payment, name='payment'),  
+    re_path(r'^shopsave/(?P<id>\d+)/$',views.shopsave, name='shopsave'),  
 
     re_path(r'^indexo/$',views.indexo, name='indexo'),
     re_path(r'^$',views.log, name='log'),
@@ -65,6 +66,9 @@ urlpatterns = [
     re_path(r'^Admin_update/(?P<id>\d+)/$',views.Admin_update, name='Admin_update'),
     re_path(r'^Admin_updatesave/(?P<id>\d+)/$',views.Admin_updatesave, name='Admin_updatesave'),
     re_path(r'^Admin_delete/(?P<id>\d+)/$',views.Admin_delete, name='Admin_delete'),
+    re_path(r'^Admin_Turfbooking/$',views.Admin_Turfbooking, name='Admin_Turfbooking'),
+    re_path(r'^Admin_Ticketbooking/$',views.Admin_Ticketbooking, name='Admin_Ticketbooking'),
+    re_path(r'^Admin_matchresult/$',views.Admin_matchresult, name='Admin_matchresult'),
 
 ]
 

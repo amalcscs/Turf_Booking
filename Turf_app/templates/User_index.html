@@ -32,88 +32,19 @@
 	<link rel="stylesheet" href="{% static 'css/color.css' %}">
 	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+
+	
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<!--[if lt IE 8]>
-		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-	<![endif]-->
-	<!--************************************
-			Wrapper Start
-	*************************************-->
-	<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
-		<!--************************************
-				Mobile Menu Start
-		*************************************-->
-		<div id="tg-navigationm-mobile" class="tg-navigationm-mobile tg-navigation collapse navbar-collapse">
-			<span id="tg-close" class="tg-close fa fa-close"></span>
-			<div class="tg-colhalf">
-                <ul>
-                    <li>
-                        <a href="#">Main</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="index-2.html">home1</a></li>
-                            <li><a href="index2.html">home2</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">team</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="playergrid-v1.html">playergrid-v1</a></li>
-                            <li><a href="playergrid-v2.html">playergrid-v2</a></li>
-                            <li><a href="playerdetail.html">playergrid detail</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="buyticket.html">Buy Tickets</a></li>
-                    <li>
-                        <a href="#">Match Results</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="matchresult.html">match result</a></li>
-                            <li><a href="matchresultdetail.html">match result detail</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="tg-colhalf">
-                <ul>
-                    <li>
-                        <a href="#">fixtures</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="fixtures.html">fixtures</a></li>
-                            <li><a href="fixturedetail.html">fixture detail</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">pro soccer media</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="soccermedia-1.html">pro soccer media1</a></li>
-                            <li><a href="soccermedia-2.html">pro soccer media2</a></li>
-                        </ul>
-                    </li>
-                    <li class="active"><a href="contactus.html">Contact</a></li>
-                    <li>
-                        <a href="#"><i class=" fa fa-navicon"></i></a>
-                        <ul>
-                            <li><a href="aboutus.html">about us</a></li>
-                            <li><a href="shoplist.html">shop list</a></li>
-                            <li><a href="shopgrid.html">shop grid</a></li>
-                            <li><a href="productsingle.html">shop detail</a></li>
-                            <li><a href="bloglist.html">blog list</a></li>
-                            <li><a href="bloggrid.html">blog grid</a></li>
-                            <li><a href="blogdetail.html">blog detail</a></li>
-                            <li><a href="404.html">404 error</a></li>
-                            <li><a href="comming-soon.html">comming soon</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-		</div>
-		<!--************************************
-				Mobile Menu End
-		*************************************-->
+
 		<!--************************************
 				Header Start
 		*************************************-->
-		<header id="tg-header" class="tg-header tg-haslayout">
+		<header id="tg-header" class="tg-header tg-haslayout" style="background-color:#343a40">
 			<div class="container">
 				<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 					<div class="row">
@@ -131,43 +62,66 @@
 										
 										<nav class="tg-addnav">
 											<ul>
-												<li class="active">  
-													<a href="{% url 'User_notification' %}"><button type="button" class="btn btn-primary "  style="margin-bottom:20px;">
-														Notifications <span class="badge badge-light">{{user_count}}</span>
+												<!-- <li class="active">  
+													<a href="{% url 'Owner_notification' %}"><button type="button" class="btn btn-primary "  style="margin-bottom:20px;">
+														NOTIFICATIONS <span class="badge badge-light"></span>
 													  </button></a>
+												</li> -->
+												<li>
+													&nbsp;
 												</li>
 												<li class="active">  
 													<a href="{% url 'User_logout' %}"><button type="button" class="btn btn-danger "  style="margin-bottom:20px;">
-														Logout 
+														LOGOUT 
 													  </button></a>
 												</li>
 									
-												</ul></nav></div>
+												</ul>
+												</nav>
+												</div>
 												<div class="tg-colhalf pull-right">
-										<nav class="tg-addnav">
-											<ul>
-												
+													<nav class="tg-addnav">
+														<ul>
 												<li class="active">
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 													</li>
 												
 												
 														
-																<li class="active">
-																	<a href="{% url 'log' %}">Login</a>
+																<!-- <li class="active">
+																	<a href="">
+																		<div class="btn btn-warning">Add Shopping</div> </a>
 															
 																		</li>
 																		<li class="active">
-																			<a href="{% url 'regis' %}">Register</a>
-																	
-																				</li>
+																			<div class="dropdown show">
+																			  <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																				Booking
+																			  </a>
+																			
+																			  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+																				<a class="dropdown-item" href="{% url 'Owner_Turf_bookingviewUser' %}">Turf Booking</a>
+																			  </div>
+																			</div>
+																													  </li> -->
+<li>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											&nbsp;&nbsp;&nbsp;</li>
+											
+																													  <li class="active">  
+																														<a href="{% url 'User_notification' %}"><button type="button" class="btn btn-primary "  style="margin-bottom:20px;">
+																															NOTIFICATIONS <span class="badge badge-light"></span>
+																														  </button></a>
+																													</li>
                                         </ul>
                                     </nav>
                                 </div>
+								</div>
+								</nav>
 						<nav id="tg-nav" class="tg-nav brand-center">
 							<div class="navbar-header">
 								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tg-navigationm-mobile">
@@ -177,43 +131,45 @@
 									<a href="index-2.html"><img src="{% static 'images/logo.png' %}" alt="image description"></a>
 								</strong>
 							</div>
-							<div id="tg-navigation" class="tg-navigation">
+							<div id="tg-navigationm-mobile" class="tg-navigation">
 								<div class="tg-colhalf">
+									
                                     <ul>
-                                        <li class="active">
+									
+										<li class="active">
                                             <a href="{% url 'ind' %}"> Home</a>
                                         </li>
-                                        <li>
+										<li>
                                             <a href="{% url 'turf' %}">All Turfs</a>
                                             
                                         </li>
-									
-                                         <li>
+										<li>
                                             <a href="{% url 'matches' %}">Matches</a>
                                         </li>
+                                       
 									</ul>
                                 </div>
                                 <div class="tg-colhalf">
                                     <ul>
-										<li>
+										<li class="active">
 											<a href="{% url 'shop' %}">Shop</a>
 											
 										</li>
-										
-										<li>
+										<li class="active">
 											<a href="{% url 'about' %}">About Us</a>
 										   
 										 </li>
-									   
-										 <li>
-											<a href="{% url 'User_contact' %}">Contact Us</a>
+										<li class="active">
+											<a href="{% url 'User_contact' %}"> Contact Us</a>
 											
-										 </li>
+										</li>
 									</ul>
                                     </ul>
                                 </div> 
 							</div>
 						</nav>
+
+						</div>
 					</div>
 				</div>
 			</div>
@@ -224,6 +180,7 @@
 		<!--************************************
 				Home Slider Start
 		*************************************-->
+		{%block content%} 
 		<div class="tg-sliderbox">
 			<div class="tg-imglayer">
 				<img src="{% static 'images/bg-pattran.png' %}" alt="image desctription">
@@ -245,32 +202,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="swiper-slide">
-						<div class="container">
-							<figure class="floating">
-								<img src="{% static 'images/slider/img-01.png' %}" alt="image description">
-							</figure>
-							<div class="tg-slider-content">
-								<h1>PLAY WITH <span>HEART</span></h1>
-							</div>
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="container">
-							<figure class="floating">
-								<img src="{% static 'images/slider/img-01.png' }" alt="image description">
-							</figure>
-							<div class="tg-slider-content">
-								<h1>PLAY WITH <span>HEART</span></h1>
-								<!-- <div class="tg-btnbox">
-									<h2>from june 27</h2>
-									<a class="tg-btn" href="#"><span>read more</span></a>
-									<a class="tg-btn" href="#"><span>book my ticket</span></a>
-								</div> -->
-							</div>
-						</div>
-					</div>
-				</div>
+					
 				<!-- <div class="tg-btn-next">
 					<span>next</span>
 					<span class="fa fa-angle-down"></span>
@@ -394,7 +326,7 @@
 												<div class="col-md-4"></div>
 												<div class="col-md-4">
 											<div class="tg-btnbox ">
-												<a class="tg-btn" href="{% url 'User_viewmatchresult' %}"><span>view all result</span></a>
+												<a class="tg-btn" href="{% url 'User_viewmatchresult' %}"><span>view results</span></a>
 											</div>
 										</div>
 										<div class="col-md-4"></div>
@@ -434,70 +366,97 @@
 			<!--************************************
 					Top Rated Player Start
 			*************************************-->
-		
-	<div class="tg-modalbox modal fade" id="tg-register" tabindex="-1" role="dialog">
-		<div class="modal-dialog" role="document">
-			<div class="tg-modal-content">
-				<div class="tg-formarea">
-					<div class="tg-border-heading">
-						<h3>Signup</h3>
-					</div>
-					<form class="tg-loginform" method="post" action="sign" style="background-color: pink;">
-						<fieldset>
-							<div class="form-group" >
-								<label>First_Name</label>
-								<input type="text" name="First Name" class="form-control" placeholder="First Name">
-							</div>
-							<label>Last Name</label>
-							<div class="form-group">
-								<input type="text" name="Last Name" class="form-control" placeholder="Last Name">
-							</div>
-							<label>User Name</label>
-							<div class="form-group">
-								<input type="text" name="User Name" class="form-control" placeholder="User Name">
-							</div>
-							<label>Password</label>
-							<div class="form-group">
-								<input type="Password" name="Password" class="form-control" placeholder="Password">
-							</div><label>Confirm_password</label>
-							<div class="form-group">
-								<input type="text" name="Confirm_password" class="form-control" placeholder="Confirm_password">
-							</div>
-
-						
-							<div class="form-group">
-								<div class="tg-note">
-									<i class="fa fa-exclamation-circle"></i>
-									<span>We will email you your password.</span>
+			{%endblock%}
+			<footer id="tg-footer" class="tg-footer tg-haslayout">
+				<div class="tg-haslayout tg-footerinfobox">
+					<div class="tg-bgboxone"></div>
+					<div class="tg-bgboxtwo"></div>
+					<div class="tg-footerinfo">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="tg-footercol">
+										<div class="tg-posttitle">
+											<h3>signup</h3>
+										</div>
+										<div class="tg-description">
+											<p>A signup page (also known as a registration page) enables users and organizations to independently register and gain access to your system. It is common to have multiple signup pages depending on the types of people and organizations you want to register.</p>
+										</div>
+										<form class="tg-form-newsletter">
+											<fieldset>
+												<!-- <div class="form-group">
+													<input type="email" class="form-control" name="email" placeholder="Email">
+												</div> -->
+												<a href="{% url 'regis' %}"><input type="button" value="signup" class="tg-btn" type="submit"></a>
+											</fieldset>
+										</form>
+										<div class="tg-posttitle">
+											<h3>popular tags</h3>
+										</div>
+										<div class="tg-tags">
+											<a class="tg-tag" >Turfs</a>
+											<a class="tg-tag" >Matches</a>
+											<a class="tg-tag" >Results</a>
+										
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4"></div>
+								<div class="col-sm-4">
+									<div class="tg-footercol">
+										<!-- <div class="tg-haslayout">
+											<strong class="tg-logo">
+												<a href="#">
+													<img src="images/logo2.png" alt="image description">
+												</a>
+											</strong>
+										</div> -->
+										<div class="tg-description">
+											<p>To edit the info that you use on Google services, like your name and photo, sign in to your account.</p>
+										</div>
+										{% for i in mem1 %}
+													
+										<ul class="tg-contactinfo">
+											<li>
+												<i class="fa fa-home"></i>
+												<address>{{i.address}}</address>
+											</li>
+											<li>
+												<i class="fa fa-envelope-o"></i>
+												{{i.email}}
+											</li>
+											<li>
+												<i class="fa fa-phone"></i>
+												<span>{{i.mobile}}</span>
+											</li>
+										</ul>
+										{% endfor %}
+									</div>
 								</div>
 							</div>
-							<div class="form-group">
-								<button class="tg-btn tg-btn-lg" type="submit">Login Now</button>
-							</div>
-							<div class="tg-description">
-								<p>Already have an account? <a href="#">Login</a></p>
-							</div>
-						</fieldset>
-					</form>
-				</div>
-				<!-- <div class="tg-logintype">
-					<div class="tg-border-heading">
-						<h3>Signup with</h3>
+						</div>
 					</div>
-					<ul>
-						<li class="tg-facebook"><a href="#">facebook</a></li>
-						<li class="tg-twitter"><a href="#">twitter</a></li>
-						<li class="tg-googleplus"><a href="#">google+</a></li>
-						<li class="tg-linkedin"><a href="#">linkedin</a></li>
-					</ul>
-				</div> -->
-			</div>
-		</div>
-	</div>
-	<!-- Button trigger modal -->
-	<!--************************************
-		LightBoxes End
-	*************************************-->
+				</div>
+				<div class="tg-footerbar">
+					<div class="container">
+						<span class="tg-copyright"><a target="_blank" href="https://www.templateshub.net"></a></span>
+						<nav class="tg-footernav">
+							<!-- <ul>
+								<li><a href="#">Home</a></li>
+								<li><a href="#">All Turfs</a></li>
+								<li><a href="#">Matches</a></li>
+								<li><a href="#">Shop</a></li>
+								<li><a href="#">About us</a></li>
+								<li><a href="#">Contact us</a></li>
+							</ul> -->
+						</nav>
+					</div>
+				</div>
+			</footer>
+</main></div>
+	
+
+
 	<script src="js/vendor/jquery-library.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/customScrollbar.min.js"></script>
@@ -509,6 +468,13 @@
 	<script src="js/countTo.js"></script>
 	<script src="js/appear.js"></script>
 	<script src="js/main.js"></script>
+
+			<!--************************************
+					About Us End
+			*************************************-->
+			
+
+		
 </body>
 
 

@@ -5,9 +5,10 @@
 
 
 
-<body  style="background-image: url({% static 'images/add_turf1.jpg' %}); background-repeat:no-repeat;background-size:cover;">
-	<section class="ftco-section">
-<div class='container  mb-5' style="padding-top:230px;padding-bottom: 30px;">
+<body >
+	<section class="ftco-section"  style="background-image: url({% static 'images/add_turf1.jpg' %}); background-repeat:no-repeat;background-size:cover;">
+		<div style="padding-top:50px!important;"></div>
+		<div class='container  mb-5' style="padding-top:230px;padding-bottom: 30px;">
 	<div class='row'>
 		<div class='col-md-2'></div>
 		<div class='col-md-8 mt-5' style="background-color:white;">
@@ -19,79 +20,111 @@
 							<h3>ADD MATCH RESULT</h3>
 						</div>
 					</div>
+					<br><br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>Turfname</label>
 							<select class='form-control' name="turfname" required>
-								{% for i in m %}
-								<option selected hidden value="{{i.Turfname}}">{{i.Turfname}}</option>
+								{% for i in turf %}
+								<option selected hidden value="">--Select--</option>
 								<option value="{{i.id}}">{{i.Turfname}}</option>
 								{% endfor %}
                             </select>
 						</div>
 					</div>
+					<br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>Location</label>
 							<select class='form-control' name="location" required>
-								{% for i in m %}
-								<option selected hidden value="{{i.location}}">{{i.location}}</option>
+								{% for i in turf %}
+								<option selected hidden value="">--Select--</option>
 								<option value="{{i.id}}">{{i.location}}</option>
 								{% endfor %}
                             </select>
 						</div>
 					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Match Name</label>
+							<select class='form-control' name="matchname" >
+								{% for n in d %}
+								<option selected hidden value="">--Select--</option>
+								<option value="{{n.matchname}}">{{n.matchname}}</option>
+								{% endfor %}
+                            </select>
+						</div>
+					</div>
+					<br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>First Team</label>
-							<select class='form-control' name="firstteam" required>
-								{% for j in c %}
-								<option selected hidden value="{{j.teamname}}">{{j.teamname}}</option>
+							<select class='form-control' name="firstteam" >
+								{% for j in tems %}
+								<option selected hidden value="">--Select--</option>
 								<option value="{{j.id}}">{{j.teamname}}</option>
 								{% endfor %}
                             </select>
 						</div>
 					</div>
+					<br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>Second Team</label>
-							<select class='form-control' name="secondteam" required>
-								{% for j in c %}
-								<option selected hidden value="{{j.teamname}}">{{j.teamname}}</option>
-								<option value="{{j.id}}">{{j.teamname}}</option>
+							<select class='form-control' name="secondteam" >
+								{% for k in tems %}
+								<option selected hidden value="">--Select--</option>
+								<option value="{{k.id}}">{{k.teamname}}</option>
 								{% endfor %}
                             </select>
 						</div>
 					</div>
+					<br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>Upload Image</label>
-							  <input type="file" name='image' required class="form-control">
+							  <input type="file" name='image'  class="form-control">
 						</div>
 					</div>
-                  
+					<br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>Winning Team</label>
-							<select class='form-control' name="winteam" required>
-								{% for j in c %}
-								<option selected hidden value="{{j.teamname}}">{{j.teamname}}</option>
-								<option value="{{j.id}}">{{j.teamname}}</option>
+							<select class='form-control' name="winteam" >
+								{% for l in tems %}
+								<option selected hidden value="">--Select--</option>
+								<option value="{{l.id}}">{{l.teamname}}</option>
 								{% endfor %}
                             </select>
 						</div>
 					</div>
+					<br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>Lossing Team</label>
-							<select class='form-control' name="lossteam" required>
-								{% for j in c %}
-								<option selected hidden value="{{j.teamname}}">{{j.teamname}}</option>
-								<option value="{{j.id}}">{{j.teamname}}</option>
+							<select class='form-control' name="lossteam" >
+								{% for o in tems %}
+								<option selected hidden value="">--Select--</option>
+								<option value="{{o.id}}">{{o.teamname}}</option>
 								{% endfor %}
                             </select>
 						</div>
 					</div>
+				<br>
+				<div class="row">
+					<div class="col-md-12">
+						<label>Date</label>
+						  <input type="date" name='date'   class="form-control txtDate">
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-12">
+						<label>Time</label>
+						  <input type="time" name='time'  class="form-control">
+					</div>
+				</div>
 				<br>
 					<div class="row">
 						<div class="col-md-4"></div>
@@ -107,6 +140,24 @@
 		<div class='col-md-2'></div>
 	</div>
 </div>
+
+
+<script>
+    $(function() {
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+        var minDate = year + '-' + month + '-' + day;
+        $('.txtDate').attr('min', minDate);
+
+    })
+</script>
+
 
 <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

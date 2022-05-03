@@ -32,88 +32,17 @@
 	<link rel="stylesheet" href="{% static 'css/color.css' %}">
 	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<!--[if lt IE 8]>
-		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-	<![endif]-->
-	<!--************************************
-			Wrapper Start
-	*************************************-->
-	<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
-		<!--************************************
-				Mobile Menu Start
-		*************************************-->
-		<div id="tg-navigationm-mobile" class="tg-navigationm-mobile tg-navigation collapse navbar-collapse">
-			<span id="tg-close" class="tg-close fa fa-close"></span>
-			<div class="tg-colhalf">
-                <ul>
-                    <li>
-                        <a href="#">Main</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="index-2.html">home1</a></li>
-                            <li><a href="index2.html">home2</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">team</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="playergrid-v1.html">playergrid-v1</a></li>
-                            <li><a href="playergrid-v2.html">playergrid-v2</a></li>
-                            <li><a href="playerdetail.html">playergrid detail</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="buyticket.html">Buy Tickets</a></li>
-                    <li>
-                        <a href="#">Match Results</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="matchresult.html">match result</a></li>
-                            <li><a href="matchresultdetail.html">match result detail</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="tg-colhalf">
-                <ul>
-                    <li>
-                        <a href="#">fixtures</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="fixtures.html">fixtures</a></li>
-                            <li><a href="fixturedetail.html">fixture detail</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">pro soccer media</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="soccermedia-1.html">pro soccer media1</a></li>
-                            <li><a href="soccermedia-2.html">pro soccer media2</a></li>
-                        </ul>
-                    </li>
-                    <li class="active"><a href="contactus.html">Contact</a></li>
-                    <li>
-                        <a href="#"><i class=" fa fa-navicon"></i></a>
-                        <ul>
-                            <li><a href="aboutus.html">about us</a></li>
-                            <li><a href="shoplist.html">shop list</a></li>
-                            <li><a href="shopgrid.html">shop grid</a></li>
-                            <li><a href="productsingle.html">shop detail</a></li>
-                            <li><a href="bloglist.html">blog list</a></li>
-                            <li><a href="bloggrid.html">blog grid</a></li>
-                            <li><a href="blogdetail.html">blog detail</a></li>
-                            <li><a href="404.html">404 error</a></li>
-                            <li><a href="comming-soon.html">comming soon</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-		</div>
-		<!--************************************
-				Mobile Menu End
-		*************************************-->
+
 		<!--************************************
 				Header Start
 		*************************************-->
-		<header id="tg-header" class="tg-header tg-haslayout">
+		<header id="tg-header" class="tg-header tg-haslayout" style="background-color:#343a40">
 			<div class="container">
 				<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 					<div class="row">
@@ -132,42 +61,55 @@
 										<nav class="tg-addnav">
 											<ul>
 												<li class="active">  
-													<a href="{% url 'Admin_notification' %}"><button type="button" class="btn btn-primary "  style="margin-bottom:20px;">
-														Notifications <span class="badge badge-light">{{ownercount}}</span>
-													  </button></a>
+													<a href="{% url 'Admin_signupdetails' %}">
+														<div class="btn btn-success">Registration update</div> </a>
 												</li>
 												<li class="active">  
 													<a href="{% url 'Admin_logout' %}"><button type="button" class="btn btn-danger "  style="margin-bottom:20px;">
-														Logout 
+														LOGOUT 
 													  </button></a>
 												</li>
 									
-												</ul></nav></div>
+												</ul>
+												</nav>
+												</div>
 												<div class="tg-colhalf pull-right">
-										<nav class="tg-addnav">
-											<ul>
-												
+													<nav class="tg-addnav">
+														<ul>
 												<li class="active">
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													&nbsp;&nbsp;
+
 													</li>
 												
 												
 														
 																<li class="active">
-																	<a href="{% url 'log' %}">Login</a>
+																	<a href="{% url 'Admin_notification' %}"><button type="button" class="btn btn-primary "  style="margin-bottom:20px;">
+																		NOTIFICATIONS <span class="badge badge-light"></span>
+																	  </button></a>
+																	
 															
 																		</li>
 																		<li class="active">
-																			<a href="{% url 'Admin_signupdetails' %}">Signup details</a>
-																	
+																			<div class="dropdown show">
+																				<a class="btn btn-warning dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																				  Bookings
+																				</a>
+																			  
+																				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+																				  <a class="dropdown-item" href="{% url 'Admin_Turfbooking' %}">Turf Bookings</a><br><br>
+																				  <a class="dropdown-item" href="{% url 'Admin_Ticketbooking' %}">Ticket Bookings</a>
+																				</div>
+																			  </div>
 																				</li>
                                         </ul>
                                     </nav>
                                 </div>
+								</div>
+								</nav>
 						<nav id="tg-nav" class="tg-nav brand-center">
 							<div class="navbar-header">
 								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tg-navigationm-mobile">
@@ -177,8 +119,9 @@
 									<a href="index-2.html"><img src="{% static 'images/logo.png' %}" alt="image description"></a>
 								</strong>
 							</div>
-							<div id="tg-navigation" class="tg-navigation">
+							<div id="tg-navigationm-mobile" class="tg-navigation">
 								<div class="tg-colhalf">
+									
                                     <ul>
                                         <li class="active">
                                             <a href="{% url 'Admin_index' %}"> Home</a>
@@ -187,7 +130,10 @@
                                             <a href="{% url 'Admin_Turf_requests' %}">Turfs Requests</a>
                                             
                                         </li>
-									
+										<li>
+                                            <a href="">Shop</a>
+                                            
+                                        </li>
                                        
 									</ul>
                                 </div>
@@ -196,7 +142,10 @@
 										<li>
                                             <a href="{% url 'Admin_view_matches' %}">Matches</a>
                                         </li>
-									   
+										<li>
+                                            <a href="{% url 'Admin_matchresult' %}">Match Result</a>
+                                            
+                                        </li>
 										 <li>
 											<a href="{% url 'Admin_contact' %}">Contact Us</a>
 											
@@ -206,10 +155,15 @@
                                 </div> 
 							</div>
 						</nav>
+
+						</div>
 					</div>
 				</div>
 			</div>
 		</header>
+
+
+		{%block content%} 
 		<!--************************************
 				Header End
 		*************************************-->
@@ -237,31 +191,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="swiper-slide">
-						<div class="container">
-							<figure class="floating">
-								<img src="{% static 'images/slider/img-01.png' %}" alt="image description">
-							</figure>
-							<div class="tg-slider-content">
-								<h1>PLAY WITH <span>HEART</span></h1>
-							</div>
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<div class="container">
-							<figure class="floating">
-								<img src="{% static 'images/slider/img-01.png' }" alt="image description">
-							</figure>
-							<div class="tg-slider-content">
-								<h1>PLAY WITH <span>HEART</span></h1>
-								<!-- <div class="tg-btnbox">
-									<h2>from june 27</h2>
-									<a class="tg-btn" href="#"><span>read more</span></a>
-									<a class="tg-btn" href="#"><span>book my ticket</span></a>
-								</div> -->
-							</div>
-						</div>
-					</div>
+				
 				</div>
 				<!-- <div class="tg-btn-next">
 					<span>next</span>
@@ -279,42 +209,11 @@
 		<!--************************************
 				Main Start
 		*************************************-->
-		<main id="tg-main" class="tg-main tg-haslayout">
+		
 			<!--************************************
 					About Us Start
 			*************************************-->
-			<section class="tg-main-section tg-haslayout">
-				<!-- <div class="container">
-					<div class="tg-section-name">
-						<h2>About pro soccer</h2>
-					</div> -->
-					<!-- <div class="col-sm-11 col-xs-11 pull-right">
-						<div class="row">
-							<div class="tg-aboutussection">
-								<div class="row">
-									<div class="col-md-6 col-sm-12 col-xs-12">
-										<figure>
-											<img src="{% static 'images/hello.jpg' %}" alt="image description">
-										</figure>
-									</div>
-									<div class="col-md-6 col-sm-12 col-xs-12">
-										<div class="tg-contentbox">
-											<div class="tg-section-heading"><h2>PURPOSE OF TURFS</h2></div>
-											<div class="tg-description">
-												<p>Plants take up carbon dioxide and release oxygen into the atmosphere and grass is no exception. Well-managed turfgrass can also help reduce pollen production by preventing the growth of weedy species which produce significant amounts of airborne pollen.
-													The top factor for a playground surface is the level of fall protection it achieves. When installed with the proper padding and infill, synthetic turf meets the American Standard Testing Methods (ASTM) standards and can provide excellent shock absorption<br>Turfgrass Reduces Runoff,It Prevent Erosion,It Replenishes Air and have so many benifits<br>turf, in horticulture, the surface layer of soil with its matted, dense vegetation, usually grasses grown for ornamental or recreational use. Such turf grasses include Kentucky bluegrass, creeping bent grass, fine or red fescue, and perennial ryegrass among the popular cool-season types and Bermuda grass, zoysia grass, and St. Augustine grass among the warm-season types.</p>
-											</div>
-											<div class="tg-btnbox">
-												<a class="tg-btn" href="https://en.wikipedia.org/wiki/Artificial_turf"><span>READ MORE</span></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div> -->
-				</div>
-			</section>
+		
 			<!--************************************
 					About Us End
 			*************************************-->
@@ -338,13 +237,11 @@
 										<div class="tg-section-heading"><h2>Sports Turf</h2></div>
 										<div class="tg-description">
 											<p>Artificial turf is a surface of synthetic fibers made to look like natural grass. It is most often used in arenas for sports that were originally or are normally played on grass. However, it is now being used on residential lawns and commercial applications as well. The main reason is maintenance – artificial turf stands up to heavy use, such as in sports, and requires no irrigation or trimming. Domed, covered, and partially covered stadiums may require artificial turf because of the difficulty of getting grass enough sunlight to stay healthy. Artificial turf does have its downside, however: limited life, periodic cleaning requirements, petroleum use, toxic chemicals from infill, and heightened health and safety concerns.</p>
+									<p>FieldTurf’s football systems are designed to meet or exceed FIFA Quality Pro & FIFA Quality certifications.
+
+										FieldTurf is a leader in outdoor and indoor artificial turf football surfacing. FieldTurf football systems are the trusted choice in Major European Football clubs. Ajax Amsterdam, FC Barcelona, FC Sevilla, Borussia Dortmund, 1860 Munich, Olympic Lyonnais, Olympic de Marseille, Everton and West Ham United among others have trusted FieldTurf as their surface of choice.</p>
 										</div>
-										<div class="tg-counters">
-											<div class="tg-counter tg-days"></div>
-											<div class="tg-counter tg-hours"></div>
-											<div class="tg-counter tg-minutes"></div>
-											<div class="tg-counter tg-seconds"></div>
-										</div>
+									
 										
 									</div>
 								</div>
@@ -353,7 +250,95 @@
 					</div>
 				</div>
 			</section>
-		
+			{%endblock%}
+
+			<footer id="tg-footer" class="tg-footer tg-haslayout">
+				<div class="tg-haslayout tg-footerinfobox">
+					<div class="tg-bgboxone"></div>
+					<div class="tg-bgboxtwo"></div>
+					<div class="tg-footerinfo">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="tg-footercol">
+										<div class="tg-posttitle">
+											<h3>signup</h3>
+										</div>
+										<div class="tg-description">
+											<p>A signup page (also known as a registration page) enables users and organizations to independently register and gain access to your system. It is common to have multiple signup pages depending on the types of people and organizations you want to register.</p>
+										</div>
+										<form class="tg-form-newsletter">
+											<fieldset>
+												<!-- <div class="form-group">
+													<input type="email" class="form-control" name="email" placeholder="Email">
+												</div> -->
+												<a href="{% url 'regis' %}"><input type="button" value="signup" class="tg-btn" type="submit"></a>
+											</fieldset>
+										</form>
+										<div class="tg-posttitle">
+											<h3>popular tags</h3>
+										</div>
+										<div class="tg-tags">
+											<a class="tg-tag" >Turfs</a>
+											<a class="tg-tag" >Matches</a>
+											<a class="tg-tag" >Results</a>
+										
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-4"></div>
+								<div class="col-sm-4">
+									<div class="tg-footercol">
+										<!-- <div class="tg-haslayout">
+											<strong class="tg-logo">
+												<a href="#">
+													<img src="images/logo2.png" alt="image description">
+												</a>
+											</strong>
+										</div> -->
+										<div class="tg-description">
+											<p>To edit the info that you use on Google services, like your name and photo, sign in to your account.</p>
+										</div>
+									
+													
+										<ul class="tg-contactinfo">
+											<li>
+												<i class="fa fa-home"></i>
+												<address>New World Business Centre
+													Station Rd, Warmley, Bristol BS30 8XG, United Kingdom</address>
+											</li>
+											<li>
+												<i class="fa fa-envelope-o"></i>
+												Admin@gmail.com
+											</li>
+											<li>
+												<i class="fa fa-phone"></i>
+												<span>+91 7845968545</span>
+											</li>
+										</ul>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tg-footerbar">
+					<div class="container">
+						<span class="tg-copyright"><a target="_blank" href="https://www.templateshub.net"></a></span>
+						<nav class="tg-footernav">
+							<!-- <ul>
+								<li><a href="#">Home</a></li>
+								<li><a href="#">All Turfs</a></li>
+								<li><a href="#">Matches</a></li>
+								<li><a href="#">Shop</a></li>
+								<li><a href="#">About us</a></li>
+								<li><a href="#">Contact us</a></li>
+							</ul> -->
+						</nav>
+					</div>
+				</div>
+			</footer>
 
 	<script src="js/vendor/jquery-library.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
@@ -366,6 +351,8 @@
 	<script src="js/countTo.js"></script>
 	<script src="js/appear.js"></script>
 	<script src="js/main.js"></script>
+
+
 </body>
 
 

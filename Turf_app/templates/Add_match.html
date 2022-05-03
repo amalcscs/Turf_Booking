@@ -5,9 +5,10 @@
 
 
 
-<body  style="background-image: url({% static 'images/add_turf1.jpg' %}); background-repeat:no-repeat;background-size:cover;">
-	<section class="ftco-section">
+<body  >
+	<section class="ftco-section" style="background-image: url({% static 'images/add_turf1.jpg' %}); background-repeat:no-repeat;background-size:cover;">
 <div class='container  mb-5' style="padding-top:230px;padding-bottom: 30px;">
+	<div style="padding-top:50px!important;"></div>
 	<div class='row'>
 		<div class='col-md-2'></div>
 		<div class='col-md-8 mt-5' style="background-color:white;">
@@ -18,7 +19,7 @@
 						<div class="col-md-12">
 							<h3>ADD MATCHES</h3>
 						</div>
-					</div>
+					</div><br><br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>Turfname</label>
@@ -30,6 +31,7 @@
                             </select>
 						</div>
 					</div>
+					<br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>Location</label>
@@ -41,28 +43,59 @@
                             </select>
 						</div>
 					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Match Name</label>
+							  <input type="text" name='matchname' required class="form-control">
+						</div>
+					</div>
+					<br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>First Team</label>
 							<select class='form-control' name="firstteam" required>
 								{% for j in c %}
 								<option selected hidden value="{{j.teamname}}">{{j.teamname}}</option>
-								<option value="{{j.id}}">{{j.teamname}}</option>
+								<option value="{{j.teamname}}">{{j.teamname}}</option>
 								{% endfor %}
                             </select>
 						</div>
 					</div>
+					<br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>Second Team</label>
 							<select class='form-control' name="secondteam" required>
 								{% for j in c %}
 								<option selected hidden value="{{j.teamname}}">{{j.teamname}}</option>
-								<option value="{{j.id}}">{{j.teamname}}</option>
+								<option value="{{j.teamname}}">{{j.teamname}}</option>
 								{% endfor %}
                             </select>
 						</div>
 					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Date</label>
+							  <input type="date" name='date'  required class="form-control txtDate">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Time</label>
+							  <input type="time" name='time' required class="form-control">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Ticket Price</label>
+							  <input type="number" name='ticketprice' required class="form-control">
+						</div>
+					</div>
+					<br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>Upload Image</label>
@@ -85,6 +118,22 @@
 		<div class='col-md-2'></div>
 	</div>
 </div>
+
+<script>
+    $(function() {
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+        var minDate = year + '-' + month + '-' + day;
+        $('.txtDate').attr('min', minDate);
+
+    })
+</script>
 
 
 <!-- Optional JavaScript -->

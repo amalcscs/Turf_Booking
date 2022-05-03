@@ -32,88 +32,18 @@
 	<link rel="stylesheet" href="{% static 'css/color.css' %}">
 	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<!--[if lt IE 8]>
-		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-	<![endif]-->
-	<!--************************************
-			Wrapper Start
-	*************************************-->
-	<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
-		<!--************************************
-				Mobile Menu Start
-		*************************************-->
-		<div id="tg-navigationm-mobile" class="tg-navigationm-mobile tg-navigation collapse navbar-collapse">
-			<span id="tg-close" class="tg-close fa fa-close"></span>
-			<div class="tg-colhalf">
-                <ul>
-                    <li>
-                        <a href="#">Main</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="index-2.html">home1</a></li>
-                            <li><a href="index2.html">home2</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">team</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="playergrid-v1.html">playergrid-v1</a></li>
-                            <li><a href="playergrid-v2.html">playergrid-v2</a></li>
-                            <li><a href="playerdetail.html">playergrid detail</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="buyticket.html">Buy Tickets</a></li>
-                    <li>
-                        <a href="#">Match Results</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="matchresult.html">match result</a></li>
-                            <li><a href="matchresultdetail.html">match result detail</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="tg-colhalf">
-                <ul>
-                    <li>
-                        <a href="#">fixtures</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="fixtures.html">fixtures</a></li>
-                            <li><a href="fixturedetail.html">fixture detail</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">pro soccer media</a>
-                        <ul class="tg-dropdown-menu">
-                            <li><a href="soccermedia-1.html">pro soccer media1</a></li>
-                            <li><a href="soccermedia-2.html">pro soccer media2</a></li>
-                        </ul>
-                    </li>
-                    <li class="active"><a href="contactus.html">Contact</a></li>
-                    <li>
-                        <a href="#"><i class=" fa fa-navicon"></i></a>
-                        <ul>
-                            <li><a href="aboutus.html">about us</a></li>
-                            <li><a href="shoplist.html">shop list</a></li>
-                            <li><a href="shopgrid.html">shop grid</a></li>
-                            <li><a href="productsingle.html">shop detail</a></li>
-                            <li><a href="bloglist.html">blog list</a></li>
-                            <li><a href="bloggrid.html">blog grid</a></li>
-                            <li><a href="blogdetail.html">blog detail</a></li>
-                            <li><a href="404.html">404 error</a></li>
-                            <li><a href="comming-soon.html">comming soon</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-		</div>
-		<!--************************************
-				Mobile Menu End
-		*************************************-->
+
 		<!--************************************
 				Header Start
 		*************************************-->
-		<header id="tg-header" class="tg-header tg-haslayout">
+		<header id="tg-header" class="tg-header tg-haslayout" style="background-color:#343a40">
 			<div class="container">
 				<div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
 					<div class="row">
@@ -133,32 +63,33 @@
 											<ul>
 												<li class="active">  
 													<a href="{% url 'Owner_notification' %}"><button type="button" class="btn btn-primary "  style="margin-bottom:20px;">
-														Notifications <span class="badge badge-light">{{Act_count}}</span>
+														NOTIFICATIONS <span class="badge badge-light"></span>
 													  </button></a>
 												</li>
 												<li class="active">  
 													<a href="{% url 'Owner_logout' %}"><button type="button" class="btn btn-danger "  style="margin-bottom:20px;">
-														Logout 
+														LOGOUT 
 													  </button></a>
 												</li>
 									
-												</ul></nav></div>
+												</ul>
+												</nav>
+												</div>
 												<div class="tg-colhalf pull-right">
-										<nav class="tg-addnav">
-											<ul>
-												
+													<nav class="tg-addnav">
+														<ul>
 												<li class="active">
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 													</li>
 												
 												
 														
 																<li class="active">
-																	<a href="{% url 'log' %}">Login</a>
+																	<a href="">
+																		<div class="btn btn-warning">Add Shopping</div> </a>
 															
 																		</li>
 																		<li class="active">
@@ -175,6 +106,8 @@
                                         </ul>
                                     </nav>
                                 </div>
+								</div>
+								</nav>
 						<nav id="tg-nav" class="tg-nav brand-center">
 							<div class="navbar-header">
 								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tg-navigationm-mobile">
@@ -184,8 +117,9 @@
 									<a href="index-2.html"><img src="{% static 'images/logo.png' %}" alt="image description"></a>
 								</strong>
 							</div>
-							<div id="tg-navigation" class="tg-navigation">
+							<div id="tg-navigationm-mobile" class="tg-navigation">
 								<div class="tg-colhalf">
+									
                                     <ul>
 										<li class="active">
                                             <a href="{% url 'indexo' %}">Home</a>
@@ -199,64 +133,34 @@
                                             <a href="{% url 'addteam' %}"> Add Team</a>
                                            
                                         </li>
-                                        <li>
+										<li>
                                             <a href="{% url 'req' %}">Requests</a>
                                            
                                         </li>
-										<!-- <ul>
-                                        <li><a href="buyticket.html">Status</a></li> -->
-                                        <!-- <li>
-                                            <a href="#">Contact</a>
-                                            <ul class="tg-dropdown-menu">
-                                                <li><a href="matchresult.html">match result</a></li>
-                                                <li><a href="matchresultdetail.html">match result detail</a></li>
-                                            </ul>
-                                        </li> -->
-                                    </ul>
+                                       
+									</ul>
                                 </div>
                                 <div class="tg-colhalf">
                                     <ul>
-                                        <li>
-                                            <a href="{% url 'Owner_book_details' %}">Status</a>
-                                            <!-- <ul class="tg-dropdown-menu">
-                                                <li><a href=""></a></li>
-                                                <li><a href="fixturedetail.html">Current Status</a></li>
-                                            </ul> -->
-                                        </li>
-                                       <ul>
-											<li class="active">
-												<a href="{% url 'Add_match' %}"> Add Matches</a>
-												
-											</li>
-											<li class="active">
-												<a href="{% url 'match_result' %}">Match Result</a>
-												
-											</li>
-										</ul>
-											<li class="active">
-												<a href="{% url 'Owner_contact' %}"> Contact Us</a>
-												
-											</li>
-										
-                                        <!-- </li>
-                                        <li>
-                                            <a href="#"><i class=" fa fa-navicon"></i></a>
-                                            <ul>
-                                                <li><a href="aboutus.html">about us</a></li>
-                                                <li><a href="shoplist.html">shop list</a></li>
-                                                <li><a href="shopgrid.html">shop grid</a></li>
-                                                <li><a href="productsingle.html">shop detail</a></li>
-                                                <li><a href="bloglist.html">blog list</a></li>
-                                                <li><a href="bloggrid.html">blog grid</a></li>
-                                                <li><a href="blogdetail.html">blog detail</a></li>
-                                                <li><a href="404.html">404 error</a></li>
-                                                <li><a href="comming-soon.html">comming soon</a></li>
-                                            </ul>
-                                        </li>
+										<li class="active">
+											<a href="{% url 'Add_match' %}"> Add Matches</a>
+											
+										</li>
+										<li class="active">
+											<a href="{% url 'match_result' %}">Match Result</a>
+											
+										</li>
+										<li class="active">
+											<a href="{% url 'Owner_contact' %}"> Contact Us</a>
+											
+										</li>
+									</ul>
                                     </ul>
-                                </div> -->
+                                </div> 
 							</div>
 						</nav>
+
+						</div>
 					</div>
 				</div>
 			</div>

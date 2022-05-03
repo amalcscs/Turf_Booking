@@ -1,0 +1,50 @@
+{% extends 'Admin_index.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container " style="padding-top:270px;padding-bottom:50px;">
+    <div class="row " >
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Turf Bookings</h4>
+                <div class="form-group">
+                  <input type="text" class="form-control text-dark" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                   </div>
+                <div class="table-responsive">
+                    <table class="table table-hover " id="myTable">
+                        <thead>
+                            <tr>
+                                <th>Sl.no</th>
+                                <th>Turf Name</th>
+                                <th>Sport</th>
+                                <th>Game Structure</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                
+                              </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in trufbook %}
+                            <tr class="alert" role="alert">
+                                <td>{{forloop.counter}}</td>
+                                <td>{{i.Turf.Turfname}}</td>
+                                <td>{{i.sport}}</td>
+                                <td>{{i.gamestructure}}</td>
+                                <td>{{i.date|date:'d-m-Y'}}</td>
+                                <td>{{i.fromtime}}</td>
+                                
+                              </tr>
+                              {% endfor %}
+                             
+                        </tbody>
+                      </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+{% endblock %}

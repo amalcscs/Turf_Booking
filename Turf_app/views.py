@@ -1,7 +1,6 @@
 import os
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import auth, User
 from django. contrib import messages
 from django.conf import settings
 from.models import *
@@ -85,7 +84,7 @@ def Admin_index(request):
 
 def Admin_Turf_requests(request):
     desig = designation.objects.get(designation="owner")
-    req1 = Turf.objects.filter(designation_id=desig)
+    req1 = Turf.objects.filter(designation_id=desig).order_by("-id")
     return render(request, 'Admin_Turf_requests.html',{'req1':req1})
 
 def Admin_notification(request):
@@ -109,12 +108,15 @@ def Admin_messagereply(request,id):
         v = Contact_messages.objects.get(id=id)
         v.reply=request.POST.get('reply')
         v.save()
+        msg_success = "Reply send successfully"
+        return render(request, 'Admin_notification.html',{'msg_success':msg_success})
     return redirect('Admin_notification')
 
 def Admin_view_matches(request):
+    team = Teams.objects.all()
     turf1 = Turf.objects.all()
-    view = Matchresult.objects.all().order_by("-id")
-    return render(request, 'Admin_view_matches.html',{'view':view,'turf1':turf1})
+    view = Matches.objects.all().order_by("-id")
+    return render(request, 'Admin_view_matches.html',{'team':team,'view':view,'turf1':turf1})
 
 def Admin_contact(request):
       return render(request, 'Admin_contact.html')
@@ -129,22 +131,22 @@ def Admin_addowner(request,id):
     return redirect('Admin_signupdetails')
 
 def Admin_update(request,id):
-    c = user_registration.objects.filter(id=id)
+    c = user_registration.objects.get(id=id)
+    
     return render(request, 'Admin_update.html',{'c':c})
 
 def Admin_updatesave(request,id):
-    
     if request.method == 'POST':
-        c = user_registration.objects.filter(id=id)
-        c.Firstname   = request.POST['firstname']
-        c.Lastname  = request.POST['lastname']
-        c.place  = request.POST['place']
-        c.address   = request.POST['address']
-        c.pincode   = request.POST['pincode']
-        c.mobile   = request.POST['mobile']
-        c.email   = request.POST['email']
-        c.photo = request.FILES['files']
-        c.save()
+        d = user_registration.objects.get(id=id)
+        d.Firstname   = request.POST.get('firstname')
+        d.Lastname  = request.POST.get('lastname')
+        d.place  = request.POST.get('place')
+        d.address   = request.POST.get('address')
+        d.pincode   = request.POST.get('pincode')
+        d.mobile   = request.POST.get('mobile')
+        d.email   = request.POST.get('email')
+        d.photo = request.FILES['files']
+        d.save()
         return redirect('Admin_signupdetails')
 
 
@@ -154,16 +156,23 @@ def Admin_delete(request,id):
         m.delete()
         return redirect('Admin_signupdetails')
 
+def Admin_Turfbooking(request):
+    trufbook = TurfBooking.objects.all()
+    return render(request,'Admin_Turfbooking.html',{'trufbook':trufbook})
+
+def Admin_Ticketbooking(request):
+    ticketbook = Matches.objects.all()
+    return render(request,'Admin_Ticketbooking.html',{'ticketbook':ticketbook})
+
+def Admin_matchresult(request):
+    turf1 = Turf.objects.all()
+    view = Matchresult.objects.all().order_by("-id")
+    return render(request,'Admin_matchresult.html',{'view':view,'turf1':turf1})
 
 
 
 
-def shop(request):
-  return render(request, 'shoplist.html')
 
-
-def cart(request):
-  return render(request, 'cart.html')
 
 
 
@@ -285,10 +294,14 @@ def Add_match(request):
             ab = Matches()
             ab.turf_id  = request.POST['turfname']
             ab.location_id  = request.POST['location']
+            ab.matchname = request.POST['matchname']
             ab.firstteam = request.POST['firstteam']
             ab.secondteam = request.POST['secondteam']
+            ab.date = request.POST['date']
+            ab.fromtime = request.POST['time']
+            ab.Ticketprice = request.POST['ticketprice']
             ab.photo = request.FILES['image']
-            ab.date = datetime.now()
+            
             ab.user_id  = O_id
             ab.save()
             msg_success = "Match Added successfull"
@@ -302,24 +315,27 @@ def match_result(request):
         else:
             return redirect('/')
         mem = user_registration.objects.filter(id=O_id)
-        m = Turf.objects.all()
-        c = Teams.objects.all()
+        turf = Turf.objects.all()
+        tems = Teams.objects.all()
+        d = Matches.objects.all()
         if request.method == 'POST':
             
             an = Matchresult()
             an.turf_id   = request.POST['turfname']
             an.location_id  = request.POST['location']
+            an.matchname  = request.POST['matchname']
             an.firstteam_id  = request.POST['firstteam']
             an.secondteam_id   = request.POST['secondteam']
             an.win_team_id   = request.POST['winteam']
             an.loss_team_id   = request.POST['lossteam']
             an.photo = request.FILES['image']
-            an.date = datetime.now()
+            an.date = request.POST['date']
+            an.fromtime = request.POST['time']
             an.user_id  = O_id
             an.save()
             msg_success = "Match result Added successfull"
             return render(request, 'match_result.html', {'msg_success': msg_success})
-        return render(request,'match_result.html',{'mem':mem,'m':m,'c':c}) 
+        return render(request,'match_result.html',{'mem':mem,'turf':turf,'tems':tems,'d':d}) 
 
 
 def addteam(request):
@@ -538,9 +554,10 @@ def matches(request):
         else:
             return redirect('/')
         mem1 = user_registration.objects.filter(id=U_id)
+        team = Teams.objects.all()
         turf1 = Turf.objects.all()
         view = Matches.objects.all().order_by("-id")
-        return render(request, 'matches.html',{'mem1':mem1,'turf1':turf1,'view':view})
+        return render(request, 'matches.html',{'team':team,'mem1':mem1,'turf1':turf1,'view':view})
 
 def book_ticket(request,id):
     if 'U_id' in request.session:
@@ -559,12 +576,10 @@ def ticket_booksave(request,id):
             a = Matches.objects.get(id=id)
             a.quantity  = request.POST['qty']
             a.total  = request.POST['item_total']
-            a.date  = datetime.now()
             a.accountnumber  = request.POST['accnumber']
             a.bankname  = request.POST['bankname']
             a.ifsccode  = request.POST['ifsccode']
             a.branchname  = request.POST['branchname']
-            a.amount  = request.POST['item_total']
             a.paymentdate  = datetime.now()
             a.paymentstatus  = "paid"
             a.save()
@@ -593,10 +608,30 @@ def ticket_bookpayment(request,id):
         #     a.save()
         #     return render(request,'ticket_bookpayment.html',{'mem1':mem1})
         
-  
 
 def bookingdelete(request,id):
     
         m = Matches.objects.get(id=id)
         m.delete()
         return redirect('matches')
+
+def shop(request):
+    shopcat = Shopcategory.objects.all()
+    items = Shopitems.objects.all()
+    return render(request, 'shoplist.html',{'shopcat':shopcat,'items':items})
+
+def shopsave(request,id):
+        if request.method == 'POST':
+            a = Shopitems.objects.get(id=id)
+            a.size = request.POST['size1']
+            a.color = request.POST['color1']
+            a.quantity = request.POST['quantity']
+            a.finalprice = request.POST['rate']
+            a.status = "cart"
+            a.save()
+            return redirect('shop')
+
+def cart(request):
+    shopcat = Shopcategory.objects.all()
+    items = Shopitems.objects.all()
+    return render(request, 'cart.html',{'shopcat':shopcat,'items':items})
