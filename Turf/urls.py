@@ -33,6 +33,8 @@ urlpatterns = [
     re_path(r'^Turf_booking/$',views.Turf_booking, name='Turf_booking'),  
     re_path(r'^payment/(?P<id>\d+)/$',views.payment, name='payment'),  
     re_path(r'^shopsave/(?P<id>\d+)/$',views.shopsave, name='shopsave'),  
+    re_path(r'^cartsave/(?P<id>\d+)/$',views.cartsave, name='cartsave'),  
+    re_path(r'^cartpaymentsave/(?P<id>\d+)/$',views.cartpaymentsave, name='cartpaymentsave'),  
 
     re_path(r'^indexo/$',views.indexo, name='indexo'),
     re_path(r'^$',views.log, name='log'),
@@ -44,6 +46,8 @@ urlpatterns = [
     re_path(r'^req/$',views.req, name='req'),
     re_path(r'^Owner_book_details/$',views.Owner_book_details, name='Owner_book_details'),
     re_path(r'^Add_match/$',views.Add_match, name='Add_match'),
+    re_path(r'^Owner_addshopcategory/$',views.Owner_addshopcategory, name='Owner_addshopcategory'),
+    re_path(r'^Owner_addshopitem/$',views.Owner_addshopitem, name='Owner_addshopitem'),
     re_path(r'^match_result/$',views.match_result, name='match_result'),
     re_path(r'^Owner_contact/$',views.Owner_contact, name='Owner_contact'),
     re_path(r'^Owner_Turf_bookingviewUser/$',views.Owner_Turf_bookingviewUser, name='Owner_Turf_bookingviewUser'),

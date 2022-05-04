@@ -47,124 +47,141 @@
 <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-7" style="padding-top:270px!important;">
-        <div class="" style="font-size:30px;font-weight:600;">YOUR CART</div>
+        <div class="" style="font-size:30px;font-weight:600;color:purple;">YOUR CART</div>
 
-        <table class="table table-bordered text-center mb-0" name="cart">
-            <thead class="bg-secondary text-dark">
-                <tr>
-                    <th>Item</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                    <th>Remove</th>
-                </tr>
-            </thead>
-            <tbody class="align-middle" >
-            
-            {% for i in items %}
-                {% if i.status == "cart" %}
-                <tr>
-                    <td class="align-middle">{{i.itemname}}</td>
-                    <td class="align-middle">{{i.quantity}}</td>
-                    <td class="align-middle">{{i.price}}</td>
-                    <td class="align-middle"><input type="text" name="finalprice" value="{{i.finalprice}}"></td>
-                    <td class="align-middle">
-                        <button type="submit" class="btn btn-danger">Remove</button>
-                    </td>
-                </tr>
-                {% endif %}
-                
-            {% endfor %}
-               </tbody>
-            </table>
-
+      
     </div>
-    <div class="col-md-4" style="padding-top:270px!important;" id="cart">
+    <div class="col-md-4" style="padding-top:270px!important;" >
+ </div></div>
+
 <div class="row">
-    
-    <div class="" style="font-size:30px;font-weight:600;margin-left:15px;">FINAL PRICE</div>
-    <div class="col-md-6" id="cart">Sub Total : 
-      
-        <input type="text" disabled name="total"  jAutoCalc="SUM({finalprice})" style="width:100px;height:30px;border:none;"> </div>
-      
-        <div class="col-md-6" style="margin-top:5px;">Tax : <input type="text" value="10" name="tax" > </div>
-</div>
-<div class="row" style="margin-left:3px;">
-    Final Price : 
-        <input type="text" name="total" jAutoCalc="{1000} * {tax}" disabled  style="width:100px;height:30px;border:none;"> 
-    <div ></div>
-</div>
+<div class="col-md-1"></div>
+<div class="col-md-10" >
 
-    </div>
-</div>
-
-
-<form id="cart">
+<form action="" id="cart" method="post">
     <table name="cart">
        <tr>
-          <th></th>
+         
           <th>Item</th>
           <th>Qty</th>
           <th>Price</th>
-          <th>&nbsp;</th>
           <th>Item Total</th>
+          <th>Actions</th>
        </tr>
+       {% for i in items %}
+       {% if i.status == "adcart" %}
        <tr class="line_items">
-          <td><button class="row-remove">Remove</button></td>
-          <td>Stuff</td>
-          <td><input type="text" name="qty" value="1"></td>
-          <td><input type="text" name="price" value="9.99"></td>
-          <td>&nbsp;</td>
-          <td><input type="text" name="item_total" value="" jAutoCalc="{qty} * {price}"></td>
+       
+         
+          <td style="padding-left:50px;padding-right:50px;">{{i.itemname}}</td>
+          <td><input type="text" style="border:none;" disabled name="qty" value="{{i.quantity}}"></td>
+          <td><input type="text" style="border:none;" disabled name="price" value="{{i.price}}"></td>
+         
+          <td><input type="text" style="border:none;" disabled name="item_total" value="" jAutoCalc="{qty} * {price}"></td>
+          <td><button class="row-remove btn btn-danger">Remove</button></td>
        </tr>
-       <tr class="line_items">
-          <td><button class="remove">Remove</button></td>
-          <td>More Stuff</td>
-          <td><input type="text" name="qty" value="2"></td>
-          <td><input type="text" name="price" value="12.50"></td>
-          <td>&nbsp;</td>
-          <td><input type="text" name="item_total" value="" jAutoCalc="{qty} * {price}"></td>
-       </tr>
-       <tr class="line_items">
-          <td><button class="remove">Remove</button></td>
-          <td>And More Stuff</td>
-          <td><input type="text" name="qty" value="3"></td>
-          <td><input type="text" name="price" value="99.99"></td>
-          <td>&nbsp;</td>
-          <td><input type="text" name="item_total" value="" jAutoCalc="{qty} * {price}"></td>
+       {% endif %}
+                
+          {% endfor %}
+    </form>
+
+<form action="" id="cart" method="post">
+  
+    {% csrf_token %}
+  
+       <tr>
+          <td colspan="3">&nbsp;</td>
+          <td style="font-size:20px;color:green;font-weight:600;">Subtotal</td>
+          <td><input type="text" name="sub_total" value="" jAutoCalc="SUM({item_total})" style="border:none;color:red;" disabled></td>
        </tr>
        <tr>
           <td colspan="3">&nbsp;</td>
-          <td>Subtotal</td>
-          <td>&nbsp;</td>
-          <td><input type="text" name="sub_total" value="" jAutoCalc="SUM({item_total})"></td>
-       </tr>
-       <tr>
-          <td colspan="3">&nbsp;</td>
-          <td>
-             Tax:
-             <select name="tax">
-                <option value=".06">CT Tax</option>
-                <option selected value=".00">Tax Free</option>
-             </select>
+          <td style="font-size:20px;color:green;font-weight:600;">
+            &nbsp; &nbsp; &nbsp; &nbsp; Tax
+             <input type="text" name="tax" value=".06" style="border:none;width:20px;" disabled>
           </td>
-          <td>&nbsp;</td>
-          <td><input type="text" name="tax_total" value="" jAutoCalc="{sub_total} * {tax}"></td>
+          <td><input type="text" style="border:none;color:red;" disabled name="tax_total" value="" jAutoCalc="{sub_total} * {tax}"></td>
        </tr>
        <tr>
           <td colspan="3">&nbsp;</td>
-          <td>Total</td>
-          <td>&nbsp;</td>
-          <td><input type="text" name="grand_total" value="" jAutoCalc="{sub_total} + {tax_total}"></td>
+          <td style="font-size:20px;color:green;font-weight:600;">Total</td>
+          <td><input type="text" style="border:none;color:red;" disabled name="grand_total" value="" jAutoCalc="{sub_total} + {tax_total}"></td>
        </tr>
        <tr>
-          <td colspan="99"><button class="row-add">Add Row</button></td>
-       </tr>
+        <td colspan="3">&nbsp;</td>
+        <td style="font-size:20px;color:green;font-weight:600;"></td>
+        <td>
+      
+            <button type="button" class="btn btn-success" data-toggle="modal"
+            data-target="#myModal">Pay</button> 
+       
+        </td>
+     </tr>
     </table>
  </form>
 
+</div>
+</div>
+<div class="col-md-1"></div>
+</div>
+
+<div style="padding-top:30px;"></div>
 
 
+
+<div class="modal fade" id="myModal" aria-hidden="true">
+<div class="modal-dialog modal-notify modal-warning" role="document">
+  <!--Content-->
+  <div class="modal-content">
+    <!--Header-->
+    <div class="modal-header text-center">
+      <h4 class="modal-title white-text w-100 font-weight-bold py-2">Payment</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true" class="white-text">&times;</span>
+      </button>
+    </div>
+
+    <!--Body-->
+   
+           <div class="modal-body">
+      <div class="row">
+          <div class="col-md-6">
+       <label>Account Number</label>
+        <input type="text" name="accnumber" id="form3" class="form-control validate" required>
+    </div>
+    <div class="col-md-6">
+        <label>Bank Name</label>
+         <input type="text" name="bankname" id="form3" class="form-control validate" required>
+     </div>
+      </div>
+
+      <div class="row " style="padding-top:20px;">
+        <div class="col-md-6">
+     <label>IFSC Code</label>
+      <input type="text" id="ifsccode" name="ifsccode" class="form-control validate" required>
+  </div>
+  <div class="col-md-6">
+    <label>Branch Name</label>
+     <input type="text" name="branchname" id="form3" class="form-control validate" required>
+ </div>
+    </div>
+  
+    <!-- <div class="row" style="padding-top:20px;">
+        <div class="col-md-6">
+            <label>Date</label>
+            <input type="text" style= {{i.date}}</div>
+         </div>
+        
+    </div> -->
+    <div class="text-center mt-3" style="padding-top:20px;">
+    
+     <button type="submit" class="btn btn-success">Pay</button>
+  </div>
+  
+    </div>
+</form>
+
+</div></div></div>
 
 
 {%endblock%}

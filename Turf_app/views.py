@@ -400,6 +400,50 @@ def Owner_reject_booking(request,id):
     n = TurfBooking.objects.filter(id=id).update(status = "rejected")
     return redirect('Owner_Turf_bookingviewUser')
 
+def Owner_addshopcategory(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        desss = designation.objects.get(designation="owner")
+        if request.method == 'POST':
+            a = Shopcategory()
+            a.category  = request.POST['category']
+            a.user_id  = O_id
+            a.designation_id = desss.id
+            a.save()
+            msg_success = "Category Added successfully"
+            return render(request, 'Owner_addshopcategory.html', {'msg_success': msg_success})
+        return render(request, 'Owner_addshopcategory.html',{'mem':mem})   
+            
+
+def Owner_addshopitem(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        desss = designation.objects.get(designation="owner")
+        cate = Shopcategory.objects.all()
+        if request.method == 'POST':
+            a = AddShopitems()
+            a.category_id   = request.POST['category']
+            a.companyname   = request.POST['company']
+            a.itemname   = request.POST['item']
+            a.price   = request.POST['price']
+            a.photo   = request.FILES['files']
+            a.description   = request.POST['description']
+            a.user_id  = O_id
+            a.designation_id = desss.id
+            a.save()
+            msg_success = "Items Added successfully"
+            return render(request, 'Owner_addshopitem.html', {'msg_success': msg_success})
+        return render(request, 'Owner_addshopitem.html',{'mem':mem,'cate':cate})   
+            
+
 
 #***********User module***********
 
@@ -617,21 +661,58 @@ def bookingdelete(request,id):
 
 def shop(request):
     shopcat = Shopcategory.objects.all()
-    items = Shopitems.objects.all()
+    items = AddShopitems.objects.all()
     return render(request, 'shoplist.html',{'shopcat':shopcat,'items':items})
 
 def shopsave(request,id):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        dessig = designation.objects.get(designation="users")
+        items = AddShopitems.objects.get(id=id)
         if request.method == 'POST':
-            a = Shopitems.objects.get(id=id)
+            a = Shopitems()
+            a.companyname = request.POST['compname']
+            a.itemname = request.POST['itemname']
+            a.price = request.POST['price']
+            # a.photo = request.FILES['files']
+            a.description = request.POST['description']
             a.size = request.POST['size1']
             a.color = request.POST['color1']
             a.quantity = request.POST['quantity']
             a.finalprice = request.POST['rate']
-            a.status = "cart"
+            a.user_id = U_id
+            a.designation_id = dessig.id
+            a.date = datetime.now()
+            a.status = "adcart"
             a.save()
-            return redirect('shop')
+            return redirect('cart')
+        return render(request, 'shoplist.html',{'items':items,'mem1':mem1})
+
 
 def cart(request):
     shopcat = Shopcategory.objects.all()
     items = Shopitems.objects.all()
     return render(request, 'cart.html',{'shopcat':shopcat,'items':items})
+
+def cartsave(request,id):
+        if request.method == 'POST':
+            a = Shopitems.objects.get(id=id)
+            a.status = "payment"
+            a.save()
+            return redirect('cart')
+
+def cartpaymentsave(request,id):
+    b = Shopitems.objects.get(id=id)
+    if request.method == 'POST':
+        a = Shoppayment.objects.get(id=id)
+        a.subtotal = request.POST['size1']
+        a.tax = request.POST['color1']
+        a.total = request.POST['quantity']
+        a.status = "paid"
+        a.save()
+        return redirect('shop')
+    return render(request,'shoplist.html',{'b':b})

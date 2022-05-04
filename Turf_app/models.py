@@ -172,6 +172,8 @@ class Payment(models.Model):
 class Shopcategory(models.Model):
     user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,
                              related_name='Shopcategoryuser', null=True, blank=True)
+    designation = models.ForeignKey(designation, on_delete=models.DO_NOTHING,
+                             related_name='Shopcategorydesignation', null=True, blank=True)
     category = models.CharField(max_length=240, null=True)
     status = models.CharField(max_length=240, null=True, default='0')
     
@@ -182,8 +184,9 @@ class Shopcategory(models.Model):
 class Shopitems(models.Model):
     user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,
                              related_name='Shopitemsuser', null=True, blank=True)
-    category = models.ForeignKey(Shopcategory, on_delete=models.DO_NOTHING,
-                             related_name='Shopitemsuser', null=True, blank=True)
+    designation = models.ForeignKey(designation, on_delete=models.DO_NOTHING,
+                             related_name='Shopitemsdesignation', null=True, blank=True)
+    category = models.CharField(max_length=240, null=True)
     companyname = models.CharField(max_length=240, null=True)
     itemname = models.CharField(max_length=240, null=True)
     price = models.CharField(max_length=240, null=True)
@@ -191,9 +194,51 @@ class Shopitems(models.Model):
     color = models.CharField(max_length=240, null=True)
     quantity = models.CharField(max_length=240, null=True)
     finalprice = models.CharField(max_length=240, null=True)
+    subtotal = models.CharField(max_length=240, null=True)
+    tax = models.CharField(max_length=240, null=True)
+    total = models.CharField(max_length=240, null=True)
     photo = models.FileField(upload_to='images/', null=True, blank=True)
     description = models.CharField(max_length=240, null=True)
     status = models.CharField(max_length=240, null=True, default='0')
     
     def __str__(self):
         return self.category
+
+class AddShopitems(models.Model):
+    user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,
+                             related_name='AddShopitemssuser', null=True, blank=True)
+    designation = models.ForeignKey(designation, on_delete=models.DO_NOTHING,
+                             related_name='AddShopitemsdesignation', null=True, blank=True)
+    category = models.ForeignKey(Shopcategory, on_delete=models.DO_NOTHING,
+                             related_name='AddShopitemsuser', null=True, blank=True)
+    companyname = models.CharField(max_length=240, null=True)
+    itemname = models.CharField(max_length=240, null=True)
+    price = models.CharField(max_length=240, null=True)
+    size = models.CharField(max_length=240, null=True)
+    color = models.CharField(max_length=240, null=True)
+    photo = models.FileField(upload_to='images/', null=True, blank=True)
+    description = models.CharField(max_length=240, null=True)
+    status = models.CharField(max_length=240, null=True, default='0')
+    
+    def __str__(self):
+        return self.companyname
+
+
+class Shoppayment(models.Model):
+    user = models.ForeignKey(user_registration, on_delete=models.DO_NOTHING,
+                             related_name='Shoppaymentuser', null=True, blank=True)
+    Shopitems = models.ForeignKey(Shopitems, on_delete=models.DO_NOTHING,
+                             related_name='Shoppaymentuser', null=True, blank=True)
+    subtotal = models.CharField(max_length=240, null=True)
+    tax = models.CharField(max_length=240, null=True)
+    total = models.CharField(max_length=240, null=True)
+    date = models.DateField(null=True, blank=True)
+    bankname = models.CharField(max_length=240, null=True)
+    accountnumber = models.CharField(max_length=240, null=True)
+    ifsccode = models.CharField(max_length=240, null=True)
+    branchname = models.CharField(max_length=240, null=True)
+    amount = models.CharField(max_length=240, null=True)
+    status = models.CharField(max_length=240, null=True, default='0')
+    
+    def __str__(self):
+        return self.subtotal

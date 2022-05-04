@@ -87,8 +87,16 @@
 												
 														
 																<li class="active">
-																	<a href="">
-																		<div class="btn btn-warning">Add Shopping</div> </a>
+																	<div class="dropdown">
+																		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																		  Add Shopping
+																		</button>
+																		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+																		  <a class="dropdown-item" href="{% url 'Owner_addshopcategory' %}">Category</a><br><br>
+																		  <a class="dropdown-item" href="{% url 'Owner_addshopitem' %}">Items</a>
+																		  
+																		</div>
+																	  </div>
 															
 																		</li>
 																		<li class="active">
