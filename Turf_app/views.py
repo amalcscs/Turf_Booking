@@ -661,8 +661,9 @@ def bookingdelete(request,id):
 
 def shop(request):
     shopcat = Shopcategory.objects.all()
+    cat = Shopcategory.objects.get(category="sports")
     items = AddShopitems.objects.all()
-    return render(request, 'shoplist.html',{'shopcat':shopcat,'items':items})
+    return render(request, 'shoplist.html',{'shopcat':shopcat,'items':items,'cat':cat})
 
 def shopsave(request,id):
     if 'U_id' in request.session:
@@ -695,24 +696,54 @@ def shopsave(request,id):
 
 def cart(request):
     shopcat = Shopcategory.objects.all()
+    cat = Shopcategory.objects.get(category="sports")
     items = Shopitems.objects.all()
-    return render(request, 'cart.html',{'shopcat':shopcat,'items':items})
+    return render(request, 'cart.html',{'shopcat':shopcat,'items':items,'cat':cat})
 
 def cartsave(request,id):
+        b = Shopitems.objects.get(id=id)
         if request.method == 'POST':
             a = Shopitems.objects.get(id=id)
+            a.subtotal = request.POST['sub_total']
+            a.tax = request.POST['tax_total']
+            a.total = request.POST['grand_total']
             a.status = "payment"
             a.save()
-            return redirect('cart')
+            b = Shoppayment()
+            b.items = request.POST['itemname']
+            b.subtotal = request.POST['sub_total']
+            b.tax = request.POST['tax_total']
+            b.total = request.POST['grand_total']
+            a.status = "paid"
+            b.save()
+            msg_success = "Order Placed successfully Please check your orders"
+            return render(request,'cart.html', {'msg_success': msg_success})
+        return render(request,'cart.html',{'b':b})
 
 def cartpaymentsave(request,id):
-    b = Shopitems.objects.get(id=id)
-    if request.method == 'POST':
-        a = Shoppayment.objects.get(id=id)
-        a.subtotal = request.POST['size1']
-        a.tax = request.POST['color1']
-        a.total = request.POST['quantity']
-        a.status = "paid"
-        a.save()
-        return redirect('shop')
-    return render(request,'shoplist.html',{'b':b})
+    items = Shopitems.objects.filter(id=id)
+    # if request.method == 'POST':
+    #     b = Shopitems()
+    #     b.status = "payment"
+    #     b.save()
+    #     a = Shoppayment()
+    #     a.subtotal = request.POST['sub_total']
+    #     a.tax = request.POST['tax_total']
+    #     a.total = request.POST['grand_total']
+    #     a.status = "paid"
+    #     a.save()
+    #     return redirect('shop')
+    return render(request,'cartpaymentsave.html',{'items':items})
+
+
+def User_myorders(request):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        shopcat = Shopcategory.objects.all()
+        cat = Shopcategory.objects.get(category="sports")
+        items1 = Shopitems.objects.filter(user_id=U_id).filter(status="payment")
+        return render(request, 'User_myorders.html',{'shopcat':shopcat,'items1':items1,'cat':cat,'mem1':mem1})

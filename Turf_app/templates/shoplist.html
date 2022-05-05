@@ -133,99 +133,89 @@ $(function() {
 									</fieldset>
 								</form>
 							</div> -->
-							{% for j in items %}
-							{% if j.category_id == 2 %}
-							<form action="{% url 'shopsave' j.id %}" method="post" enctype="multipart/form-data" name="cart" id="cart">
-								{% csrf_token %}
-							<div class="th-products tg-shoplist">
-								<div class="tg-product">
-									<figure class="tg-productimg">
-										<img src="{{j.photo.url}}" name="files" style="width:300px!important;height:300px!important;">
-									</figure>
-									<div class="tg-productinfo">
-										<input type="text"  name="compname" class="tg-theme-tag" value="{{j.companyname}}" style="border:none;font-size: 20px;">
-										<input type="text"  name="itemname" class="tg-producttitle" value="{{j.itemname}}" style="border:none;font-size: 20px;font-weight: 600;">
-										<input type="text"  class="tg-productprice" name="price" value="${{j.price}}" style="border:none;font-weight: 600;">
-										<span class="tg-stars"><span></span></span>
-										<div class="tg-description">
-											<p><input type="text"   class="tg-productprice" name="description" style="border:none;font-weight: 600;" value="{{j.description}}"></p>
-										</div>
-									
-										<div class="tg-productcolorsize">
-											<div class="tg-productsize">
-												<span>Size:</span>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="size1" id="s1" value="S">
-													<label class="tg-sizeone" for="s1">s</label>
-												</div>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="size1" id="m1" value="M">
-													<label class="tg-sizetwo" for="m1">m</label>
-												</div>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="size1" id="l1" value="L">
-													<label class="tg-sizethree" for="l1">l</label>
-												</div>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="size1" id="xl1" value="XL">
-													<label class="tg-sizefour" for="xl1">xl</label>
-												</div>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="size1" id="xxl1" value="XXL">
-													<label class="tg-sizefive" for="xxl1">xxl</label>
-												</div>
-											</div>
-											<div class="tg-productcolor">
-												<span>Color:</span>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="color1" id="one1" value="Yellow">
-													<label class="tg-colorone" for="one1"></label>
-												</div>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="color1" id="two1" value="Pink">
-													<label class="tg-colortwo" for="two1"></label>
-												</div>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="color1" id="three1" value="Orange">
-													<label class="tg-colorthree" for="three1"></label>
-												</div>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="color1" id="four1" value="Blue">
-													<label class="tg-colorfour" for="four1"></label>
-												</div>
-												<div class="tg-checkbox">
-													<input type="checkbox" name="color1" id="five1" value="Purple">
-													<label class="tg-colorfive" for="five1"></label>
-												</div>
-											</div>
-										</div>
-										
-										<div class="tg-productinfo">
-											<!-- <em class="minus">-</em> -->
-											<div class="row">
-												<div class="col-md-4">
-											<label style="padding-left:20px;">Quantity</label>
-											<input type="text" style="margin-left:20px;"  value="1" id="quantity1" name="quantity" >
-										</div>
-										<div class="col-md-4">
-											<label style="padding-left:20px;" >Price</label>
-											<input type="text" style="margin-left:20px;"  value="" jAutoCalc="{quantity} * {price}" id="" name="rate">
-										
-										</div>	<!-- <em class="plus">+</em> -->
-										
-										<div class="col-md-4" >
-									
-									</div>
-									</div>
-								<div class="row" style="padding-top:10px;">
-									<button class="tg-btn tg-btnaddtocart" type="submit">add to cart</button>
-								</div>
-								</div>
-								</div>
+
+
+
+
+<div class="row">
+	
+
+	{% for j in items %}
+							
+	<form action="{% url 'shopsave' j.id %}" method="post" enctype="multipart/form-data" name="cart" id="cart">
+		{% csrf_token %}
+
+
+	<div class="col-md-12" style="border:1px solid black;">
+		<br>
+		<div class="row">
+			<div class="col-md-4" ><img src="{{j.photo.url}}" name="files" style="padding-top:100px;width:200px!important;height:300px!important;" > </div>
+			<div class="col-md-8">
+				<div class="row">
+					<div><input type="text"  name="compname" class="tg-theme-tag" value="{{j.companyname}}" style="border:none;font-size: 20px;background-color: yellow;"></div>
+				</div><br>
+				<div class="row">
+					<div class="col-md-6"><input type="text"  name="itemname" class="tg-producttitle" value="{{j.itemname}}" style="border:none;font-size: 20px;font-weight: 600;"></div>
+					<div class="col-md-6"><input type="text"  class="tg-productprice" name="price" value="{{j.price}}" style="border:none;font-weight: 600;"></div>
+				</div><br>
+				<div class="row">
+					<div><input type="text"   class="tg-productprice" name="description" style="border:none;font-weight: 600;" value="{{j.description}}"></div>
+				</div><br>
+				<div class="row">
+					<div class="col-md-6">
+						<span style="font-size:20px;">Color:</span>
+					
+							<input type="checkbox" name="color1" id="one1" value="Yellow">
+							<label class="tg-colorone" for="one1">Yellow</label>
+						
+							<input type="checkbox" name="color1" id="two1" value="Pink">
+							<label class="tg-colortwo" for="two1">Pink</label>
+						
+							<input type="checkbox" name="color1" id="three1" value="Orange">
+							<label class="tg-colorthree" for="three1">Orange</label>
+					
+						</div>
+							<div class="col-md-6">
+								<span style="font-size:20px;">Size:</span>
+								<input type="checkbox" name="size1" id="s1" value="S">
+								<label class="tg-sizeone" for="s1">s</label>
+							
+								<input type="checkbox" name="size1" id="m1" value="M">
+								<label class="tg-sizetwo" for="m1">m</label>
+						
+								<input type="checkbox" name="size1" id="l1" value="L">
+								<label class="tg-sizethree" for="l1">l</label>
+							
+								<input type="checkbox" name="size1" id="xl1" value="XL">
+								<label class="tg-sizefour" for="xl1">xl</label>
+						
+								<input type="checkbox" name="size1" id="xxl1" value="XXL">
+								<label class="tg-sizefive" for="xxl1">xxl</label>
+						
 							</div>
-						</form></div>
-						{% endif %}
-							{% endfor %}
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-6">
+					<label>Quantity:</label> <input type="text" style="margin-left:20px;"  value="1" id="quantity1" name="quantity" ></div>
+				<div class="col-md-6">
+					<label>Price:</label> <input type="text" style="margin-left:20px;"  value="" jAutoCalc="{quantity} * {price}" id="" name="rate"></div>
+			</div><br>
+			<div class="row">
+				<div class="col-md-6"></div>
+				<div class="col-md-6"><button class="tg-btn tg-btnaddtocart" type="submit">add to cart</button></div>
+			</div>
+			<br>
+			</div>
+		</div>
+	</div>
+	</form>
+	{% endfor %}
+	
+</div>
+
+
+
 </div>
 						<div class="col-md-3 col-sm-4 col-xs-12">
 							<aside id="tg-sidebar" class="tg-sidebar">
@@ -260,7 +250,7 @@ $(function() {
 										<a class="tg-btn" href="#">Filter</a>
 									</div>
 								</div> -->
-								<div class="tg-widget">
+								<!-- <div class="tg-widget">
 									<h3>Slideshow Widget</h3>
 									<div class="tg-slideshow-widget tg-haslayout">
 										<div id="tg-slideshow-slider" class="tg-slideshow-slider tg-haslayout">
@@ -286,7 +276,7 @@ $(function() {
 											<div class="tg-themebtnprev"><span class="fa fa-angle-up"></span></div>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<div class="tg-widget tg-tags-widget">
 									<h3>popular tags</h3>
 									<ul>

@@ -57,8 +57,11 @@
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-10" >
-
-<form action="" id="cart" method="post">
+    
+    {% for j in items %}  {% if j.status == "adcart" %}
+   <form action="{% url 'cartsave' j.id %}" id="cart" method="post">
+       {% csrf_token %}
+    {% endif %}  {% endfor %}  
     <table name="cart">
        <tr>
          
@@ -70,6 +73,7 @@
        </tr>
        {% for i in items %}
        {% if i.status == "adcart" %}
+    
        <tr class="line_items">
        
          
@@ -83,38 +87,38 @@
        {% endif %}
                 
           {% endfor %}
-    </form>
+   
+          {% for j in items %}
+          {% if j.status == "adcart" %}
+          <input type="hidden" style="border:none;"  name="itemname" value="{{j.itemname}}">
+          {% endif %}
+                
+          {% endfor %}
 
-<form action="" id="cart" method="post">
-  
-    {% csrf_token %}
-  
        <tr>
           <td colspan="3">&nbsp;</td>
           <td style="font-size:20px;color:green;font-weight:600;">Subtotal</td>
-          <td><input type="text" name="sub_total" value="" jAutoCalc="SUM({item_total})" style="border:none;color:red;" disabled></td>
+          <td><input type="text" name="sub_total" value="" jAutoCalc="SUM({item_total})" style="border:none;color:red;" ></td>
        </tr>
        <tr>
           <td colspan="3">&nbsp;</td>
           <td style="font-size:20px;color:green;font-weight:600;">
             &nbsp; &nbsp; &nbsp; &nbsp; Tax
-             <input type="text" name="tax" value=".06" style="border:none;width:20px;" disabled>
+             <input type="text" name="tax" value=".06" style="border:none;width:20px;" >
           </td>
-          <td><input type="text" style="border:none;color:red;" disabled name="tax_total" value="" jAutoCalc="{sub_total} * {tax}"></td>
+          <td><input type="text" style="border:none;color:red;"  name="tax_total" value="" jAutoCalc="{sub_total} * {tax}"></td>
        </tr>
        <tr>
           <td colspan="3">&nbsp;</td>
           <td style="font-size:20px;color:green;font-weight:600;">Total</td>
-          <td><input type="text" style="border:none;color:red;" disabled name="grand_total" value="" jAutoCalc="{sub_total} + {tax_total}"></td>
+          <td><input type="text" style="border:none;color:red;"  name="grand_total" value="" jAutoCalc="{sub_total} + {tax_total}"></td>
        </tr>
        <tr>
         <td colspan="3">&nbsp;</td>
         <td style="font-size:20px;color:green;font-weight:600;"></td>
         <td>
-      
-            <button type="button" class="btn btn-success" data-toggle="modal"
-            data-target="#myModal">Pay</button> 
-       
+            <button type="submit" class="btn btn-success" >Checkout</button> </a>
+            
         </td>
      </tr>
     </table>
@@ -183,6 +187,23 @@
 
 </div></div></div>
 
+
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {% if msg_success %}
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            text: '{{ msg_success }}',
+            showConfirmButton: false,
+            timer: 3000
+        }).then(function () {
+            javascript: history.go(-2);
+        })
+        
+    </script>
+	{% endif %}
 
 {%endblock%}
 

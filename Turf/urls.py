@@ -35,6 +35,7 @@ urlpatterns = [
     re_path(r'^shopsave/(?P<id>\d+)/$',views.shopsave, name='shopsave'),  
     re_path(r'^cartsave/(?P<id>\d+)/$',views.cartsave, name='cartsave'),  
     re_path(r'^cartpaymentsave/(?P<id>\d+)/$',views.cartpaymentsave, name='cartpaymentsave'),  
+    re_path(r'^User_myorders/$',views.User_myorders, name='User_myorders'),  
 
     re_path(r'^indexo/$',views.indexo, name='indexo'),
     re_path(r'^$',views.log, name='log'),

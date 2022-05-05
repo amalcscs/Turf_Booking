@@ -229,6 +229,7 @@ class Shoppayment(models.Model):
                              related_name='Shoppaymentuser', null=True, blank=True)
     Shopitems = models.ForeignKey(Shopitems, on_delete=models.DO_NOTHING,
                              related_name='Shoppaymentuser', null=True, blank=True)
+    items = models.CharField(max_length=240, null=True)
     subtotal = models.CharField(max_length=240, null=True)
     tax = models.CharField(max_length=240, null=True)
     total = models.CharField(max_length=240, null=True)

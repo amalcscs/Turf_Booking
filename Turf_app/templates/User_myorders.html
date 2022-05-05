@@ -1,0 +1,175 @@
+{% extends 'User_index.html' %}
+{% load static %}
+
+{%block content%}
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
+
+
+<script type="text/javascript">
+<!--
+$(function() {
+
+	function autoCalcSetup() {
+		$('form#cart').jAutoCalc('destroy');
+		$('form#cart tr.line_items').jAutoCalc({keyEventsFire: true, decimalPlaces: 2, emptyAsZero: true});
+		$('form#cart').jAutoCalc({decimalPlaces: 2});
+	}
+	autoCalcSetup();
+
+
+	$('button.row-remove').on("click", function(e) {
+		e.preventDefault();
+
+		var form = $(this).parents('form')
+		$(this).parents('tr').remove();
+		autoCalcSetup();
+
+	});
+
+	$('button.row-add').on("click", function(e) {
+		e.preventDefault();
+
+		var $table = $(this).parents('table');
+		var $top = $table.find('tr.line_items').first();
+		var $new = $top.clone(true);
+
+		$new.jAutoCalc('destroy');
+		$new.insertBefore($top);
+		$new.find('input[type=text]').val('');
+		autoCalcSetup();
+
+	});
+
+});
+//-->
+</script>
+
+
+		<div class="tg-banner tg-haslayout">
+			<div class="tg-imglayer">
+				<img src="{% static 'images/bg-pattran.png' %}" alt="image desctription">
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="tg-banner-content tg-haslayout">
+						<div class="tg-pagetitle">
+							<h1>My Orders</h1>
+						</div>
+						<ol class="tg-breadcrumb">
+							<li><a href="#">Home</a></li>
+							<li class="active">My Orders</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--************************************
+				Banner End
+		*************************************-->
+		<!--************************************
+				Main Start
+		*************************************-->
+		
+							<!-- <div class="tg-shophead">
+								<ul class="tg-shopviewnav">
+									<li><a href="#"><i class="fa fa-th"></i></a></li>
+									<li class="tg-active"><a href="#"><i class="fa fa-list"></i></a></li>
+								</ul>
+								<form class="tg-formfilter">
+									<fieldset>
+										<div class="tg-select">
+											<select>
+												<option>sort by: All Category</option>
+												<option>All Category</option>
+												<option>All Category</option>
+											</select>
+										</div>
+										<div class="tg-select">
+											<select>
+												<option>Show: 9 Items Per Page</option>
+												<option>All Category</option>
+												<option>All Category</option>
+											</select>
+										</div>
+									</fieldset>
+								</form>
+							</div> -->
+
+
+
+
+<div class="row">
+	
+
+	{% for j in items1 %}
+	
+
+	<div class="col-md-12" style="border:1px solid black;">
+		<br>
+		<div class="row">
+			<div class="col-md-4" > </div>
+			<div class="col-md-8">
+				<div class="row">
+					<div><input type="text"  name="compname" class="tg-theme-tag" value="{{j.companyname}}" style="border:none;font-size: 20px;background-color: yellow;"></div>
+				</div><br>
+				<div class="row">
+					<div class="col-md-6"><input type="text"  name="itemname" class="tg-producttitle" value="{{j.itemname}}" style="border:none;font-size: 20px;font-weight: 600;"></div>
+					<div class="col-md-6"><input type="text"  class="tg-productprice" name="price" value="{{j.price}}" style="border:none;font-weight: 600;"></div>
+				</div><br>
+				<div class="row">
+					<div><input type="text"   class="tg-productprice" name="description" style="border:none;font-weight: 600;" value="{{j.description}}"></div>
+				</div><br>
+				<div class="row">
+					<div class="col-md-6">
+						<span style="font-size:20px;">Color:</span>{{j.color}}
+					
+						</div>
+							<div class="col-md-6">
+								<!-- <span style="font-size:20px;">Size:</span> -->
+								<!-- <input type="checkbox" name="size1" id="s1" value="S">
+								<label class="tg-sizeone" for="s1">s</label>
+							
+								<input type="checkbox" name="size1" id="m1" value="M">
+								<label class="tg-sizetwo" for="m1">m</label>
+						
+								<input type="checkbox" name="size1" id="l1" value="L">
+								<label class="tg-sizethree" for="l1">l</label>
+							
+								<input type="checkbox" name="size1" id="xl1" value="XL">
+								<label class="tg-sizefour" for="xl1">xl</label>
+						
+								<input type="checkbox" name="size1" id="xxl1" value="XXL">
+								<label class="tg-sizefive" for="xxl1">xxl</label> -->
+						
+							</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-6">
+					<label>Quantity:</label> <input type="text" style="margin-left:20px;"  value="{{j.quantity}}"  name="quantity" ></div>
+				<div class="col-md-6">
+					<label>Order Price:</label> <input type="text" style="margin-left:20px;"  value="{{j.finalprice}}"  id="" name="rate"></div>
+			</div><br>
+			<div class="row">
+				<div style="font-size:15px;color:red;">Your Item Deleverd By, </div>
+			</div>
+			<br>
+			</div>
+		</div>
+	</div>
+	</form>
+	{% endfor %}
+	
+</div>
+
+
+
+
+		{%endblock%}
