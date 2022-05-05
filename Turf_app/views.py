@@ -169,6 +169,9 @@ def Admin_matchresult(request):
     view = Matchresult.objects.all().order_by("-id")
     return render(request,'Admin_matchresult.html',{'view':view,'turf1':turf1})
 
+def Admin_viewshopping(request):
+    categ = Shopitems.objects.filter(status="payment")
+    return render(request, 'Admin_viewshopping.html',{'categ':categ})
 
 
 
@@ -444,6 +447,23 @@ def Owner_addshopitem(request):
         return render(request, 'Owner_addshopitem.html',{'mem':mem,'cate':cate})   
             
 
+def Owner_senddeliverydate(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        cate = Shopitems.objects.filter(status="payment")
+        return render(request, 'Owner_senddeliverydate.html',{'mem':mem,'cate':cate})
+
+def Owner_senddate(request,id):
+        if request.method == 'POST':
+            a = Shopitems.objects.get(id=id)
+            a.deliverydate  = request.POST['deliverydate']
+            a.save()
+            return redirect('Owner_senddeliverydate')   
+            
 
 #***********User module***********
 

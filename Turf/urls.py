@@ -56,6 +56,8 @@ urlpatterns = [
     re_path(r'^Owner_messagereply/(?P<id>\d+)/$',views.Owner_messagereply, name='Owner_messagereply'),
     re_path(r'^Owner_accept_booking/(?P<id>\d+)/$',views.Owner_accept_booking, name='Owner_accept_booking'),
     re_path(r'^Owner_reject_booking/(?P<id>\d+)/$',views.Owner_reject_booking, name='Owner_reject_booking'),
+    re_path(r'^Owner_senddate/(?P<id>\d+)/$',views.Owner_senddate, name='Owner_senddate'),
+    re_path(r'^Owner_senddeliverydate/$',views.Owner_senddeliverydate, name='Owner_senddeliverydate'),
 
     re_path(r'^Admin_index/$',views.Admin_index, name='Admin_index'),
     re_path(r'^Admin_signupdetails/$',views.Admin_signupdetails, name='Admin_signupdetails'),
@@ -74,6 +76,7 @@ urlpatterns = [
     re_path(r'^Admin_Turfbooking/$',views.Admin_Turfbooking, name='Admin_Turfbooking'),
     re_path(r'^Admin_Ticketbooking/$',views.Admin_Ticketbooking, name='Admin_Ticketbooking'),
     re_path(r'^Admin_matchresult/$',views.Admin_matchresult, name='Admin_matchresult'),
+    re_path(r'^Admin_viewshopping/$',views.Admin_viewshopping, name='Admin_viewshopping'),
 
 ]
 

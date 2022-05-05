@@ -199,6 +199,7 @@ class Shopitems(models.Model):
     total = models.CharField(max_length=240, null=True)
     photo = models.FileField(upload_to='images/', null=True, blank=True)
     description = models.CharField(max_length=240, null=True)
+    deliverydate = models.DateField(null=True, blank=True)
     status = models.CharField(max_length=240, null=True, default='0')
     
     def __str__(self):
