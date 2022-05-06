@@ -1,4 +1,5 @@
 import os
+import random
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django. contrib import messages
@@ -6,6 +7,8 @@ from django.conf import settings
 from.models import *
 from datetime import datetime,date,timedelta
 from django.http import HttpResponse, HttpResponseRedirect
+from Turf.settings import EMAIL_HOST_USER
+from django.core.mail import send_mail
 
 #Login
 
@@ -64,6 +67,34 @@ def regis(request):
         return render(request, 'reg.html', {'msg_success': msg_success})
     return render(request, 'reg.html') 
 
+
+#Forgot Password
+
+def Forgot_password(request):
+    if request.method == "POST":
+        email_id = request.POST.get('email')
+        access_user_data = user_registration.objects.filter(email=email_id).exists()
+        if access_user_data:
+            _user = user_registration.objects.filter(email=email_id)
+            password = random.SystemRandom().randint(100000, 999999)
+            print(password)
+            _user.update(password = password)
+            subject =' your authentication data updated'
+            message = 'Password Reset Successfully\n\nYour login details are below\n\nUsername : ' + str(email_id) + '\n\nPassword : ' + str(password) + \
+                '\n\nYou can login this details\n\nNote: This is a system generated email, do not reply to this email id'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [email_id, ]
+            send_mail(subject, message, email_from,
+                      recipient_list, fail_silently=True)
+            # _user.save()
+            msg_success = "Password Reset successfully check your mail new password"
+            return render(request, 'Forgot_password.html', {'msg_success': msg_success})
+        else:
+            msg_error = "This email does not exist  "
+            return render(request, 'Forgot_password.html', {'msg_error': msg_error})
+    return render(request,'Forgot_password.html')
+
+
 #*******Admin module*******
 
 #Admin Logout
@@ -81,6 +112,23 @@ def Admin_index(request):
         owner = designation.objects.get(designation='owner')
         ownercount=Contact_messages.objects.filter(designation_id=owner).count()
         return render(request, 'Admin_index.html',{'ownercount':ownercount})
+
+def Admin_changepassword(request): 
+        if request.method == 'POST':
+
+            newPassword = request.POST.get('password')
+            confirmPassword = request.POST.get('conpassword')
+
+            user = User.objects.get(is_superuser=True)
+            if newPassword == confirmPassword:
+                user.set_password(newPassword)
+                user.save()
+                msg_success = "Password has been changed successfully"
+                return render(request, 'Admin_index.html', {'msg_success': msg_success})
+            else:
+                msg_error = "Password does not match"
+                return render(request, 'Admin_index.html', {'msg_error': msg_error})
+        return render(request,'Admin_index.html')
 
 def Admin_Turf_requests(request):
     desig = designation.objects.get(designation="owner")
@@ -208,6 +256,33 @@ def indexo(request):
         users = designation.objects.get(designation='users')
         Act_count=Contact_messages.objects.filter(designation_id=users).count()
         return render(request, 'index.html',{'mem':mem,'Act_count':Act_count})
+
+
+
+def Owner_changepassword(request,id):
+        if request.method == 'POST':
+            abc = user_registration.objects.get(id=id)
+            cur = abc.password
+            oldps = request.POST["currentPassword"]
+            newps = request.POST["password"]
+            cmps = request.POST["conpassword"]
+            if oldps == cur:
+                if oldps != newps:
+                    if newps == cmps:
+                        abc.password = request.POST.get('conpassword')
+                        abc.save()
+                        return render(request, 'index.html', )
+                elif oldps == newps:
+                    messages.add_message(request, messages.INFO, 'Current and New password same')
+                else:
+                    messages.info(request, 'Incorrect password same')
+
+                return render(request, 'index.html')
+            else:
+                messages.add_message(request, messages.INFO, 'old password wrong')
+                return render(request, 'index.html')
+       
+
 
 #Owner logout
 
@@ -487,6 +562,37 @@ def ind(request):
         return render(request, 'User_index.html',{'mem1':mem1,'user_count':user_count})
 
 
+def User_changepassword(request,id):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        if request.method == 'POST':
+            abc = user_registration.objects.get(id=id)
+            cur = abc.password
+            oldps = request.POST["currentPassword"]
+            newps = request.POST["password"]
+            cmps = request.POST["conpassword"]
+            if oldps == cur:
+                if oldps != newps:
+                    if newps == cmps:
+                        abc.password = request.POST.get('conpassword')
+                        abc.save()
+                        return render(request, 'User_index.html', {'mem1': mem1})
+                elif oldps == newps:
+                    messages.add_message(request, messages.INFO, 'Current and New password same')
+                else:
+                    messages.info(request, 'Incorrect password same')
+
+                return render(request, 'User_index.html', {'mem1': mem1})
+            else:
+                messages.add_message(request, messages.INFO, 'old password wrong')
+                return render(request, 'User_index.html', {'mem1': mem1})
+        return render(request, 'User_index.html',{'mem1':mem1})
+
+
 def User_notification(request):
     if 'U_id' in request.session:
         if request.session.has_key('U_id'):
@@ -699,7 +805,7 @@ def shopsave(request,id):
             a.companyname = request.POST['compname']
             a.itemname = request.POST['itemname']
             a.price = request.POST['price']
-            # a.photo = request.FILES['files']
+            # a.photo = request.POST['imgs']
             a.description = request.POST['description']
             a.size = request.POST['size1']
             a.color = request.POST['color1']

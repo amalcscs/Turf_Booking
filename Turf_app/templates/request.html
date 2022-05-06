@@ -12,7 +12,7 @@
 		  <div class="card-body">
 			<h4 class="card-title">Turf Requests</h4>
 			<div class="form-group">
-			  <input type="text" class="form-control text-dark" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+			  <input type="text" class="form-control text-dark" style="color:black;" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
 			   </div>
 			<div class="table-responsive">
 			  <table class="table table-hover " id="myTable">
@@ -78,7 +78,7 @@
 	</div>
 </div>
 </body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
 	<script>
 	  function myFunction() {
 		  var input, filter, table, tr, td, i, txtValue;
@@ -87,7 +87,7 @@
 		  table = document.getElementById("myTable");
 		  tr = table.getElementsByTagName("tr");
 		  for (i = 0; i < tr.length; i++) {
-			  td = tr[i].getElementsByTagName("td")[1];
+			  td = tr[i].getElementsByTagName("td")[2];
 			  if (td) {
 				  txtValue = td.textContent || td.innerText;
 				  if (txtValue.toUpperCase().indexOf(filter) > -1) {

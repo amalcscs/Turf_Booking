@@ -149,14 +149,15 @@ $(function() {
 	<div class="col-md-12" style="border:1px solid black;">
 		<br>
 		<div class="row">
-			<div class="col-md-4" ><img src="{{j.photo.url}}" name="files" style="padding-top:100px;width:200px!important;height:300px!important;" > </div>
+			<div class="col-md-4" ><img src="{{j.photo.url}}"  style="padding-top:100px;width:200px!important;height:300px!important;" >
+		 </div>
 			<div class="col-md-8">
 				<div class="row">
 					<div><input type="text"  name="compname" class="tg-theme-tag" value="{{j.companyname}}" style="border:none;font-size: 20px;background-color: yellow;"></div>
 				</div><br>
 				<div class="row">
 					<div class="col-md-6"><input type="text"  name="itemname" class="tg-producttitle" value="{{j.itemname}}" style="border:none;font-size: 20px;font-weight: 600;"></div>
-					<div class="col-md-6"><input type="text"  class="tg-productprice" name="price" value="{{j.price}}" style="border:none;font-weight: 600;"></div>
+					<div class="col-md-6"><input type="text"  class="tg-productprice" name="price" value="${{j.price}}" style="border:none;font-weight: 600;"></div>
 				</div><br>
 				<div class="row">
 					<div><input type="text"   class="tg-productprice" name="description" style="border:none;font-weight: 600;" value="{{j.description}}"></div>

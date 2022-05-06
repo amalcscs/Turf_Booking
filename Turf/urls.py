@@ -12,6 +12,7 @@ from Turf_app import views
 urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path(r'^ind$',views.ind, name='ind'),
+    re_path(r'^Forgot_password$',views.Forgot_password, name='Forgot_password'),
     re_path(r'^User_logout$',views.User_logout, name='User_logout'),
     
     re_path(r'^about/$',views.about, name='about'),
@@ -36,6 +37,7 @@ urlpatterns = [
     re_path(r'^cartsave/(?P<id>\d+)/$',views.cartsave, name='cartsave'),  
     re_path(r'^cartpaymentsave/(?P<id>\d+)/$',views.cartpaymentsave, name='cartpaymentsave'),  
     re_path(r'^User_myorders/$',views.User_myorders, name='User_myorders'),  
+    re_path(r'^User_changepassword/(?P<id>\d+)/$',views.User_changepassword, name='User_changepassword'),  
 
     re_path(r'^indexo/$',views.indexo, name='indexo'),
     re_path(r'^$',views.log, name='log'),
@@ -57,9 +59,11 @@ urlpatterns = [
     re_path(r'^Owner_accept_booking/(?P<id>\d+)/$',views.Owner_accept_booking, name='Owner_accept_booking'),
     re_path(r'^Owner_reject_booking/(?P<id>\d+)/$',views.Owner_reject_booking, name='Owner_reject_booking'),
     re_path(r'^Owner_senddate/(?P<id>\d+)/$',views.Owner_senddate, name='Owner_senddate'),
+    re_path(r'^Owner_changepassword/(?P<id>\d+)/$',views.Owner_changepassword, name='Owner_changepassword'),
     re_path(r'^Owner_senddeliverydate/$',views.Owner_senddeliverydate, name='Owner_senddeliverydate'),
 
     re_path(r'^Admin_index/$',views.Admin_index, name='Admin_index'),
+    re_path(r'^Admin_changepassword/$',views.Admin_changepassword, name='Admin_changepassword'),
     re_path(r'^Admin_signupdetails/$',views.Admin_signupdetails, name='Admin_signupdetails'),
     re_path(r'^Admin_logout/$',views.Admin_logout, name='Admin_logout'),
     re_path(r'^Admin_Turf_requests/$',views.Admin_Turf_requests, name='Admin_Turf_requests'),

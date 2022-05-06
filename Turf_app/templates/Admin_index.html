@@ -65,9 +65,19 @@
 														<div class="btn btn-success">Registration update</div> </a>
 												</li>
 												<li class="active">  
-													<a href="{% url 'Admin_logout' %}"><button type="button" class="btn btn-danger "  style="margin-bottom:20px;">
-														LOGOUT 
-													  </button></a>
+													<div class="dropdown">
+														<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+															<i class="fa fa-gear"></i>  Settings
+														</button>
+														<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><br>
+														 &nbsp;&nbsp;&nbsp; <a class="dropdown-item" href="#"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Admin</a><br><br>
+														 &nbsp;&nbsp;&nbsp;<a class="dropdown-item" href="#" data-toggle="modal"
+														 data-target="#myModal"><i class="fa fa-key" aria-hidden="true"></i>&nbsp;Change Password </a><br><br>
+														 &nbsp;&nbsp;&nbsp;<a class="dropdown-item" href="{% url 'Admin_logout' %}"><i class="fa fa-sign-out " aria-hidden="true"></i>&nbsp;Logout</a><br>
+														</div>
+													  </div>
+
+												
 												</li>
 									
 												</ul>
@@ -339,6 +349,88 @@
 					</div>
 				</div>
 			</footer>
+
+
+
+
+<!-- Modal -->
+
+<div class="modal" id="myModal" >
+    <div class="modal-dialog">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 grid-margin stretch-card bg-dark text-light modal-content" style="background-color:grey;">
+
+            <!-- Modal Header -->
+            <div class="modal-header" >
+                <h4 class="modal-title">Change Password</h4>
+                <button type="button " class="close " style="color:white;"
+                    data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" >
+				
+                <form action="{% url 'Admin_changepassword' %}" method="post" enctype="multipart/form-data">
+					
+                    {% csrf_token %}
+                    <div class="card">
+                        <div class="card-body" >
+                           
+								<div class="row p-3">
+									<label>New Password</label>
+									   <input type="password" class="form-control" name="password" id="newpass">
+									</div>
+									<div class="row p-3">
+										<label>Confirm Password</label>
+										   <input type="password" class="form-control" name="conpassword" id="conpassword">
+										</div>
+										<span id='message'></span>
+                <br>
+            
+     <script>
+ $('#conpassword').on('change', function () {
+  if ($('#newpass').val() == $('#conpassword').val()) {
+    $('#message').html('Matching').css('color', 'white');
+  } else 
+    $('#message').html('Not Matching').css('color', 'red');
+});
+    </script>
+                            </div>
+                            <br>
+                            <div  style="float:right;padding-bottom:20px;">
+                                <button type="submit" 
+                                    class="btn btn-outline-primary btn-icon-text ">
+                                    <i class="text-primary mdi mdi-send btn-icon-prepend"></i>
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- sweet alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% if msg_success %}
+<script>
+Swal.fire({
+	position: 'center',
+	icon: 'success',
+	text: '{{ msg_success }}',
+	showConfirmButton: false,
+	timer: 3000
+}).then(function () {
+	javascript: history.go(-2);
+})
+
+</script>
+{% endif %}
+
+
+
 
 	<script src="js/vendor/jquery-library.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>

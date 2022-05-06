@@ -15,7 +15,7 @@
                       <div class="card-body" >
                         <h4 class="card-title">Turf Bookings</h4>
                         <div class="form-group">
-                          <input type="text" class="form-control text-dark" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
+                          <input type="text" class="form-control text-dark" style="color:black;" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
                            </div>
                         <div class="table-responsive">
                           <table class="table table-hover " id="myTable">
@@ -92,4 +92,37 @@
             <div style="padding-top:50px!important;"></div>
 </section></body>
         
+
+
+<script>
+
+  //js for submit button in new_team.html page
+  function redirect() {
+      window.location.href = "projectmanager_tlreported";
+  }
+
+  function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+              } else {
+                  tr[i].style.display = "none";
+              }
+          }
+      }
+  }
+</script>
+
+
 {% endblock %}

@@ -3,52 +3,45 @@
 
 {%block content%}
 
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
-
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
 <script type="text/javascript">
-    <!--
-    $(function() {
+   <!--
+   $(function() {
 
-        function autoCalcSetup() {
-            $('form#cart').jAutoCalc('destroy');
-            $('form#cart tr.line_items').jAutoCalc({keyEventsFire: true, decimalPlaces: 2, emptyAsZero: true});
-            $('form#cart').jAutoCalc({decimalPlaces: 2});
-        }
-        autoCalcSetup();
+      function autoCalcSetup() {
+         $('form#cart').jAutoCalc('destroy');
+         $('form#cart tr.line_items').jAutoCalc({keyEventsFire: true, decimalPlaces: 2, emptyAsZero: true});
+         $('form#cart').jAutoCalc({decimalPlaces: 2});
+      }
+      autoCalcSetup();
 
 
-        $('button.row-remove').on("click", function(e) {
-            e.preventDefault();
+      $('button.row-remove').on("click", function(e) {
+         e.preventDefault();
 
-            var form = $(this).parents('form')
-            $(this).parents('tr').remove();
-            autoCalcSetup();
+         var form = $(this).parents('form')
+         $(this).parents('tr').remove();
+         autoCalcSetup();
 
-        });
+      });
 
-        $('button.row-add').on("click", function(e) {
-            e.preventDefault();
+      $('button.row-add').on("click", function(e) {
+         e.preventDefault();
 
-            var $table = $(this).parents('table');
-            var $top = $table.find('tr.line_items').first();
-            var $new = $top.clone(true);
+         var $table = $(this).parents('table');
+         var $top = $table.find('tr.line_items').first();
+         var $new = $top.clone(true);
 
-            $new.jAutoCalc('destroy');
-            $new.insertBefore($top);
-            $new.find('input[type=text]').val('');
-            autoCalcSetup();
+         $new.jAutoCalc('destroy');
+         $new.insertBefore($top);
+         $new.find('input[type=text]').val('');
+         autoCalcSetup();
 
-        });
+      });
 
-    });
-    //-->
+   });
+   //-->
 </script>
 
     <!-- Page Content -->
