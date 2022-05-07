@@ -209,8 +209,9 @@ def Admin_Turfbooking(request):
     return render(request,'Admin_Turfbooking.html',{'trufbook':trufbook})
 
 def Admin_Ticketbooking(request):
+    user_reg = user_registration.objects.all()
     ticketbook = Matches.objects.all()
-    return render(request,'Admin_Ticketbooking.html',{'ticketbook':ticketbook})
+    return render(request,'Admin_Ticketbooking.html',{'user_reg':user_reg,'ticketbook':ticketbook})
 
 def Admin_matchresult(request):
     turf1 = Turf.objects.all()
@@ -741,6 +742,14 @@ def book_ticket(request,id):
         return render(request, 'book_ticket.html',{'mem1':mem1,'order':order,'turf':turf})
 
 def ticket_booksave(request,id):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        mem2 = user_registration.objects.get(id=U_id)
+        mem3 = mem2.Firstname
         if request.method == 'POST':
             
             a = Matches.objects.get(id=id)
@@ -752,8 +761,10 @@ def ticket_booksave(request,id):
             a.branchname  = request.POST['branchname']
             a.paymentdate  = datetime.now()
             a.paymentstatus  = "paid"
+            a.turfuser_id = mem3
             a.save()
             return redirect('matches')
+        return render(request, 'book_ticket.html',{'mem1':mem1})
 
 def ticket_bookpayment(request,id):
     if 'U_id' in request.session:

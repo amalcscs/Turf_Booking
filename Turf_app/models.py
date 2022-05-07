@@ -66,6 +66,7 @@ class Matches(models.Model):
                              related_name='Matchesuser', null=True, blank=True)
     turf = models.ForeignKey(Turf, on_delete=models.DO_NOTHING,
                              related_name='matchturf', null=True, blank=True)
+    
     matchname = models.CharField(max_length=240, null=True)
     firstteam = models.CharField(max_length=240, null=True)
     secondteam = models.CharField(max_length=240, null=True)
@@ -84,6 +85,8 @@ class Matches(models.Model):
     ifsccode = models.CharField(max_length=240, null=True)
     branchname = models.CharField(max_length=240, null=True)
     amount = models.CharField(max_length=240, null=True)
+    turfuser_id = models.CharField(max_length=240, null=True)
+    
     
 
     def __str__(self):

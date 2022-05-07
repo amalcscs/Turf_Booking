@@ -31,7 +31,10 @@
                             {% for i in ticketbook %}
                             <tr class="alert" role="alert">
                                 <td>{{forloop.counter}}</td>
-                                <td>{{i.user.Firstname}}</td>
+                                <td>
+                                    {{i.turfuser_id}}
+                                  
+                                </td>
                                 <td>{{i.turf.Turfname}}</td>
                                 <td>{{i.matchname}}</td>
                                 <td>{{i.Ticketprice}}</td>
