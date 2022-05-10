@@ -539,7 +539,30 @@ def Owner_senddate(request,id):
             a.deliverydate  = request.POST['deliverydate']
             a.save()
             return redirect('Owner_senddeliverydate')   
-            
+
+def Owner_viewticketbooking(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        user_reg = user_registration.objects.all()
+        ticketbook = Matches.objects.all()
+        return render(request, 'Owner_viewticketbooking.html',{'mem':mem,'user_reg':user_reg,'ticketbook':ticketbook})
+
+def Owner_adminrepliedmessages(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        user_reg = user_registration.objects.all()
+        mess3 = Contact_messages.objects.filter(user_id=O_id)
+        return render(request, 'Owner_adminrepliedmessages.html',{'user_reg':user_reg,'mem':mem,'mess3':mess3}) 
+
+
 
 #***********User module***********
 

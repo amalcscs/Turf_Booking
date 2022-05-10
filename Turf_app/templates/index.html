@@ -61,9 +61,17 @@
 										<nav class="tg-addnav">
 											<ul>
 												<li class="active">  
-													<a href="{% url 'Owner_notification' %}"><button type="button" class="btn btn-primary "  style="margin-bottom:20px;">
-														NOTIFICATIONS <span class="badge badge-light"></span>
-													  </button></a>
+													<div class="dropdown">
+														<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														Notifications</button>
+														<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+														  <a class="dropdown-item" href="{% url 'Owner_adminrepliedmessages' %}">Your messages</a><br><br>
+														  <a class="dropdown-item" href="{% url 'Owner_notification' %}">Reply to users</a><br><br>
+														  
+														  
+														</div>
+													  </div>
+
 												</li>
 												<li class="active">  
 													<div class="dropdown">
@@ -116,7 +124,8 @@
 																			  </a>
 																			
 																			  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-																				<a class="dropdown-item" href="{% url 'Owner_Turf_bookingviewUser' %}">Turf Booking</a>
+																				<a class="dropdown-item" href="{% url 'Owner_Turf_bookingviewUser' %}">Turf Booking</a><br><br>
+																				<a class="dropdown-item" href="{% url 'Owner_viewticketbooking' %}">Ticket Booking</a>
 																			  </div>
 																			</div>
 																													  </li>

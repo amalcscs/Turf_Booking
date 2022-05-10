@@ -61,6 +61,8 @@ urlpatterns = [
     re_path(r'^Owner_senddate/(?P<id>\d+)/$',views.Owner_senddate, name='Owner_senddate'),
     re_path(r'^Owner_changepassword/(?P<id>\d+)/$',views.Owner_changepassword, name='Owner_changepassword'),
     re_path(r'^Owner_senddeliverydate/$',views.Owner_senddeliverydate, name='Owner_senddeliverydate'),
+    re_path(r'^Owner_viewticketbooking/$',views.Owner_viewticketbooking, name='Owner_viewticketbooking'),
+    re_path(r'^Owner_adminrepliedmessages/$',views.Owner_adminrepliedmessages, name='Owner_adminrepliedmessages'),
 
     re_path(r'^Admin_index/$',views.Admin_index, name='Admin_index'),
     re_path(r'^Admin_changepassword/$',views.Admin_changepassword, name='Admin_changepassword'),

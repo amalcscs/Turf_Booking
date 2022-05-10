@@ -92,7 +92,7 @@
                         <div class="card-body">
                             <div class="row p-3">
                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
-                                   <input type="date" name="deliverydate" class="form-control">
+                                   <input type="date" name="deliverydate" class="form-control txtDate">
                                 </div>
                             </div>
                             <br>
@@ -114,6 +114,21 @@
 </div>
 {% endfor %}
 
+<script>
+    $(function() {
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+        var minDate = year + '-' + month + '-' + day;
+        $('.txtDate').attr('min', minDate);
+
+    })
+</script>
 
     <script>
 

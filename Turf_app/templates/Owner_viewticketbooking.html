@@ -1,4 +1,4 @@
-{% extends 'Admin_index.html' %}
+{% extends 'index.html' %}
 {% load static %}
 {% block content %}
 
@@ -7,30 +7,39 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Turf Bookings</h4>
+                <h4 class="card-title">Ticket Bookings</h4>
                 <div class="form-group">
                   <input type="text" class="form-control text-dark" style="color:black;" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
                    </div>
                 <div class="table-responsive">
-                    <table class="table table-hover " id="myTable">
+                    <table class="table table-hover " >
                         <thead>
                             <tr>
                                 <th>Sl.no</th>
+                                <th>Name</th>
                                 <th>Turf Name</th>
-                                <th>Sport</th>
-                                <th>Game Structure</th>
+                                <th>Match Name</th>
+                                <th>Ticket Price</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
                                 <th>Date</th>
                                 <th>Time</th>
                                 
                               </tr>
                         </thead>
-                        <tbody>
-                            {% for i in trufbook %}
+                        <tbody id="myTable">
+                            {% for i in ticketbook %}
                             <tr class="alert" role="alert">
                                 <td>{{forloop.counter}}</td>
-                                <td>{{i.Turf.Turfname}}</td>
-                                <td>{{i.sport}}</td>
-                                <td>{{i.gamestructure}}</td>
+                                <td>
+                                    {{i.turfuser_id}}
+                                  
+                                </td>
+                                <td>{{i.turf.Turfname}}</td>
+                                <td>{{i.matchname}}</td>
+                                <td>{{i.Ticketprice}}</td>
+                                <td>{{i.quantity}}</td>
+                                <td>{{i.total}}</td>
                                 <td>{{i.date|date:'d-m-Y'}}</td>
                                 <td>{{i.fromtime}}</td>
                                 
@@ -45,8 +54,6 @@
           </div>
         </div>
     </div>
-
-
 
     <script>
       $(document).ready(function(){
