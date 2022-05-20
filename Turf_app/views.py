@@ -235,8 +235,6 @@ def Admin_viewshopping(request):
 def buy_tickets_readmore(request):
   return render(request, 'buy_tickets_readmore.html') 
   
-def payment(request):
-  return render(request, 'payment.html') 
 
 
 
@@ -665,7 +663,13 @@ def User_contact(request):
 
 
 def about(request):
-    return render(request, 'aboutus.html')
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        return render(request, 'aboutus.html',{'mem1':mem1})
 
 #booking turf
 
@@ -820,10 +824,16 @@ def bookingdelete(request,id):
         return redirect('matches')
 
 def shop(request):
-    shopcat = Shopcategory.objects.all()
-    cat = Shopcategory.objects.get(category="sports")
-    items = AddShopitems.objects.all()
-    return render(request, 'shoplist.html',{'shopcat':shopcat,'items':items,'cat':cat})
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        shopcat = Shopcategory.objects.all()
+        cat = Shopcategory.objects.get(category="sports")
+        items = AddShopitems.objects.all()
+        return render(request, 'shoplist.html',{'mem1':mem1,'shopcat':shopcat,'items':items,'cat':cat})
 
 def shopsave(request,id):
     if 'U_id' in request.session:
@@ -874,26 +884,39 @@ def cartsave(request,id):
             b.subtotal = request.POST['sub_total']
             b.tax = request.POST['tax_total']
             b.total = request.POST['grand_total']
-            a.status = "paid"
+            b.accountnumber = request.POST['accno']
+            b.bankname = request.POST['bank']
+            b.ifsccode = request.POST['ifsc']
+            b.branchname = request.POST['branch']
+            b.status = "paid"
             b.save()
             msg_success = "Order Placed successfully Please check your orders"
             return render(request,'cart.html', {'msg_success': msg_success})
         return render(request,'cart.html',{'b':b})
 
+
+def cartpayment(request,id):
+    if 'U_id' in request.session:
+        if request.session.has_key('U_id'):
+            U_id = request.session['U_id']
+        else:
+            return redirect('/')
+        mem1 = user_registration.objects.filter(id=U_id)
+        items = Shoppayment.objects.get(id=id)
+        return render(request,'payment.html',{'mem1':mem1,'items':items})
+
 def cartpaymentsave(request,id):
-    items = Shopitems.objects.filter(id=id)
-    # if request.method == 'POST':
-    #     b = Shopitems()
-    #     b.status = "payment"
-    #     b.save()
-    #     a = Shoppayment()
-    #     a.subtotal = request.POST['sub_total']
-    #     a.tax = request.POST['tax_total']
-    #     a.total = request.POST['grand_total']
-    #     a.status = "paid"
-    #     a.save()
-    #     return redirect('shop')
-    return render(request,'cartpaymentsave.html',{'items':items})
+        if request.method == 'POST':
+            a = Shoppayment.objects.get(id=id)
+            a.accountnumber = request.POST['accno']
+            a.bankname = request.POST['bank']
+            a.ifsccode = request.POST['ifsc']
+            a.branchname = request.POST['branch']
+            a.status = "paid"
+            a.save()
+            return redirect('cart')
+        return render(request,'cart.html')
+
 
 
 def User_myorders(request):
