@@ -1,0 +1,118 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{%block content%}
+
+
+
+<body  >
+	<section class="ftco-section" style="background-image: url({% static 'images/add_turf1.jpg' %}); background-repeat:no-repeat;background-size:cover;">
+		<div style="padding-top:280px!important;"></div>
+        
+<div class='container  mb-5' >
+	<div class='row'>
+		<div class='col-md-2'></div>
+		<div class='col-md-8 mt-5' style="background-color:white;">
+			<div class="card p-3">
+                
+				<form method='post' action="{% url 'Turf_Edit_save' turf.id %}" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="row">
+						<div class="col-md-12">
+							<h3>EDIT TURF</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Turfname</label>
+							<input type="text" name="Turfname" value="{{turf.Turfname}}" class='form-control'>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Location</label>
+							<input type="text" name="Location" value="{{turf.location}}" class='form-control'>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Location Url</label>
+							  <input type="text" name='loc_url' value="{{turf.locationurl}}" class="form-control">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Sport</label>
+							<input type="text" name="Sport" value="{{turf.sport}}" class='form-control'>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Capacity</label>
+							<input type="number" name="Capacity" value="{{turf.capacity}}"  class='form-control'>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Price</label>
+							<input type="number" name="Price" value="{{turf.Price}}" class='form-control'>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Amenties</label>
+							<input type="text" name="Amenties" value="{{turf.amenties}}" class='form-control'>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Upload Image</label>
+							  <input type="file" name='files' value="{{turf.photo}}" class="form-control">
+						</div>
+					</div>
+				<br>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4 " style="padding-bottom:20px;">
+							<input type="submit" value="Send Request" style="background-color:green;font-size:20px;border:radius:50px;color:white;padding:10px;">
+
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class='col-md-2'></div>
+	</div>
+</div>
+<div style="padding-top:50px!important;"></div>
+</section></body>
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {% if msg_success %}
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            text: '{{ msg_success }}',
+            showConfirmButton: false,
+            timer: 3000
+        }).then(function () {
+            javascript: history.go(-2);
+        })
+        
+    </script>
+	{% endif %}
+
+	{% endblock %}

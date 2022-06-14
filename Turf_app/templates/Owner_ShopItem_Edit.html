@@ -1,4 +1,4 @@
-{% extends 'Admin_index.html' %}
+{% extends 'index.html' %}
 {% load static %}
 {% block content %}
        
@@ -8,7 +8,7 @@
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Turf Requests</h4>
+                        <h4 class="card-title">Edit Shopping Items</h4>
                         <div class="form-group">
                           <input type="text" class="form-control" style="color:black;" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" style="color:white;">
                            </div>
@@ -17,54 +17,42 @@
                             <thead>
                                 <tr>
                                     <th>Sl.no</th>
-                                    <th>Turf Image</th>
-                                    <th>Turf Name</th>
-                                    <th>Location</th>
-                                   
-                                    <th>Sport</th>
-                                    <th>Capacity</th>
-                                    <th>Amenties</th>
+                                    <th>Category</th>
+                                    <th>Company</th>
+                                    <th>Item</th>
+                                    <th>Photo</th>
+                                    <th>Description</th>
                                     <th>Price</th>
-                                    <th>Action</th>
-                                   
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                   </tr>
                             </thead>
                             <tbody id="myTable" >
                               
-                              {% for i in req1 %}
+                              {% for i in items %}
                               
                                 <tr class="alert" role="alert">
                                     <td>{{forloop.counter}}</td>
+                                    <td>{{i.category}}</td>
+                                    <td>{{i.companyname}}</td>
+                                    <td>{{i.itemname}}</td>
                                     <td><img src="{{i.photo.url}}" style="width:100px!important;height:50px!important;"></td>
-                                    <td>{{i.Turfname}}</td>
-                                    <td>{{i.location}}</td>
-                                    <td>{{i.sport}}</td>
-                                    <td>{{i.capacity}}</td>
-                                    <td>{{i.amenties}}</td>
-                                    <td>{{i.Price}}</td>
+                                    <td>{{i.description}}</td>
+                                    <td>{{i.price}}</td>
                                     <td>
-                                      {% if i.status == "0" %}
-                                      <a href="{% url 'AdminTurfapprove' i.id %}">
-                                        <div class="btn btn-success" >
-                                            <i class="mdi mdi-check"></i>&nbsp; Approved
+                                      
+                                      <a href="{% url 'ShoppingItem_Edit' i.id %}">
+                                        <div class="btn btn-warning" >
+                                            <i class="mdi mdi-check"></i>&nbsp; Edit
                                         </div>
                                     </a>
-                                    <a href="{% url 'AdminTurfrejected' i.id %}">
-                                    <div class="btn btn-danger" >
-                                      <i class="mdi mdi-check"></i>&nbsp; Rejected
-                                  </div>
-                                </a>
-                                       {% elif i.status == "approved" %}
-                                       <div class="btn btn-success" >
-                                        <i class="mdi mdi-check"></i>&nbsp; Approved
-                                    </div>
-                                    {% elif i.status == "rejected" %} 
-                                    <div class="btn btn-danger" >
-                                      <i class="mdi mdi-check"></i>&nbsp; Rejected
-                                  </div>
-								  {% endif %}
+                                   
+                                
                                     </td>
-                              
+                                  <td> <a href="{% url 'OwnerShoppingItemdelete' i.id %}">
+                                    <div class="btn btn-danger" >
+                                      <i class="mdi mdi-check"></i>&nbsp; Delete
+                                  </div></td>
                                   </tr>
                                
                                   {% endfor %}

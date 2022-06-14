@@ -25,7 +25,7 @@
 							<label>Turfname</label>
 							<select class='form-control' name="turfname" required>
 								{% for i in m %}
-								<option selected hidden value="{{i.Turfname}}">{{i.Turfname}}</option>
+								<option selected hidden value="{{i.Turfname}}">--Select--</option>
 								<option value="{{i.id}}">{{i.Turfname}}</option>
 								{% endfor %}
                             </select>
@@ -37,7 +37,7 @@
 							<label>Location</label>
 							<select class='form-control' name="location" required>
 								{% for i in m %}
-								<option selected hidden value="{{i.location}}">{{i.location}}</option>
+								<option selected hidden value="{{i.location}}">--Select--</option>
 								<option value="{{i.id}}">{{i.location}}</option>
 								{% endfor %}
                             </select>
@@ -56,7 +56,7 @@
 							<label>First Team</label>
 							<select class='form-control' name="firstteam" required>
 								{% for j in c %}
-								<option selected hidden value="{{j.teamname}}">{{j.teamname}}</option>
+								<option selected hidden value="{{j.teamname}}">--Select--</option>
 								<option value="{{j.teamname}}">{{j.teamname}}</option>
 								{% endfor %}
                             </select>
@@ -68,7 +68,7 @@
 							<label>Second Team</label>
 							<select class='form-control' name="secondteam" required>
 								{% for j in c %}
-								<option selected hidden value="{{j.teamname}}">{{j.teamname}}</option>
+								<option selected hidden value="{{j.teamname}}">--Select--</option>
 								<option value="{{j.teamname}}">{{j.teamname}}</option>
 								{% endfor %}
                             </select>

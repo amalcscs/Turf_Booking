@@ -65,8 +65,8 @@
 														<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 														Notifications</button>
 														<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-														  <a class="dropdown-item" href="{% url 'Owner_adminrepliedmessages' %}">Your messages</a><br><br>
-														  <a class="dropdown-item" href="{% url 'Owner_notification' %}">Reply to users</a><br><br>
+														  <a class="dropdown-item" href="{% url 'Owner_adminrepliedmessages' %}">&nbsp;&nbsp;&nbsp;Your messages</a><br><br>
+														  <a class="dropdown-item" href="{% url 'Owner_notification' %}">&nbsp;&nbsp;&nbsp;Reply to users</a><br><br>
 														  
 														  
 														</div>
@@ -106,12 +106,14 @@
 																<li class="active">
 																	<div class="dropdown">
 																		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																		  Add Shopping
+																		  Shopping
 																		</button>
 																		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-																		  <a class="dropdown-item" href="{% url 'Owner_addshopcategory' %}">Category</a><br><br>
-																		  <a class="dropdown-item" href="{% url 'Owner_addshopitem' %}">Items</a><br><br>
-																		  <a class="dropdown-item" href="{% url 'Owner_senddeliverydate' %}">Send Delivery date</a>
+																		  <a class="dropdown-item" href="{% url 'Owner_addshopcategory' %}">&nbsp;&nbsp;&nbsp;Add Category</a><br><br>
+																		  <a class="dropdown-item" href="{% url 'Owner_addshopitem' %}">&nbsp;&nbsp;&nbsp;Add Items</a><br><br>
+																		  <a class="dropdown-item" href="{% url 'Owner_senddeliverydate' %}">&nbsp;&nbsp;&nbsp;Send Delivery date</a><br><br>
+																		  <a class="dropdown-item" href="{% url 'Owner_ShoppingCategory_Edit' %}">&nbsp;&nbsp;&nbsp;Edit Category</a><br><br>
+																		  <a class="dropdown-item" href="{% url 'Owner_ShopItem_Edit' %}">&nbsp;&nbsp;&nbsp;Edit Items</a><br><br>
 																		  
 																		</div>
 																	  </div>
@@ -124,8 +126,8 @@
 																			  </a>
 																			
 																			  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-																				<a class="dropdown-item" href="{% url 'Owner_Turf_bookingviewUser' %}">Turf Booking</a><br><br>
-																				<a class="dropdown-item" href="{% url 'Owner_viewticketbooking' %}">Ticket Booking</a>
+																				<a class="dropdown-item" href="{% url 'Owner_Turf_bookingviewUser' %}">&nbsp;&nbsp;&nbsp;Turf Booking</a><br><br>
+																				<a class="dropdown-item" href="{% url 'Owner_viewticketbooking' %}">&nbsp;&nbsp;&nbsp;Ticket Booking</a>
 																			  </div>
 																			</div>
 																													  </li>
@@ -152,11 +154,28 @@
                                            
                                         </li>
                                         <li class="active">
-                                            <a href="{% url 'add' %}"> Add Turf</a>
-                                           
+                                            <!-- <a href="{% url 'add' %}"> Add Turf</a> -->
+											<a href="" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+											style="text-decoration:none;" > Turf </a>
+											
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color:grey;">
+												<a class="dropdown-item" href="{% url 'add' %}">&nbsp;&nbsp;&nbsp;Add Turf</a><br><br>
+												<a class="dropdown-item" href="{% url 'Owner_Turf_edit' %}">&nbsp;&nbsp;&nbsp;Edit Turf</a>
+											  </div>
+											
+											<!-- <ul class="dropdown-menu" role="menu">
+												
+												<li><a href="{% url 'add' %}" style="text-decoration:none;" data-hover=" ">Add Turf</a></li>
+												<li><a href="{% url 'Owner_Turf_edit' %}" style="text-decoration:none;" data-hover=" ">Turf</a></li>
+											</ul> -->
                                         </li>
 										<li class="active">
-                                            <a href="{% url 'addteam' %}"> Add Team</a>
+                                            <a href="" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+											style="text-decoration:none;">Team</a>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color:grey;">
+												<a class="dropdown-item" href="{% url 'addteam' %}">&nbsp;&nbsp;&nbsp;Add Team</a><br><br>
+												<a class="dropdown-item" href="{% url 'Owner_Team_edit' %}">&nbsp;&nbsp;&nbsp;Edit Team</a>
+											  </div>
                                            
                                         </li>
 										<li>
@@ -169,12 +188,22 @@
                                 <div class="tg-colhalf">
                                     <ul>
 										<li class="active">
-											<a href="{% url 'Add_match' %}"> Add Matches</a>
 											
+											<a href="" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+											style="text-decoration:none;">Matches</a>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color:grey;">
+												<a class="dropdown-item" href="{% url 'Add_match' %}">&nbsp;&nbsp;&nbsp;Add Matches</a><br><br>
+												<a class="dropdown-item" href="{% url 'Owner_Match_edit' %}">&nbsp;&nbsp;&nbsp;Edit Matches</a>
+											  </div>
 										</li>
 										<li class="active">
-											<a href="{% url 'match_result' %}">Match Result</a>
 											
+											<a href="" class="dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+											style="text-decoration:none;">Match Result</a>
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color:grey;">
+												<a class="dropdown-item" href="{% url 'match_result' %}">&nbsp;&nbsp;&nbsp;Add Match Result</a><br><br>
+												<a class="dropdown-item" href="{% url 'Owner_MatchResult_edit' %}">&nbsp;&nbsp;&nbsp;Edit Match Result</a>
+											  </div>
 										</li>
 										<li class="active">
 											<a href="{% url 'Owner_contact' %}"> Contact Us</a>

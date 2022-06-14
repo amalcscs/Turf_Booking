@@ -1,5 +1,6 @@
 import os
 import random
+from tkinter import S
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django. contrib import messages
@@ -134,6 +135,7 @@ def Admin_Turf_requests(request):
     desig = designation.objects.get(designation="owner")
     req1 = Turf.objects.filter(designation_id=desig).order_by("-id")
     return render(request, 'Admin_Turf_requests.html',{'req1':req1})
+
 
 def Admin_notification(request):
     
@@ -319,6 +321,265 @@ def add(request):
             return render(request, 'Addturf.html', {'msg_success': msg_success})
         return render(request, 'Addturf.html',{'mem':mem}) 
 
+def Owner_Turf_edit(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        desig = designation.objects.get(designation="owner")
+        req1 = Turf.objects.filter(designation_id=desig).order_by("-id")
+        return render(request, 'Owner_Turf_edit.html',{'req1':req1,'mem':mem})
+
+
+def OwnerTurfdelete(request,id):
+    
+    m =   Turf.objects.get(id = id)
+    m.delete()
+    return redirect('Owner_Turf_edit')
+
+def Turf_Edit(request,id):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        turf = Turf.objects.get(id=id)
+  
+        return render(request,'Turf_Edit.html',{'turf':turf,'mem':mem})
+
+def Turf_Edit_save(request,id):
+    if request.method == 'POST':
+        abc = Turf.objects.get(id=id)
+        abc.Turfname = request.POST['Turfname']
+        abc.location = request.POST['Location']
+        abc.locationurl = request.POST['loc_url']
+        abc.sport = request.POST['Sport']
+        abc.capacity = request.POST['Capacity']
+        abc.Price = request.POST['Price']
+        abc.amenties = request.POST['Amenties']
+        abc.photo = request.FILES['files']
+        abc.save()
+    return redirect('Owner_Turf_edit')
+
+
+def Owner_Team_edit(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        teams = Teams.objects.all().order_by("-id")
+        return render(request, 'Owner_Team_edit.html',{'teams':teams,'mem':mem})
+
+def OwnerTeamdelete(request,id):
+    
+    m =   Teams.objects.get(id = id)
+    m.delete()
+    return redirect('Owner_Team_edit')
+
+def Team_Edit(request,id):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        team = Teams.objects.get(id=id)
+  
+        return render(request,'Team_Edit.html',{'team':team,'mem':mem})
+
+def Team_Edit_save(request,id):
+    if request.method == 'POST':
+        abc = Teams.objects.get(id=id)
+        abc.teamname = request.POST['name']
+        abc.photo = request.FILES['image']
+        abc.save()
+        msg_success = "Team Updated successfully"
+        return render(request, 'Owner_Team_edit.html', {'msg_success': msg_success})
+    return redirect('Owner_Team_edit')
+
+def Owner_Match_edit(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        matches = Matches.objects.all().order_by("-id")
+        return render(request, 'Owner_Match_edit.html',{'matches':matches,'mem':mem})
+
+def OwnerMatchesdelete(request,id):
+    
+    m =   Matches.objects.get(id = id)
+    m.delete()
+    return redirect('Owner_Match_edit')
+
+def Match_Edit(request,id):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        match = Matches.objects.get(id=id)
+        m=Turf.objects.all()
+        c=Teams.objects.all()
+        return render(request,'Match_Edit.html',{'match':match,'mem':mem,'m':m,'c':c})
+
+def Match_Edit_save(request,id):
+        if request.method == 'POST':
+            
+            ab = Matches.objects.get(id=id)
+            ab.turf_id  = request.POST['turfname']
+            ab.location_id  = request.POST['location']
+            ab.matchname = request.POST['matchname']
+            ab.firstteam = request.POST['firstteam']
+            ab.secondteam = request.POST['secondteam']
+            ab.date = request.POST['date']
+            ab.fromtime = request.POST['time']
+            ab.Ticketprice = request.POST['ticketprice']
+            ab.photo = request.FILES['image']
+            ab.save()
+            msg_success = "Match Updated successfull"
+            return render(request, 'Owner_Match_edit.html', {'msg_success': msg_success})
+        return redirect('Owner_Match_edit') 
+
+
+def Owner_MatchResult_edit(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        matchresult = Matchresult.objects.all().order_by("-id")
+        teams = Matches.objects.all()
+        return render(request, 'Owner_MatchResult_edit.html',{'teams':teams,'matchresult':matchresult,'mem':mem})
+
+
+def OwnerMatcheResultdelete(request,id):
+    
+    m =   Matchresult.objects.get(id = id)
+    m.delete()
+    return redirect('Owner_MatchResult_edit')
+
+def MatchResult_Edit(request,id):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        match = Matchresult.objects.get(id=id)
+        m=Turf.objects.all()
+        c=Teams.objects.all()
+        d=Matches.objects.all()
+        return render(request,'MatchResult_Edit.html',{'match':match,'mem':mem,'m':m,'c':c,'d':d})
+
+def MatchResult_Edit_Save(request,id):
+        if request.method == 'POST':
+            
+            an = Matchresult.objects.get(id=id)
+            an.turf_id   = request.POST['turfname']
+            an.location_id  = request.POST['location']
+            an.matchname_id  = request.POST['matchname']
+            an.firstteam_id  = request.POST['firstteam']
+            an.secondteam_id   = request.POST['secondteam']
+            an.win_team_id   = request.POST['winteam']
+            an.loss_team_id   = request.POST['lossteam']
+            an.photo = request.FILES['image']
+            an.date = request.POST['date']
+            an.fromtime = request.POST['time']
+            an.save()
+            msg_success = "Match result Updated successfull"
+            return render(request, 'Owner_MatchResult_edit.html', {'msg_success': msg_success})
+        return redirect('Owner_MatchResult_edit')
+
+def Owner_ShoppingCategory_Edit(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        desig = designation.objects.get(designation="owner")
+        category = Shopcategory.objects.all().order_by("-id")
+        return render(request, 'Owner_ShoppingCategory_Edit.html',{'category':category,'mem':mem})
+
+
+def OwnerShoppingCategorydelete(request,id):
+    
+    m =   Shopcategory.objects.get(id = id)
+    m.delete()
+    return redirect('Owner_ShoppingCategory_Edit')
+
+def ShoppingCategory_Edit(request,id):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        shopcate = Shopcategory.objects.get(id=id)
+        return render(request,'ShoppingCategory_Edit.html',{'shopcate':shopcate,'mem':mem})
+
+def ShoppingCategory_Edit_save(request,id):
+        if request.method == 'POST':
+            
+            an = Shopcategory.objects.get(id=id)
+            an.category   = request.POST['category']
+            an.save()
+            msg_success = "Shopping Category Updated successfull"
+            return render(request, 'Owner_ShoppingCategory_Edit.html', {'msg_success': msg_success})
+        return redirect('Owner_ShoppingCategory_Edit')
+
+def Owner_ShopItem_Edit(request):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        desig = designation.objects.get(designation="owner")
+        items = AddShopitems.objects.all().order_by("-id")
+        return render(request, 'Owner_ShopItem_Edit.html',{'items':items,'mem':mem})
+
+def OwnerShoppingItemdelete(request,id):
+    
+    m =   AddShopitems.objects.get(id = id)
+    m.delete()
+    return redirect('Owner_ShopItem_Edit')
+
+def ShoppingItem_Edit(request,id):
+    if 'O_id' in request.session:
+        if request.session.has_key('O_id'):
+            O_id = request.session['O_id']
+        else:
+            return redirect('/')
+        mem = user_registration.objects.filter(id=O_id)
+        shopitem = AddShopitems.objects.get(id=id)
+        cate = Shopcategory.objects.all()
+        return render(request,'ShoppingItem_Edit.html',{'cate':cate,'shopitem':shopitem,'mem':mem})
+
+def ShoppingItem_Edit_save(request,id):
+        if request.method == 'POST':
+            
+            a = AddShopitems.objects.get(id=id)
+            a.category_id   = request.POST['category']
+            a.companyname   = request.POST['company']
+            a.itemname   = request.POST['item']
+            a.price   = request.POST['price']
+            a.photo   = request.FILES['files']
+            a.description   = request.POST['description']
+            a.save()
+            msg_success = "Shopping Items Updated successfull"
+            return render(request, 'Owner_ShopItem_Edit.html', {'msg_success': msg_success})
+        return redirect('Owner_ShopItem_Edit')
+
 def req(request):
     if 'O_id' in request.session:
         if request.session.has_key('O_id'):
@@ -400,7 +661,7 @@ def match_result(request):
             an = Matchresult()
             an.turf_id   = request.POST['turfname']
             an.location_id  = request.POST['location']
-            an.matchname  = request.POST['matchname']
+            an.matchname_id  = request.POST['matchname']
             an.firstteam_id  = request.POST['firstteam']
             an.secondteam_id   = request.POST['secondteam']
             an.win_team_id   = request.POST['winteam']

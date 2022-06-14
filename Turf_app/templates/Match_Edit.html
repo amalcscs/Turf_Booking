@@ -5,28 +5,27 @@
 
 
 
-<body >
-	<section class="ftco-section"  style="background-image: url({% static 'images/add_turf1.jpg' %}); background-repeat:no-repeat;background-size:cover;">
-		<div style="padding-top:50px!important;"></div>
-		<div class='container  mb-5' style="padding-top:230px;padding-bottom: 30px;">
+<body  >
+	<section class="ftco-section" style="background-image: url({% static 'images/add_turf1.jpg' %}); background-repeat:no-repeat;background-size:cover;">
+<div class='container  mb-5' style="padding-top:230px;padding-bottom: 30px;">
+	<div style="padding-top:50px!important;"></div>
 	<div class='row'>
 		<div class='col-md-2'></div>
 		<div class='col-md-8 mt-5' style="background-color:white;">
 			<div class="card p-3">
-				<form method='post' class='post-form bg-light' action="" enctype="multipart/form-data">
+				<form method='post' class='post-form bg-light' action="{% url 'Match_Edit_save' match.id %}" enctype="multipart/form-data">
 					{% csrf_token %}
 					<div class="row">
 						<div class="col-md-12">
-							<h3>ADD MATCH RESULT</h3>
+							<h3>EDIT MATCHES</h3>
 						</div>
-					</div>
-					<br><br>
+					</div><br><br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>Turfname</label>
 							<select class='form-control' name="turfname" required>
-								{% for i in turf %}
-								<option selected hidden value="">--Select--</option>
+								{% for i in m %}
+								<option selected hidden value="{{match.Turfname}}">--Select--</option>
 								<option value="{{i.id}}">{{i.Turfname}}</option>
 								{% endfor %}
                             </select>
@@ -37,8 +36,8 @@
 						<div class="col-md-12">
 							<label>Location</label>
 							<select class='form-control' name="location" required>
-								{% for i in turf %}
-								<option selected hidden value="">--Select--</option>
+								{% for i in m %}
+								<option selected hidden value="{{match.location}}">--Select--</option>
 								<option value="{{i.id}}">{{i.location}}</option>
 								{% endfor %}
                             </select>
@@ -48,22 +47,17 @@
 					<div class="row">
 						<div class="col-md-12">
 							<label>Match Name</label>
-							<select class='form-control' name="matchname" >
-								{% for n in d %}
-								<option selected hidden value="">--Select--</option>
-								<option value="{{n.id}}">{{n.matchname}}</option>
-								{% endfor %}
-                            </select>
+							  <input type="text" name='matchname' value="{{match.matchname}}" required class="form-control">
 						</div>
 					</div>
 					<br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>First Team</label>
-							<select class='form-control' name="firstteam" >
-								{% for j in tems %}
-								<option selected hidden value="">--Select--</option>
-								<option value="{{j.id}}">{{j.teamname}}</option>
+							<select class='form-control' name="firstteam" required>
+								{% for j in c %}
+								<option selected hidden value="{{match.teamname}}">--Select--</option>
+								<option value="{{j.teamname}}">{{j.teamname}}</option>
 								{% endfor %}
                             </select>
 						</div>
@@ -72,67 +66,51 @@
 					<div class="row">
 						<div class="col-md-12">
 							<label>Second Team</label>
-							<select class='form-control' name="secondteam" >
-								{% for k in tems %}
-								<option selected hidden value="">--Select--</option>
-								<option value="{{k.id}}">{{k.teamname}}</option>
+							<select class='form-control' name="secondteam" required>
+								{% for j in c %}
+								<option selected hidden value="{{match.teamname}}">--Select--</option>
+								<option value="{{j.teamname}}">{{j.teamname}}</option>
 								{% endfor %}
                             </select>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Date</label>
+							  <input type="date" name='date' value="{{match.date}}"  required class="form-control txtDate">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Time</label>
+							  <input type="time" name='time' value="{{match.fromtime}}" required class="form-control">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Ticket Price</label>
+							  <input type="number" name='ticketprice' value="{{match.Ticketprice}}"  required class="form-control">
 						</div>
 					</div>
 					<br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>Upload Image</label>
-							  <input type="file" name='image'  class="form-control">
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="col-md-12">
-							<label>Winning Team</label>
-							<select class='form-control' name="winteam" >
-								{% for l in tems %}
-								<option selected hidden value="">--Select--</option>
-								<option value="{{l.id}}">{{l.teamname}}</option>
-								{% endfor %}
-                            </select>
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="col-md-12">
-							<label>Lossing Team</label>
-							<select class='form-control' name="lossteam" >
-								{% for o in tems %}
-								<option selected hidden value="">--Select--</option>
-								<option value="{{o.id}}">{{o.teamname}}</option>
-								{% endfor %}
-                            </select>
+							  <input type="file" name='image' value="{{match.photo.url}}" required class="form-control">
 						</div>
 					</div>
 				<br>
-				<div class="row">
-					<div class="col-md-12">
-						<label>Date</label>
-						  <input type="date" name='date'   class="form-control txtDate">
-					</div>
-				</div>
-				<br>
-				<div class="row">
-					<div class="col-md-12">
-						<label>Time</label>
-						  <input type="time" name='time'  class="form-control">
-					</div>
-				</div>
-				<br>
+				
 					<div class="row">
-						<div class="col-md-4"></div>
+						<div class="col-md-6"></div>
 						<div class="col-md-4 " style="padding-bottom:20px;">
 							<input type="submit" value="submit" style="background-color:green;font-size:20px;border:radius:50px;color:white;padding:10px;">
 
 						</div>
-						<div class="col-md-4"></div>
+						<div class="col-md-2"></div>
 					</div>
 				</form>
 			</div>
@@ -140,7 +118,6 @@
 		<div class='col-md-2'></div>
 	</div>
 </div>
-
 
 <script>
     $(function() {
