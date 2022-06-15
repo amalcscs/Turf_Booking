@@ -23,7 +23,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<label>Category</label>
-                            <select class='form-control' name="category" >
+                            <select class='form-control' name="category" required>
 								{% for i in cate %}
 								<option selected hidden value="{{shopitem.category}}">--Select--</option>
 								<option value="{{i.id}}">{{i.category}}</option>
@@ -34,13 +34,13 @@
 					<div class="row">
 						<div class="col-md-12">
 							<label>Company</label>
-                            <input type="text" name='company' value="{{shopitem.company}}" required class="form-control">
+                            <input type="text" name='company' value="{{shopitem.companyname}}" required class="form-control">
 						</div>
 					</div>
                     <div class="row">
 						<div class="col-md-12">
 							<label>Item</label>
-                            <input type="text" name='item' value="{{shopitem.item}}" required class="form-control">
+                            <input type="text" name='item' value="{{shopitem.itemname}}" required class="form-control">
 						</div>
 					</div>
                     <div class="row">

@@ -23,7 +23,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<label>Category</label>
-                            <select class='form-control' name="category" >
+                            <select class='form-control' name="category" required >
 								{% for i in cate %}
 								<option selected hidden value="">--Select--</option>
 								<option value="{{i.id}}">{{i.category}}</option>

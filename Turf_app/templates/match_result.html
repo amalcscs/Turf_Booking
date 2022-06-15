@@ -48,7 +48,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<label>Match Name</label>
-							<select class='form-control' name="matchname" >
+							<select class='form-control' name="matchname" required>
 								{% for n in d %}
 								<option selected hidden value="">--Select--</option>
 								<option value="{{n.id}}">{{n.matchname}}</option>
@@ -60,7 +60,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<label>First Team</label>
-							<select class='form-control' name="firstteam" >
+							<select class='form-control' name="firstteam" required>
 								{% for j in tems %}
 								<option selected hidden value="">--Select--</option>
 								<option value="{{j.id}}">{{j.teamname}}</option>
@@ -72,7 +72,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<label>Second Team</label>
-							<select class='form-control' name="secondteam" >
+							<select class='form-control' name="secondteam" required>
 								{% for k in tems %}
 								<option selected hidden value="">--Select--</option>
 								<option value="{{k.id}}">{{k.teamname}}</option>
@@ -84,14 +84,14 @@
 					<div class="row">
 						<div class="col-md-12">
 							<label>Upload Image</label>
-							  <input type="file" name='image'  class="form-control">
+							  <input type="file" name='image' required class="form-control">
 						</div>
 					</div>
 					<br>
 					<div class="row">
 						<div class="col-md-12">
 							<label>Winning Team</label>
-							<select class='form-control' name="winteam" >
+							<select class='form-control' name="winteam" required>
 								{% for l in tems %}
 								<option selected hidden value="">--Select--</option>
 								<option value="{{l.id}}">{{l.teamname}}</option>
@@ -103,7 +103,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<label>Lossing Team</label>
-							<select class='form-control' name="lossteam" >
+							<select class='form-control' name="lossteam" required>
 								{% for o in tems %}
 								<option selected hidden value="">--Select--</option>
 								<option value="{{o.id}}">{{o.teamname}}</option>
@@ -115,14 +115,14 @@
 				<div class="row">
 					<div class="col-md-12">
 						<label>Date</label>
-						  <input type="date" name='date'   class="form-control txtDate">
+						  <input type="date" name='date' required  class="form-control txtDate">
 					</div>
 				</div>
 				<br>
 				<div class="row">
 					<div class="col-md-12">
 						<label>Time</label>
-						  <input type="time" name='time'  class="form-control">
+						  <input type="time" name='time' required class="form-control">
 					</div>
 				</div>
 				<br>
