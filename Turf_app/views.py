@@ -727,7 +727,7 @@ def Owner_Turf_bookingviewUser(request):
             return redirect('/')
         mem = user_registration.objects.filter(id=O_id)
         desss = designation.objects.get(designation="users")
-        turfbook = TurfBooking.objects.filter(designation_id = desss.id)
+        turfbook = TurfBooking.objects.filter(owner_id=O_id)
         return render(request, 'Owner_Turf_bookingviewUser.html',{'turfbook':turfbook,'mem':mem})
 
 def Owner_accept_booking(request,id):
@@ -953,12 +953,14 @@ def books(request,id):
             return redirect('/')
         mem1 = user_registration.objects.filter(id=U_id)
         design = designation.objects.get(designation="users")
+        turf = Turf.objects.get(id=id)
         if request.method == 'POST':
             
             a = TurfBooking()
             a.date  = request.POST['date']
             a.fromtime  = request.POST['time']
             a.sport  = request.POST['Sport']
+            a.owner_id  = request.POST['owner']
             a.gamestructure  = request.POST['game_structure']
             a.user_id  = U_id
             a.designation_id = design.id
@@ -966,7 +968,7 @@ def books(request,id):
             a.save()
             msg_success = "Booking Request send successfully"
             return render(request, 'bookings.html', {'msg_success': msg_success})
-        return render(request, 'bookings.html',{'mem1':mem1}) 
+        return render(request, 'bookings.html',{'mem1':mem1,'turf':turf}) 
 
 
 def Turf_booking(request):

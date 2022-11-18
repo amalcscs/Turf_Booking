@@ -138,6 +138,8 @@ class Contact_messages(models.Model):
 class TurfBooking(models.Model):
     user = models.ForeignKey(user_registration, on_delete=models.CASCADE,
                              related_name='TurfBookinguser', null=True, blank=True)
+    owner = models.ForeignKey(user_registration, on_delete=models.CASCADE,
+                             related_name='TurfBookingowner', null=True, blank=True)
     Turf = models.ForeignKey(Turf, on_delete=models.CASCADE,
                                     related_name='TurfBookingTurf', null=True, blank=True)
     designation = models.ForeignKey(designation, on_delete=models.CASCADE,

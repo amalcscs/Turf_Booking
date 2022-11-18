@@ -38,6 +38,7 @@
 							<form method="post" action="" enctype="multipart/form-data">
                                 {% csrf_token %}
                             <div class="row">
+                                <input type="hidden" value="{{turf.user_id}}" name="owner">
 								<div class="col-md-6">
 									<div class="form-group">
                                         <span class="form-label">Enter your Date</span>
